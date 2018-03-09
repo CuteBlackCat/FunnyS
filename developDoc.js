@@ -1,5 +1,6 @@
 //接口相关：(初步文档，后续修订)
 //code规定： 0 成功 - 1 失败   message: ”成功” || “失败”||” other message” 所有接口必须带上  后面接口省略
+//时间一律给时间戳，为了方便阅读所以写2018.3.8
 
 //访问地址http://47.52.238.90:4396/funnys
 
@@ -284,6 +285,279 @@ Resdata:
 
 
 //音乐
-//获取用户个人音乐信息
-url: GET: .../funnys/rest / music / todayMusic
+//获取热门歌手
+url: GET: .../funnys/rest / music / getHotSinger
+Postdata:
+{
+    num:10
+}
+ResData:
+{
+    code:0,
+    message:'success',
+    data:{
+        list:[
+            {
+                name: '胡歌',
+                singerId: '10',
+                hot:10230123,
+                picUrl:'imgs'
+            },
+            {
+                name: '赵雷',
+                singerId:'100',
+                hot:21312313,
+                picUrl: 'imgs'
+            }
+        ]
+    }
+}
+//获取歌手的所有歌曲
+url: GET: .../funnys/rest / music / getSingerMusic
+Postdata:
+{
+    singerId:10,
+    page:1,
+    pageSize:10
+}
+ResData:
+{
+    code:0,
+    message:'success',
+    data:{
+        songs:[
+            {
+                songName:'成都',
+                songId:1231,
+                artists:[
+                    {
+                        singerName:"赵雷",
+                        singerId:1231313,
+                        picUrl:'imgs',
+                        collection:true
+                    }
+                ]
+            },
+            {
+                songName:'广东爱情故事',
+                songId:90923,
+                artists:[
+                    {
+                        singerName:'广东雨神',
+                        singerId:478123,
+                        picUrl:'imgs',
+                        collection:false
+                    }
+                ]
+            }
+        ],
+    }
+}
+
+//获取分类音乐
+//说明
+{
+    0:todayMusic,//每日推荐，最多50首
+    1:rankMusic,//排行榜 最多500首，以下类推
+    2:atleastMusic,//最新音乐，
+    3:hotMusic,//最热音乐
+    4:soarMusic,//飙升音乐 
+    5:loveMusic,//我最爱的音乐,
+}
+url: GET: .../funnys/rest / music / getMusic
+Postdata:{
+    searchType: 0,//每日推荐
+    userName: 'lijiaxin'
+}
+ResData:
+{
+    code:0,
+    message:'success',
+    data:{
+        songs:[
+            {
+                songName:'成都',
+                songId:1231,
+                artists:[
+                    {
+                        singerName:"赵雷",
+                        singerId:1231313,
+                        picUrl:'imgs',
+                        collection:true,
+                    }
+                ]
+            },
+            {
+                songName:'广东爱情故事',
+                songId:90923,
+                artists:[
+                    {
+                        singerName:'广东雨神',
+                        singerId:478123,
+                        picUrl:'imgs',
+                        collection:false
+                    }
+                ]
+            }
+        ],
+        // collectionNum: '98万',
+        // commentNum: '99万',
+        // collection: true || false暂时不要这3条，后续再说
+    }
+}
+
+//收藏歌曲
+url: GET: .../funnys/rest / music / collectionMusic
+Postdata:
+{
+    songId:90923,
+    userName:'lijiaxin',
+    userId:90
+}
+ResData:
+{
+    code:0,
+    message:'success'
+}
+
+//
+
+//获取歌曲详情
+url: GET: .../funnys/rest / music / getMusicDetail
+Postdata:{
+    songId:90923
+}
+Resdata:
+{
+    code:0,
+    message:'success',
+    data:{
+        singerName:'广东雨神',
+        songUrl: 'https://',
+        songPicUrl: 'imgs',
+        artists:[
+            {
+                singerName: '广东雨神',
+                singerId: 478123,
+                picUrl: 'imgs',
+                collection: false
+            }
+        ]
+    }
+}
+
+//获取歌词
+url: GET: .../funnys/rest / music / getMusicLyric
+Postdata:{
+    songId:90923
+}
+Resdata:
+{
+    code:0,
+    message:'success',
+    data:{
+        lyric:'...'
+    }
+}
+
+//获取歌曲评论
+url: GET: .../funnys/rest / music / getMusicComment
+Postdata:
+{
+    songId: 90923,
+    page: 1,
+    pageSize:20
+}
+ResData:
+{
+    code:0,
+    message:'success',
+    data:{
+        commentNum:9879,
+        hotComment:[//10条
+            {
+                userName:'wuxh',
+                content:'shide',
+                userId:2,
+                userPhoto: 'imgs',
+                playCallNum: 9870,//点赞数
+                play:false,//是否点赞
+                commentTime:'2018.3.9',
+                reply:{//回复,如果是回复别人就有，如果不是就没有
+                    userName: 'lijiaxin',
+                    content: 'wuxinghaoshiwoerzi',
+                    userId: 2
+                },
+                commentId:90
+            }
+        ],
+        atleastComment:[
+            {
+                userName: 'wuxh',
+                content: 'wangbadan',
+                userId: 2,
+                userPhoto: 'imgs',
+                playCallNum: 9870,//点赞数
+                play: false,//是否点赞
+                commentTime: '2018.3.9',
+                reply:null,
+                commentId: 90
+            }
+        ]
+    }
+}
+
+//评论点赞
+url: GET: .../funnys/rest / music / playCall
+Postdata:
+{
+    songId: 90923,
+    commentId: 90,
+    content:'好的',
+    userName:'lijaixin',
+    userId:1,
+    playCall:true||false //点赞||取消点赞
+    time:'2017'
+}
+ResData:
+{
+    code:0,
+    message:'success'
+}
+
+//评论歌曲
+url: GET: .../funnys/rest / music / commentMusic
+Postdata:
+{
+    songId: 90923,
+    commentId: 90,
+    content:'好的',
+    userName:'lijaixin',
+    userId:1,
+    time:'2018.3.9'
+}
+ResData:
+{
+    code: 0,
+    message: 'success'
+}
+
+//回复评论
+url: GET: .../funnys/rest / music / commentReply
+Postdata:
+{
+    songId:90923,
+    commentId:90,
+    content:'sda',
+    userName:'lijiaxin'
+    userId:1,
+    time:'2018.3.9',
+    replyId:20//代表回复commentId为20的评论
+}
+ResData:
+{
+    code: 0,
+        message: 'success'
+}
+
 
