@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { BackcanvasComponent } from './backcanvas/backcanvas.component';
+import { BackcanvasComponent } from './canvas/backcanvas/backcanvas.component';
 
 
 @NgModule({
