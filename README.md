@@ -1,4 +1,4 @@
-# FunnyS
+# FunnyS(本项目暂不考虑支持低版本的浏览器，请使用最新版chrome浏览)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.2.
 

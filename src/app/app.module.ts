@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { BackcanvasComponent } from './backcanvas/backcanvas.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BackcanvasComponent
   ],
   imports: [
     BrowserModule
