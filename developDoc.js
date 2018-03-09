@@ -383,7 +383,7 @@ ResData:
                         singerName:"赵雷",
                         singerId:1231313,
                         picUrl:'imgs',
-                        collection:true,
+                        collection:true,//代表是否收藏到我最爱的音乐中
                     }
                 ]
             },
