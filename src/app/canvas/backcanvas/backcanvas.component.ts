@@ -70,7 +70,6 @@ export class BackcanvasComponent implements OnInit {
 			this.current_circle.y = null;
 		})
 	}
-
 }
 
 class Circle {
