@@ -114,13 +114,20 @@ export class BackcanvasComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		window.addEventListener('load', this.init(60));
+		window.addEventListener('load', () => {
+			this.init(60);
+		});
 
 		window.addEventListener('mousemove', (e) => {
 			// const el = e || window.event;
 			this.current_circle.x = e.clientX;
 			this.current_circle.y = e.clientY;
 		});
+
+		window.addEventListener('mouseout',(e) => {
+			this.current_circle.x = null;
+			this.current_circle.y = null;
+		})
 	}
 
 }
