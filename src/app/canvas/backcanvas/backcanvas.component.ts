@@ -5,6 +5,73 @@ import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 	template: `<canvas #backCanvas ></canvas>`,
 	styles: ['canvas{width:100%;height:100%;display:block}']
 })
+export class BackcanvasComponent implements OnInit {
+	ctx: CanvasRenderingContext2D;
+	w: number;
+	h: number;
+	circles: any[];
+	current_circle: CurrentCircle;
+
+	@ViewChild('backCanvas') canvasRef: ElementRef;
+
+	constructor() {
+		this.circles = [];
+		this.current_circle = new CurrentCircle(0, 0);
+	}
+
+	draw() {
+		this.ctx.clearRect(0, 0, this.w, this.h);
+		for (let i = 0; i < this.circles.length; i++) {
+			this.circles[i].move(this.w, this.h);
+			this.circles[i].drawCircle(this.ctx);
+			for (let j = i + 1; j < this.circles.length; j++) {
+				this.circles[i].drawLine(this.ctx, this.circles[j]);
+			}
+		}
+
+		if (this.current_circle.x) {
+			this.current_circle.drawCircle(this.ctx);
+			for (let k = 1; k < this.circles.length; k++) {
+				this.current_circle.drawLine(this.ctx, this.circles[k]);
+			}
+		}
+
+		const _self = this;
+
+		requestAnimationFrame(() => {
+			_self.draw();
+		});
+	}
+
+	init(num) {
+		for (let i = 0; i < num; i++) {
+			this.circles.push(new Circle(Math.random() * this.w, Math.random() * this.h));
+		}
+		this.draw();
+	}
+
+	ngOnInit() {
+		this.ctx = this.canvasRef.nativeElement.getContext('2d');
+		this.w = this.canvasRef.nativeElement.width = this.canvasRef.nativeElement.offsetWidth;
+		this.h = this.canvasRef.nativeElement.height = this.canvasRef.nativeElement.offsetHeight;
+
+		window.addEventListener('load', () => {
+			this.init(60);
+		});
+
+		window.addEventListener('mousemove', (e) => {
+			// const el = e || window.event;
+			this.current_circle.x = e.clientX;
+			this.current_circle.y = e.clientY;
+		});
+
+		window.addEventListener('mouseout', (e) => {
+			this.current_circle.x = null;
+			this.current_circle.y = null;
+		})
+	}
+
+}
 
 class Circle {
 	x: number;
@@ -69,67 +136,6 @@ class CurrentCircle extends Circle {
 	}
 }
 
-export class BackcanvasComponent implements OnInit {
-	ctx: CanvasRenderingContext2D;
-	w: number;
-	h: number;
-	circles: any[];
-	current_circle: CurrentCircle;
 
-	@ViewChild('backCanvas') canvasRef: ElementRef;
-
-	constructor() {
-		this.ctx = this.canvasRef.nativeElement.getContext('2d');
-		this.w = this.canvasRef.nativeElement.width = this.canvasRef.nativeElement.offsetWidth;
-		this.h = this.canvasRef.nativeElement.height = this.canvasRef.nativeElement.offsetHeight;
-		this.circles = [];
-		this.current_circle = new CurrentCircle(0, 0);
-	}
-
-	draw() {
-		this.ctx.clearRect(0, 0, this.w, this.h);
-		for (let i = 0; i < this.circles.length; i++) {
-			this.circles[i].move(this.w, this.h);
-			this.circles[i].drawCircle(this.ctx);
-			for (let j = i + 1; j < this.circles.length; j++) {
-				this.circles[i].drawLine(this.ctx, this.circles[j]);
-			}
-		}
-
-		if (this.current_circle.x) {
-			this.current_circle.drawCircle(this.ctx);
-			for (let k = 1; k < this.circles.length; k++) {
-				this.current_circle.drawLine(this.ctx, this.circles[k]);
-			}
-		}
-
-		requestAnimationFrame(this.draw);
-	}
-
-	init(num) {
-		for (let i = 0; i < num; i++) {
-			this.circles.push(new Circle(Math.random() * this.w, Math.random() * this.h));
-		}
-		this.draw();
-	}
-
-	ngOnInit() {
-		window.addEventListener('load', () => {
-			this.init(60);
-		});
-
-		window.addEventListener('mousemove', (e) => {
-			// const el = e || window.event;
-			this.current_circle.x = e.clientX;
-			this.current_circle.y = e.clientY;
-		});
-
-		window.addEventListener('mouseout',(e) => {
-			this.current_circle.x = null;
-			this.current_circle.y = null;
-		})
-	}
-
-}
 
 
