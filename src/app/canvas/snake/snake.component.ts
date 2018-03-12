@@ -54,11 +54,10 @@ export class SnakeComponent implements OnInit {
 	}
 
 	drawSnake() {
-		const _self = this;
 		const dead = [];
 		for (let i = 0; i < this.snake.length; i++) {
 			this.snake[i].drawSnake(this.ctx, this.w, this.h);
-			const alive = this.snake[i].move(this.speed, _self.w, _self.h);
+			const alive = this.snake[i].move(this.speed, this.w, this.h);
 			if (!alive) {
 				dead.push(i);
 			}
