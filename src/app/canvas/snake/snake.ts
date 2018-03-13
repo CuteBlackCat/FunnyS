@@ -1,14 +1,14 @@
 export class Snake {
-	private color: [string];
-	private name: string;
-	private length: number;
-	private weight: number;
+	public color: [string];
+	public name: string;
+	public length: number;
+	public weight: number;
 	public x: number;
 	public y: number;
-	private angle: number;
-	private cover: number;
-	private snake: [[number, number]];
-	private speed: number;
+	public angle: number;
+	public cover: number;
+	public snake: [[number, number]];
+	public speed: number;
 
 
 	constructor(name: string, color: [string], length: number, weight: number, x: number, y: number ) {
@@ -82,19 +82,34 @@ export class Snake {
 		this.x += x;
 		this.y += y;
 		if (this.weight + this.x + speed >= w || this.x - this.weight - speed <= 0 || this.y + this.weight + speed >= h || this.y - this.weight - speed <= 0) {
-			const deadRate = Math.random();
-			if (deadRate > 0.1) {
-				let changeAngle = Math.random() * 180;
-				changeAngle = changeAngle > 90 ? changeAngle : 90 + changeAngle;
-				this.angle += changeAngle;
-			}else {
-				return false;
-			}
+			return this.switchDirective();
 		}else {
 			this.snake.pop();
 			this.snake.unshift([this.x, this.y]);
 		}
 		return true;
+	}
+
+	brokenOther(snake) {
+		let result = true;
+		snake.snake.forEach((position) => {
+			const distance = Math.sqrt(Math.pow((this.x - position[0]), 2) + Math.pow((this.y - position[1]), 2));
+			if (distance < this.weight + snake.weight) {
+				result = this.switchDirective();
+			}
+		});
+		return result;
+	}
+
+	private switchDirective() {
+		const deadRate = Math.random();
+		if (deadRate > 0) {
+			let changeAngle = Math.random() * 180;
+			changeAngle = changeAngle > 90 ? changeAngle : 90 + changeAngle;
+			this.angle += changeAngle;
+			return true;
+		}
+		return false;
 	}
 
 	growUp(num) {
@@ -107,6 +122,24 @@ export class Snake {
 			this.weight = 5 + (len - 5) * 0.1;
 		}
 	}
+}
 
-	deadFood() {}
+export class SuperSnake extends Snake {
+	constructor(name, color, length, weight, x, y) {
+		super(name, color, length, weight, x, y);
+	}
+
+	move(speed, w, h) {
+		const angle = this.angle * 2 * Math.PI / 360;
+		const x = speed * Math.cos(angle);
+		const y = speed * (-Math.sin(angle));
+		this.x += x;
+		this.y += y;
+		if (this.weight + this.x + speed >= w || this.x - this.weight - speed <= 0 || this.y + this.weight + speed >= h || this.y - this.weight - speed <= 0) {
+			return false;
+		}else {
+			this.snake.pop();
+			this.snake.unshift([this.x, this.y]);
+		}
+	}
 }

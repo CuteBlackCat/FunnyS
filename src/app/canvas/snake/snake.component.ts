@@ -34,7 +34,7 @@ export class SnakeComponent implements OnInit {
 	}
 
 	init() {
-		this.createSnake(2);
+		this.createSnake(10);
 		this.createFood(this.foodsLen, this.foodWeight);
 		this.draw();
 	}
@@ -92,9 +92,13 @@ export class SnakeComponent implements OnInit {
 		const dead = [];
 		for (let i = 0; i < this.snake.length; i++) {
 			this.snake[i].drawSnake(this.ctx, this.w, this.h);
-			const alive = this.snake[i].move(this.speed, this.w, this.h);
-			if (!alive) {
-				dead.push(i);
+			let alive = this.snake[i].move(this.speed, this.w, this.h);
+			for (let j = i + 1; j < this.snake.length; j++) {
+				console.log(this.snake[i].brokenOther(this.snake[j]));
+				alive = alive ? this.snake[i].brokenOther(this.snake[j]) : false;
+				if (!alive) {
+					dead.push(i);
+				}
 			}
 		}
 		dead.forEach((item) => {
@@ -119,7 +123,7 @@ export class SnakeComponent implements OnInit {
 				const distance = Math.sqrt(Math.pow((snake.x - food.x), 2) + Math.pow((snake.y - food.y), 2));
 				if (distance <= snake.weight + food.weight) {
 					deadFood.push(i);
-					snake.growUp(1);
+					snake.growUp(food.weight / this.foodWeight);
 				}
 			});
 			deadFood.forEach((i) => {
