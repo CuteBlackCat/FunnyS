@@ -3,8 +3,8 @@ export class Snake {
 	private name: string;
 	private length: number;
 	private weight: number;
-	private x: number;
-	private y: number;
+	public x: number;
+	public y: number;
 	private angle: number;
 	private cover: number;
 	private snake: [[number, number]];
@@ -26,7 +26,6 @@ export class Snake {
 
 		this.cover = 0.45;
 		this.speed = 5;
-
 		this.snakePosition();
 	}
 
@@ -65,6 +64,13 @@ export class Snake {
 				ctx.closePath();
 				ctx.fillStyle = '#000';
 				ctx.fill();
+				ctx.fillStyle = '#999';
+				ctx.font = '12px serif';
+				if (this.angle < 180) {
+					ctx.fillText(this.name, this.x - 50, this.y - 25, 100);
+				}else {
+					ctx.fillText(this.name, this.x - 50, this.y + 25, 100);
+				}
 			}
 		}
 	}
@@ -77,7 +83,7 @@ export class Snake {
 		this.y += y;
 		if (this.weight + this.x + speed >= w || this.x - this.weight - speed <= 0 || this.y + this.weight + speed >= h || this.y - this.weight - speed <= 0) {
 			const deadRate = Math.random();
-			if (deadRate > 0.2) {
+			if (deadRate > 0.1) {
 				let changeAngle = Math.random() * 180;
 				changeAngle = changeAngle > 90 ? changeAngle : 90 + changeAngle;
 				this.angle += changeAngle;
@@ -90,4 +96,17 @@ export class Snake {
 		}
 		return true;
 	}
+
+	growUp(num) {
+		const len = this.snake.length;
+		const x = this.snake[len - 1][0] - this.snake[len - 2][0];
+		const y = this.snake[len - 1][1] - this.snake[len - 2][1];
+		for (let i = 0; i < num; i++) {
+			const position: [number, number] = [x + i * this.snake[len - 1][0], y + i * this.snake[len - 1][1]];
+			this.snake.push(position);
+			this.weight = 5 + (len - 5) * 0.1;
+		}
+	}
+
+	deadFood() {}
 }
