@@ -89,15 +89,19 @@ export class SnakeComponent implements OnInit {
 	}
 
 	drawSnake() {
-		const dead = [];
+		let dead = [];
 		for (let i = 0; i < this.snake.length; i++) {
 			this.snake[i].drawSnake(this.ctx, this.w, this.h);
-			let alive = this.snake[i].move(this.speed, this.w, this.h);
+            const alive = this.snake[i].move(this.speed, this.w, this.h);
+            if(!alive) {
+                dead.push(i);
+                continue;
+            }
 			for (let j = i + 1; j < this.snake.length; j++) {
-				console.log(this.snake[i].brokenOther(this.snake[j]));
-				alive = alive ? this.snake[i].brokenOther(this.snake[j]) : false;
-				if (!alive) {
-					dead.push(i);
+                const crash = this.snake[i].brokenOther(this.snake[j]);
+				if (!crash) {
+                    dead.push(i);
+                    break;
 				}
 			}
 		}
@@ -112,8 +116,15 @@ export class SnakeComponent implements OnInit {
 					this.foods.push(food);
 				}
 			});
-			this.snake.splice(item, 1);
-		});
+        });
+
+        dead = Array.from(new Set(dead)).sort(() => {
+            return 1;
+        });
+        
+        dead.forEach((item) => {
+            this.snake.splice(item, 1);
+        })
 	}
 
 	eatFood() {

@@ -80,7 +80,9 @@ export class Snake {
 		const x = speed * Math.cos(angle);
 		const y = speed * (-Math.sin(angle));
 		this.x += x;
-		this.y += y;
+        this.y += y;
+        if(this.x <= 0 || this.x >= w || this.y <= 0 || this.y >= h) return false;
+        if(this.weight + this.x >= w || this.x - this.weight <=0 || this.y + this.weight >= h || this.y - this.weight <=0) return false; 
 		if (this.weight + this.x + speed >= w || this.x - this.weight - speed <= 0 || this.y + this.weight + speed >= h || this.y - this.weight - speed <= 0) {
 			return this.switchDirective();
 		}else {
@@ -94,16 +96,18 @@ export class Snake {
 		let result = true;
 		snake.snake.forEach((position) => {
 			const distance = Math.sqrt(Math.pow((this.x - position[0]), 2) + Math.pow((this.y - position[1]), 2));
-			if (distance < this.weight + snake.weight) {
+			if (distance < this.weight + snake.weight && distance > this.weight) {
 				result = this.switchDirective();
-			}
+            } else if (distance < this.weight) {
+                result = false;
+            }
 		});
 		return result;
 	}
 
 	private switchDirective() {
 		const deadRate = Math.random();
-		if (deadRate > 0) {
+		if (deadRate > 0.1) {
 			let changeAngle = Math.random() * 180;
 			changeAngle = changeAngle > 90 ? changeAngle : 90 + changeAngle;
 			this.angle += changeAngle;
