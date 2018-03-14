@@ -7,7 +7,7 @@ import { Food } from './foods';
 	selector: 'fs-snake',
 	template: `<div class="game">
 		<canvas #snake></canvas>
-		<div class="btn-back">
+		<div class="btn-back" #btn>
 			<div class="btn"></div>
 		</div>
 	</div>`,
@@ -23,14 +23,18 @@ export class SnakeComponent implements OnInit {
 	foods: any[];
 	foodsLen: number;
 	foodWeight: number;
+	btn;
+	btnAngle: number;
 
 	@ViewChild('snake') snakeRef: ElementRef;
+	@ViewChild('btn') btnRef: ElementRef;
 	constructor() {
 		this.snake = [];
 		this.foods = [];
 		this.speed = 4;
 		this.foodsLen = 200;
 		this.foodWeight = 3;
+		this.btnAngle = Math.random();
 	}
 
 	init() {
@@ -92,16 +96,16 @@ export class SnakeComponent implements OnInit {
 		let dead = [];
 		for (let i = 0; i < this.snake.length; i++) {
 			this.snake[i].drawSnake(this.ctx, this.w, this.h);
-            const alive = this.snake[i].move(this.speed, this.w, this.h);
-            if(!alive) {
-                dead.push(i);
-                continue;
-            }
+			const alive = this.snake[i].move(this.speed, this.w, this.h);
+			if (!alive) {
+				dead.push(i);
+				continue;
+			}
 			for (let j = i + 1; j < this.snake.length; j++) {
-                const crash = this.snake[i].brokenOther(this.snake[j]);
+				const crash = this.snake[i].brokenOther(this.snake[j]);
 				if (!crash) {
-                    dead.push(i);
-                    break;
+					dead.push(i);
+					break;
 				}
 			}
 		}
@@ -116,15 +120,15 @@ export class SnakeComponent implements OnInit {
 					this.foods.push(food);
 				}
 			});
-        });
+		});
 
-        dead = Array.from(new Set(dead)).sort(() => {
-            return 1;
-        });
-        
-        dead.forEach((item) => {
-            this.snake.splice(item, 1);
-        })
+		dead = Array.from(new Set(dead)).sort(() => {
+			return 1;
+		});
+
+		dead.forEach((item) => {
+			this.snake.splice(item, 1);
+		});
 	}
 
 	eatFood() {
@@ -148,6 +152,50 @@ export class SnakeComponent implements OnInit {
 		this.ctx = this.snakeRef.nativeElement.getContext('2d');
 		this.w = this.snakeRef.nativeElement.width = this.snakeRef.nativeElement.offsetWidth;
 		this.h = this.snakeRef.nativeElement.height = this.snakeRef.nativeElement.offsetHeight;
+
+		this.btn = this.btnRef.nativeElement.querySelector('.btn');
+
+		const btnBackOffetX = this.btnRef.nativeElement.offsetLeft;
+		const btnBackOffetY = this.btnRef.nativeElement.offsetTop;
+		const btnBackOffetW = this.btnRef.nativeElement.offsetWidth;
+		const btnBackOffetH = this.btnRef.nativeElement.offsetHeight;
+		const centerX = btnBackOffetX + btnBackOffetW / 2;
+		const centerY = btnBackOffetY + btnBackOffetH / 2;
+
+		const moveBtn = (e) => {
+			const clientX = e.clientX;
+			const clientY = e.clientY;
+			const distance = Math.sqrt(Math.pow((clientX - centerX), 2) + Math.pow((clientY - centerY), 2));
+			const angle = Math.asin((centerY - clientY) / distance) * 180 / Math.PI;
+			if (distance < btnBackOffetW / 2) {
+				const x = clientX - centerX;
+				const y = clientY - centerY;
+				this.btn.style['transform'] = `translate(${x}px, ${y}px)`;
+			}else {
+				if (clientY < centerY) {
+					this.btnAngle = centerX < clientX ? angle : 180 - angle;
+				} else {
+					this.btnAngle = centerX < clientX ? 360 + angle : 180 - angle;
+				}
+				const x = Math.cos(this.btnAngle * 2 * Math.PI / 360) * btnBackOffetW / 2;
+				const y = -Math.sin(this.btnAngle * 2 * Math.PI / 360) * btnBackOffetH / 2;
+				this.btn.style['transform'] = `translate(${x}px, ${y}px)`;
+			}
+		};
+
+		const clickBtn = () => {
+			window.addEventListener('mousemove', moveBtn);
+			window.addEventListener('mouseup', () => {
+				this.btn.style['transform'] = `translate(${0}px, ${0}px)`;
+				window.removeEventListener('mousemove', moveBtn);
+			});
+		};
+
+		window.addEventListener('mousedown', (e) => {
+			if (e.target.className === 'btn') {
+				clickBtn();
+			}
+		});
 
 		window.addEventListener('load', () => {
 			this.init();
