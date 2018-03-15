@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
-import { Snake } from './snake';
+import { Snake, SuperSnake } from './snake';
 import { Food } from './foods';
 
 @Component({
@@ -24,7 +24,8 @@ export class SnakeComponent implements OnInit {
 	foodsLen: number;
 	foodWeight: number;
 	btn;
-	btnAngle: number;
+    btnAngle: number;
+    superSnake: SuperSnake;
 
 	@ViewChild('snake') snakeRef: ElementRef;
 	@ViewChild('btn') btnRef: ElementRef;
@@ -39,7 +40,8 @@ export class SnakeComponent implements OnInit {
 
 	init() {
 		this.createSnake(10);
-		this.createFood(this.foodsLen, this.foodWeight);
+        this.createFood(this.foodsLen, this.foodWeight);
+        this.createSuperSnake();
 		this.draw();
 	}
 
@@ -67,12 +69,23 @@ export class SnakeComponent implements OnInit {
 
 			this.foods.push(food);
 		}
-	}
+    }
+    
+    createSuperSnake() {
+        const len = 10;
+        const weight = 5 + (len - 5) * 0.1;
+        const x = Math.random() * this.w;
+        const y = Math.random() * this.h;
+        const color = `rgba(${Math.ceil(Math.random() * 255)},${Math.ceil(Math.random() * 255)},${Math.ceil(Math.random() * 255)},1)`;
+        this.superSnake = new SuperSnake('lijiaxin', color, len, weight, x, y);
+        this.superSnake.angle = this.btnAngle;
+    }
 
 	draw() {
 		this.ctx.clearRect(0, 0, this.w, this.h);
 		this.drawSnake();
-		this.drawFood();
+        this.drawFood();
+        this.drawSuperSnake();
 		this.eatFood();
 
 		const _self = this;
@@ -129,7 +142,11 @@ export class SnakeComponent implements OnInit {
 		dead.forEach((item) => {
 			this.snake.splice(item, 1);
 		});
-	}
+    }
+    
+    drawSuperSnake() {
+        this.superSnake.drawSnake(this.ctx, this.w, this.h);
+    }
 
 	eatFood() {
 		this.snake.forEach((snake) => {
