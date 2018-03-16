@@ -8,7 +8,6 @@ export class Snake {
 	public angle: number;
 	public cover: number;
 	public snake: [[number, number]];
-	public speed: number;
 
 
 	constructor(name: string, color: [string], length: number, weight: number, x: number, y: number ) {
@@ -25,7 +24,6 @@ export class Snake {
 		this.angle = Math.random() * 360;
 
 		this.cover = 0.45;
-		this.speed = 5;
 		this.snakePosition();
 	}
 
@@ -102,8 +100,8 @@ export class Snake {
 			const distance = Math.sqrt(Math.pow((this.x - position[0]), 2) + Math.pow((this.y - position[1]), 2));
 			if (distance < this.weight + snake.weight + 5 && distance > this.weight + snake.weight) {
 				result = this.switchDirective();
-			} else if (distance < this.weight + snake.weight) {
-				result = false;
+			} else if (distance > this.weight + snake.weight + 5) {
+				result = true;
 			}
 		});
 		return result;
@@ -133,8 +131,17 @@ export class Snake {
 }
 
 export class SuperSnake extends Snake {
+	public protect: boolean;
+
 	constructor(name, color, length, weight, x, y) {
 		super(name, color, length, weight, x, y);
+
+		this.protect = true;
+
+		const _self = this;
+		window.setTimeout(() => {
+			_self.protect = false;
+		}, 2000);
 	}
 
 	move(speed, w, h) {
@@ -153,5 +160,27 @@ export class SuperSnake extends Snake {
 			this.snake.unshift([this.x, this.y]);
 		}
 		return true;
+	}
+
+	brokenOther(snake) {
+		let result = true;
+		snake.snake.forEach((position) => {
+			const distance = Math.sqrt(Math.pow((this.x - position[0]), 2) + Math.pow((this.y - position[1]), 2));
+			if (distance <= this.weight + snake.weight) {
+				result = false;
+			}
+		});
+		return result;
+	}
+
+	protectedSnake(ctx) {
+		ctx.beginPath();
+		const i = Math.ceil(this.snake.length / 2);
+		const radius = this.weight * this.length * 2;
+		ctx.arc(this.snake[i][0], this.snake[i][1], radius, 0, 360);
+		ctx.closePath();
+		// ctx.globalAlpha = 0.3;
+		ctx.fillStyle = 'rgba(0,0,255,.3)';
+		ctx.fill();
 	}
 }

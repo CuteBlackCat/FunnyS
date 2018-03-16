@@ -112,7 +112,11 @@ export class SnakeComponent implements OnInit {
 		for (let i = 0; i < this.snake.length; i++) {
 			this.snake[i].drawSnake(this.ctx, this.w, this.h);
 			const alive = this.snake[i].move(this.speed, this.w, this.h);
-			if (!alive) {
+			let crashSuper = true;
+			if (this.superSnake !== null) {
+				crashSuper = this.snake[i].brokenOther(this.superSnake);
+			}
+			if (!alive || !crashSuper) {
 				dead.push(i);
 				continue;
 			}
@@ -125,16 +129,7 @@ export class SnakeComponent implements OnInit {
 			}
 		}
 		dead.forEach((item) => {
-			const _self = this;
-			this.snake[item].snake.forEach((position, i) => {
-				if (i % 2) {
-					const color = _self.snake[item].color[0];
-					const x = Math.random() * 5 + position[0];
-					const y = Math.random() * 5 + position[1];
-					const food = new Food(x, y, color, this.foodWeight * 2);
-					this.foods.push(food);
-				}
-			});
+			this.becomeFood(this.snake[item]);
 		});
 
 		dead = Array.from(new Set(dead)).sort(() => {
@@ -153,18 +148,34 @@ export class SnakeComponent implements OnInit {
 		this.superSnake.drawSnake(this.ctx, this.w, this.h);
 		const alive = this.superSnake.move(this.superSpeed, this.w, this.h);
 		if (!alive) {
-			const _self = this;
-			this.superSnake.snake.forEach((position, i) => {
-				if (i % 2) {
-					const color = _self.superSnake.color[0];
-					const x = Math.random() * 5 + position[0];
-					const y = Math.random() * 5 + position[1];
-					const food = new Food(x, y, color, this.foodWeight * 2);
-					this.foods.push(food);
-				}
-			});
+			this.becomeFood(this.superSnake);
 			this.superSnake = null;
+		}else {
+			if (this.superSnake.protect) {
+				this.superSnake.protectedSnake(this.ctx);
+			}else {
+				for (let i = 0; i < this.snake.length; i++) {
+					const crash = this.superSnake.brokenOther(this.snake[i]);
+					if (!crash) {
+						this.becomeFood(this.superSnake);
+						this.superSnake = null;
+						break;
+					}
+				}
+			}
 		}
+	}
+
+	becomeFood(snake) {
+		snake.snake.forEach((position, i) => {
+			if (i % 2) {
+				const color = snake.color[0];
+				const x = Math.random() * 5 + position[0];
+				const y = Math.random() * 5 + position[1];
+				const food = new Food(x, y, color, this.foodWeight * 2);
+				this.foods.push(food);
+			}
+		});
 	}
 
 	eatFood() {
@@ -213,7 +224,7 @@ export class SnakeComponent implements OnInit {
 		const centerY = btnBackOffetY + btnBackOffetH / 2;
 
 		const moveBtn = (e) => {
-			if(this.superSnake === null){
+			if (this.superSnake === null) {
 				return false;
 			}
 			const clientX = e.clientX;
@@ -236,6 +247,21 @@ export class SnakeComponent implements OnInit {
 			}
 			this.superSnake.angle = this.btnAngle;
 		};
+
+		let onkeydown = false;
+		window.addEventListener('keydown', (e) => {
+			if (e.keyCode === 88 && !onkeydown) {
+				this.superSpeed *= 2;
+				onkeydown = true;
+			}
+		});
+
+		window.addEventListener('keyup', (e) => {
+			if (e.keyCode === 88 && onkeydown) {
+				this.superSpeed /= 2;
+				onkeydown = false;
+			}
+		});
 
 		const clickBtn = () => {
 			window.addEventListener('mousemove', moveBtn);
