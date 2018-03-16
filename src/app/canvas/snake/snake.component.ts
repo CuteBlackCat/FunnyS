@@ -139,6 +139,10 @@ export class SnakeComponent implements OnInit {
 		dead.forEach((item) => {
 			this.snake.splice(item, 1);
 		});
+
+		setTimeout(() => {
+			this.createSnake(dead.length);
+		}, dead.length * Math.random() * 5000);
 	}
 
 	drawSuperSnake() {
