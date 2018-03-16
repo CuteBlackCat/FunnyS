@@ -152,5 +152,6 @@ export class SuperSnake extends Snake {
 			this.snake.pop();
 			this.snake.unshift([this.x, this.y]);
 		}
+		return true;
 	}
 }

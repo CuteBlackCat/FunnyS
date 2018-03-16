@@ -24,8 +24,9 @@ export class SnakeComponent implements OnInit {
 	foodsLen: number;
 	foodWeight: number;
 	btn;
-    btnAngle: number;
-    superSnake: SuperSnake;
+	btnAngle: number;
+	superSnake: SuperSnake;
+	superSpeed: number;
 
 	@ViewChild('snake') snakeRef: ElementRef;
 	@ViewChild('btn') btnRef: ElementRef;
@@ -36,12 +37,13 @@ export class SnakeComponent implements OnInit {
 		this.foodsLen = 200;
 		this.foodWeight = 3;
 		this.btnAngle = Math.random();
+		this.superSpeed = this.speed;
 	}
 
 	init() {
 		this.createSnake(10);
-        this.createFood(this.foodsLen, this.foodWeight);
-        this.createSuperSnake();
+		this.createFood(this.foodsLen, this.foodWeight);
+		this.createSuperSnake();
 		this.draw();
 	}
 
@@ -69,23 +71,23 @@ export class SnakeComponent implements OnInit {
 
 			this.foods.push(food);
 		}
-    }
-    
-    createSuperSnake() {
-        const len = 10;
-        const weight = 5 + (len - 5) * 0.1;
-        const x = Math.random() * this.w;
-        const y = Math.random() * this.h;
-        const color = `rgba(${Math.ceil(Math.random() * 255)},${Math.ceil(Math.random() * 255)},${Math.ceil(Math.random() * 255)},1)`;
-        this.superSnake = new SuperSnake('lijiaxin', color, len, weight, x, y);
-        this.superSnake.angle = this.btnAngle;
-    }
+	}
+
+	createSuperSnake() {
+		const len = 10;
+		const weight = 5 + (len - 5) * 0.1;
+		const x = Math.random() * this.w;
+		const y = Math.random() * this.h;
+		const color = `rgba(${Math.ceil(Math.random() * 255)},${Math.ceil(Math.random() * 255)},${Math.ceil(Math.random() * 255)},1)`;
+		this.superSnake = new SuperSnake('lijiaxin', color, len, weight, x, y);
+		this.superSnake.angle = this.btnAngle;
+	}
 
 	draw() {
 		this.ctx.clearRect(0, 0, this.w, this.h);
 		this.drawSnake();
-        this.drawFood();
-        this.drawSuperSnake();
+		this.drawFood();
+		this.drawSuperSnake();
 		this.eatFood();
 
 		const _self = this;
@@ -142,11 +144,28 @@ export class SnakeComponent implements OnInit {
 		dead.forEach((item) => {
 			this.snake.splice(item, 1);
 		});
-    }
-    
-    drawSuperSnake() {
-        this.superSnake.drawSnake(this.ctx, this.w, this.h);
-    }
+	}
+
+	drawSuperSnake() {
+		if (this.superSnake === null) {
+			return false;
+		}
+		this.superSnake.drawSnake(this.ctx, this.w, this.h);
+		const alive = this.superSnake.move(this.superSpeed, this.w, this.h);
+		if (!alive) {
+			const _self = this;
+			this.superSnake.snake.forEach((position, i) => {
+				if (i % 2) {
+					const color = _self.superSnake.color[0];
+					const x = Math.random() * 5 + position[0];
+					const y = Math.random() * 5 + position[1];
+					const food = new Food(x, y, color, this.foodWeight * 2);
+					this.foods.push(food);
+				}
+			});
+			this.superSnake = null;
+		}
+	}
 
 	eatFood() {
 		this.snake.forEach((snake) => {
@@ -162,6 +181,20 @@ export class SnakeComponent implements OnInit {
 				this.foods.splice(i, 1);
 			});
 		});
+
+		if (this.superSnake !== null) {
+			const superdeadFood = [];
+			this.foods.forEach((food, i) => {
+				const distance = Math.sqrt(Math.pow((this.superSnake.x - food.x), 2) + Math.pow((this.superSnake.y - food.y), 2));
+				if (distance <= this.superSnake.weight + food.weight) {
+					superdeadFood.push(i);
+					this.superSnake.growUp(food.weight / this.foodWeight);
+				}
+			});
+			superdeadFood.forEach((i) => {
+				this.foods.splice(i, 1);
+			});
+		}
 	}
 
 
@@ -180,24 +213,28 @@ export class SnakeComponent implements OnInit {
 		const centerY = btnBackOffetY + btnBackOffetH / 2;
 
 		const moveBtn = (e) => {
+			if(this.superSnake === null){
+				return false;
+			}
 			const clientX = e.clientX;
 			const clientY = e.clientY;
 			const distance = Math.sqrt(Math.pow((clientX - centerX), 2) + Math.pow((clientY - centerY), 2));
 			const angle = Math.asin((centerY - clientY) / distance) * 180 / Math.PI;
+			if (clientY < centerY) {
+				this.btnAngle = centerX < clientX ? angle : 180 - angle;
+			} else {
+				this.btnAngle = centerX < clientX ? 360 + angle : 180 - angle;
+			}
 			if (distance < btnBackOffetW / 2) {
 				const x = clientX - centerX;
 				const y = clientY - centerY;
 				this.btn.style['transform'] = `translate(${x}px, ${y}px)`;
 			}else {
-				if (clientY < centerY) {
-					this.btnAngle = centerX < clientX ? angle : 180 - angle;
-				} else {
-					this.btnAngle = centerX < clientX ? 360 + angle : 180 - angle;
-				}
 				const x = Math.cos(this.btnAngle * 2 * Math.PI / 360) * btnBackOffetW / 2;
 				const y = -Math.sin(this.btnAngle * 2 * Math.PI / 360) * btnBackOffetH / 2;
 				this.btn.style['transform'] = `translate(${x}px, ${y}px)`;
 			}
+			this.superSnake.angle = this.btnAngle;
 		};
 
 		const clickBtn = () => {
@@ -208,7 +245,7 @@ export class SnakeComponent implements OnInit {
 			});
 		};
 
-		window.addEventListener('mousedown', (e) => {
+		window.addEventListener('mousedown', (e: HTMLInputEvent) => {
 			if (e.target.className === 'btn') {
 				clickBtn();
 			}
@@ -219,4 +256,9 @@ export class SnakeComponent implements OnInit {
 		});
 	}
 }
+
+interface HTMLInputEvent extends Event {
+	target: HTMLInputElement & EventTarget;
+}
+
 
