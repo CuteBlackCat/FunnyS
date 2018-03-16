@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    template: `<canvas #tank></canvas>`,
-    styles: ['']
+	selector: 'fs-tank',
+	template: `<canvas #tank></canvas>`,
+	styles: ['']
 })
 export class TankComponent implements OnInit {
 
-    constructor(){
-        
-    }
+	constructor() {
+		
+	}
 
-    ngOnInit() {
+	ngOnInit() {
 
-    }
+	}
 }
 
