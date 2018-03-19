@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'fs-tank',
-	template: `<canvas #tank></canvas>`,
+	template: `<div #tankwrap>
+		<canvas #wall></canvas>
+		<canvas #tank></canvas>
+		<canvas #over></canvas>
+		<canvas #stage></canvas>
+	</div>`,
 	styles: ['']
 })
 export class TankComponent implements OnInit {
