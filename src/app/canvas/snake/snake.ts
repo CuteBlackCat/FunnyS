@@ -96,8 +96,8 @@ export class Snake {
 
 	brokenOther(snake) {
 		let result = true;
-		snake.snake.forEach((position) => {
-			const distance = Math.sqrt(Math.pow((this.x - position[0]), 2) + Math.pow((this.y - position[1]), 2));
+		snake.snake.forEach((x, y) => {
+			const distance = Math.sqrt(Math.pow((this.x - x), 2) + Math.pow((this.y - y), 2));
 			if (distance < this.weight + snake.weight + 5 && distance > this.weight + snake.weight) {
 				result = this.switchDirective();
 			} else if (distance <= this.weight + snake.weight) {
@@ -164,8 +164,8 @@ export class SuperSnake extends Snake {
 
 	brokenOther(snake) {
 		let result = true;
-		snake.snake.forEach((position) => {
-			const distance = Math.sqrt(Math.pow((this.x - position[0]), 2) + Math.pow((this.y - position[1]), 2));
+		snake.snake.forEach(([x, y]) => {
+			const distance = Math.sqrt(Math.pow((this.x - x), 2) + Math.pow((this.y - y), 2));
 			if (distance <= this.weight + snake.weight) {
 				result = false;
 			}
