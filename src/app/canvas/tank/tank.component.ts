@@ -13,11 +13,12 @@ import { Component, OnInit } from '@angular/core';
 export class TankComponent implements OnInit {
 
 	constructor() {
-		
+
 	}
 
 	ngOnInit() {
 
 	}
+
 }
 

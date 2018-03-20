@@ -1,5 +1,3 @@
-import { Constant } from './constant.component';
-
 export class Menu {
 
 	ctx: CanvasRenderingContext2D;
