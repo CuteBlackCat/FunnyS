@@ -1,4 +1,5 @@
 import { Bullet } from './bullet';
+import { CrackAnimation } from './crackanimation';
 
 export class Tank {
 	x: number;
@@ -96,9 +97,9 @@ export class Tank {
 			}
 		}
 
-		if (!this.hit && tankMapCollosion(this, map)) {
-			this.hit = true;
-		}
+		// if (!this.hit && tankMapCollosion(this, map)) {
+		// 	this.hit = true;
+		// }
 	}
 
 	isShot() {
@@ -142,7 +143,7 @@ export class Tank {
 
 	distory() {
 		this.isDestoryed = true;
-		crackArray.push(new CraAnimation(Constant.CRACK_TYPE_TANK, this.ctx, this));
+		// crackArray.push(new CrackAnimation(Constant.CRACK_TYPE_TANK, this.ctx, this));
 	}
 
 }

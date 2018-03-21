@@ -5,13 +5,15 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BackcanvasComponent } from './canvas/backcanvas/backcanvas.component';
 import { SnakeComponent } from './canvas/snake/snake.component';
+import { TankComponent } from './canvas/tank/tank.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BackcanvasComponent,
-    SnakeComponent
+    SnakeComponent,
+    TankComponent
   ],
   imports: [
     BrowserModule

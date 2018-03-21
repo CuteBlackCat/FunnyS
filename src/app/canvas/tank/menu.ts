@@ -3,7 +3,7 @@ export class Menu {
 	ctx: CanvasRenderingContext2D;
 	x: number;
 	y: number;
-	selectTank: Selectank;
+	// selectTank: Selectank;
 	playerNum: number;
 	times: number;
 
@@ -12,7 +12,7 @@ export class Menu {
 		this.ctx = ctx;
 		this.x = 0;
 		this.y = Constant.SCREEN_HEIGHT;
-		this.selectTank = new this.selectTank();
+		// this.selectTank = new this.selectTank();
 		this.playerNum = 1;
 		this.times = 0;
 	}
@@ -26,7 +26,7 @@ export class Menu {
 		if (Math.trunc(this.times / 6) % 2 === 0) {
 			temp = 0;
 		}else {
-			temp = this.selectTank.size;
+			// temp = this.selectTank.size;
 		}
 		this.y = this.y > 0 ? this.y -= 5 : 0;
 
@@ -36,9 +36,9 @@ export class Menu {
 		Constant.MENU_IMAGE.src = 'images/menu.gif';
 		this.ctx.drawImage(Constant.MENU_IMAGE, this.x, this.y);
 
-		Constant.RESOURCE_IMAGE.src = 'images/tankAll.gif';
-		this.ctx.drawImage(Constant.RESOURCE_IMAGE, Constant.POS.selectTank[0], Constant.POS.selectTank[0], this.selectTank.size, this.selectTank.size, this.selectTank.x, this.y + this.selectTank.ys[this.playerNum - 1], this.selectTank.size, this.selectTank.size);
-		this.ctx.restore();
+		// Constant.RESOURCE_IMAGE.src = 'images/tankAll.gif';
+		// this.ctx.drawImage(Constant.RESOURCE_IMAGE, Constant.POS.selectTank[0], Constant.POS.selectTank[0], this.selectTank.size, this.selectTank.size, this.selectTank.x, this.y + this.selectTank.ys[this.playerNum - 1], this.selectTank.size, this.selectTank.size);
+		// this.ctx.restore();
 	}
 
 	/**

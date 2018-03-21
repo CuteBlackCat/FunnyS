@@ -1,4 +1,4 @@
-const Constant =  {
+export const Constant =  {
 	/**
 	 * 静态变量
 	*/
