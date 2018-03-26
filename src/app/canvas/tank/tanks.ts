@@ -1,5 +1,6 @@
 import { Bullet } from './bullet';
 import { CrackAnimation } from './crackanimation';
+import { Constant } from './constant';
 
 export class Tank {
 	x: number;

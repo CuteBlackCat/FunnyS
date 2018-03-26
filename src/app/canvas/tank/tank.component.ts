@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angula
 import { Renderer2 } from '@angular/core';
 
 
-import * as constant from './constant';
+import { Constant } from './constant';
+import { globalVariables } from './main';
 import { Menu } from './menu';
 
 @Component({
@@ -41,15 +42,15 @@ export class TankComponent implements OnInit, AfterViewInit {
 	}
 
 	gameLoop() {
-		switch (gameState) {
+		switch (globalVariables.gameState) {
 			case Constant.GAME_STATE_MENU:
-				menu.draw();
+				globalVariables.menu.draw();
 				break;
 		}
 	}
 
 	initObject() {
-		menu = new Menu(this.stage);
+		globalVariables.menu = new Menu(this.stage);
 	}
 
 	ngAfterViewInit() {

@@ -1,4 +1,4 @@
-export const Constant =  {
+export const Constant =  Object.freeze({
 	/**
 	 * 静态变量
 	*/
@@ -77,4 +77,4 @@ export const Constant =  {
 	/**************爆炸类型****************/
 	CRACK_TYPE_TANK:  'tank',
 	CRACK_TYPE_BULLET:  'bullet'
-};
+});
