@@ -1,4 +1,4 @@
-export const Constant =  Object.freeze({
+export const Constant =  {
 	/**
 	 * 静态变量
 	*/
@@ -8,10 +8,10 @@ export const Constant =  Object.freeze({
 
 
 	/**************图片资源*****************/
-	MENU_IMAGE:  new HTMLImageElement(),
+	MENU_IMAGE:  new Image(),
 	// MENU_IMAGE.src:  'images/menu.gif',
 	// tslint:disable-next-line:semicolon
-	RESOURCE_IMAGE:  new HTMLImageElement(),
+	RESOURCE_IMAGE:  new Image(),
 	// RESOURCE_IMAGE.src:  'images/tankAll.gif',
 
 
@@ -37,13 +37,13 @@ export const Constant =  Object.freeze({
 	},
 
 	/**************声音资源*****************/
-	START_AUDIO:  new Audio('audio/start.mp3'),
-	BULLET_DESTROY_AUDIO:  new Audio('audio/bulletCrack.mp3'),
-	TANK_DESTROY_AUDIO:  new Audio('audio/tankCrack.mp3'),
-	PLAYER_DESTROY_AUDIO:  new Audio('audio/playerCrack.mp3'),
-	MOVE_AUDIO:  new Audio('audio/move.mp3'),
-	ATTACK_AUDIO:  new Audio('audio/attack.mp3'),
-	PROP_AUDIO:  new Audio('audio/prop.mp3'),
+	START_AUDIO:  new Audio('assets/audio/tank/start.mp3'),
+	BULLET_DESTROY_AUDIO:  new Audio('assets/audio/tank/bulletCrack.mp3'),
+	TANK_DESTROY_AUDIO:  new Audio('assets/audio/tank/tankCrack.mp3'),
+	PLAYER_DESTROY_AUDIO:  new Audio('assets/audio/tank/playerCrack.mp3'),
+	MOVE_AUDIO:  new Audio('assets/audio/tank/move.mp3'),
+	ATTACK_AUDIO:  new Audio('assets/audio/tank/attack.mp3'),
+	PROP_AUDIO:  new Audio('assets/audio/tank/prop.mp3'),
 
 
 	/**************游戏状态*****************/
@@ -77,4 +77,4 @@ export const Constant =  Object.freeze({
 	/**************爆炸类型****************/
 	CRACK_TYPE_TANK:  'tank',
 	CRACK_TYPE_BULLET:  'bullet'
-});
+};

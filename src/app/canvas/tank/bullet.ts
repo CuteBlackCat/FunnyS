@@ -7,8 +7,8 @@ export class Bullet {
 	type: number;
 	dir: number;
 	size: number;
-	x:number;
-	y:number;
+	x: number;
+	y: number;
 
 	constructor(ctx, tank, type, dir) {
 		this.ctx = ctx;

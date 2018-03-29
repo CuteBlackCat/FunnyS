@@ -1,4 +1,5 @@
 import { Constant } from './constant';
+import { Menu } from './menu';
 
 class GolbalVariables {
 	emenyStopTime: number;
@@ -8,7 +9,7 @@ class GolbalVariables {
 	 * 需要全局使用的对象
 	 */
 	map: object;
-	menu: object;
+	menu: Menu;
 
 	bulletArray: Array<any>;
 

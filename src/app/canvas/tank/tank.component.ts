@@ -41,16 +41,20 @@ export class TankComponent implements OnInit, AfterViewInit {
 
 	}
 
+	initObject() {
+		globalVariables.menu = new Menu(this.stage);
+	}
+
 	gameLoop() {
 		switch (globalVariables.gameState) {
 			case Constant.GAME_STATE_MENU:
 				globalVariables.menu.draw();
 				break;
 		}
-	}
 
-	initObject() {
-		globalVariables.menu = new Menu(this.stage);
+		requestAnimationFrame(() => {
+			this.gameLoop();
+		});
 	}
 
 	ngAfterViewInit() {
@@ -71,18 +75,14 @@ export class TankComponent implements OnInit, AfterViewInit {
 		this.overRef.nativeElement.height = Constant.SCREEN_HEIGHT;
 		this.wallRef.nativeElement.width = Constant.SCREEN_WIDTH;
 		this.wallRef.nativeElement.height = Constant.SCREEN_HEIGHT;
-		this.render.setStyle(this.tankwrapRef, 'width', Constant.SCREEN_WIDTH);
-		this.render.setStyle(this.tankwrapRef, 'height', Constant.SCREEN_HEIGHT);
+		this.render.setStyle(this.tankwrapRef.nativeElement, 'width', Constant.SCREEN_WIDTH);
+		this.render.setStyle(this.tankwrapRef.nativeElement, 'height', Constant.SCREEN_HEIGHT);
 
 		this.initObject();
-
-		requestAnimationFrame(() => {
-			this.gameLoop();
-		});
+		this.gameLoop();
 	}
 
 	ngOnInit() {
-		
 	}
 
 }

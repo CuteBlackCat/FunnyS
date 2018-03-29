@@ -1,3 +1,5 @@
+import { Constant } from './constant';
+
 export class Menu {
 
 	ctx: CanvasRenderingContext2D;
@@ -33,7 +35,7 @@ export class Menu {
 		this.ctx.clearRect(0, 0, Constant.SCREEN_WIDTH, Constant.SCREEN_HEIGHT);
 		this.ctx.save();
 
-		Constant.MENU_IMAGE.src = 'images/menu.gif';
+		Constant.MENU_IMAGE.src = 'assets/imgs/tank/menu.gif';
 		this.ctx.drawImage(Constant.MENU_IMAGE, this.x, this.y);
 
 		// Constant.RESOURCE_IMAGE.src = 'images/tankAll.gif';
