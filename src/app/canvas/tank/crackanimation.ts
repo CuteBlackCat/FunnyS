@@ -1,6 +1,6 @@
 export class CrackAnimation {
 
-	constructor() {
+	constructor(type, ctx, tank) {
 
 	}
 }

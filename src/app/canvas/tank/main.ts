@@ -12,6 +12,15 @@ class GolbalVariables {
 	menu: Menu;
 
 	bulletArray: Array<any>;
+	crackArray: Array<any>;
+
+
+	/**
+	 * 消除魔术字符串
+	 */
+	enemyOne: Symbol;
+	enemyTwo: Symbol;
+	enemyThree: Symbol;
 
 	constructor() {
 		this.emenyStopTime = 0;
@@ -21,6 +30,12 @@ class GolbalVariables {
 		this.map = null;
 		this.menu = null;
 		this.bulletArray = [];
+		this.crackArray = [];
+
+
+		this.enemyOne = Symbol();
+		this.enemyTwo = Symbol();
+		this.enemyThree = Symbol();
 	}
 }
 

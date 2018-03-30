@@ -15,7 +15,7 @@ import { Menu } from './menu';
 		<canvas #over></canvas>
 		<canvas #stage></canvas>
 	</div>`,
-	styles: ['']
+	styleUrls: ['./tank.component.css']
 })
 export class TankComponent implements OnInit, AfterViewInit {
 
