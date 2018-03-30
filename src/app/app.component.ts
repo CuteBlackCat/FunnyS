@@ -1,10 +1,15 @@
+import { GlobalService } from './service/global.service';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'fs-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'fs-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Funnys';
+	title = 'Funnys';
+
+	constructor(globalService: GlobalService) {
+		globalService.arrayFuc();
+	}
 }

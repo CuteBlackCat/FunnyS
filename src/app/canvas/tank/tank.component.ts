@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, HostListener } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 
 
 import { Constant } from './constant';
 import { globalVariables } from './main';
 import { Menu } from './menu';
+import { PlayerTank } from './tanks';
 
 @Component({
 	selector: 'fs-tank',
@@ -43,6 +44,8 @@ export class TankComponent implements OnInit, AfterViewInit {
 
 	initObject() {
 		globalVariables.menu = new Menu(this.stage);
+		globalVariables.player1 = new PlayerTank(this.tank);
+		globalVariables.player2 = new PlayerTank(this.tank);
 	}
 
 	gameLoop() {
@@ -57,7 +60,72 @@ export class TankComponent implements OnInit, AfterViewInit {
 		});
 	}
 
+
+	@HostListener('document:keydown', ['$event'])
+	keyboardInput(e: KeyboardEvent) {
+		switch (globalVariables.gameState) {
+
+			// 选择玩家数
+			case Constant.GAME_STATE_MENU:
+
+				if (e.key === 'Enter') {
+					globalVariables.gameState = Constant.GAME_STATE_INIT;
+
+					if (globalVariables.menu.playerNum === 1) {
+						globalVariables.player2.lives = 0;
+					}
+				}else {
+					let n = 0;
+					if (e.key === 'Down') {
+						n = 1;
+					}else if (e.key === 'Up') {
+						n = -1;
+					}
+					globalVariables.menu.next(n);
+				}
+				break;
+
+			// 发射子弹
+			case Constant.GAME_STATE_START:
+				if (!globalVariables.keys.includes(e.keyCode)) {
+					globalVariables.keys.push(e.keyCode);
+				}
+				if (e.key === 'Space' && globalVariables.player1.lives > 0) {
+					globalVariables.player1.shoot(Constant.BULLET_TYPE_PLAYER);
+				}else if (e.key === 'Enter' && globalVariables.player2.lives > 0) {
+					globalVariables.player2.shoot(Constant.BULLET_TYPE_PLAYER);
+				}
+				break;
+
+			default:
+				break;
+		}
+
+
+	}
+
+	@HostListener('document:keyup', ['$event'])
+	keyboardOutput(e: KeyboardEvent) {
+		globalVariables.keys['remove']();
+	}
+
+		// window.addEventListener('keydown', e => {
+		// 	switch (globalVariables.gameState) {
+		// 		case Constant.GAME_STATE_MENU:
+		// 			if (e.keyCode === keyboard.ENTER) {
+
+		// 			}
+		// 			break;
+			
+		// 		default:
+		// 			break;
+		// 	}
+		// })
+
 	ngAfterViewInit() {
+		const a = [1, 2];
+		a['remove'](1);
+		console.log(a);
 		this.wall = this.wallRef.nativeElement.getContext('2d');
 		this.tank = this.tankRef.nativeElement.getContext('2d');
 		this.grass = this.grassRef.nativeElement.getContext('2d');

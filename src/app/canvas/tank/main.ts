@@ -1,3 +1,4 @@
+import { PlayerTank } from './tanks';
 import { Constant } from './constant';
 import { Menu } from './menu';
 
@@ -10,9 +11,12 @@ class GolbalVariables {
 	 */
 	map: object;
 	menu: Menu;
+	player1: PlayerTank;
+	player2: PlayerTank;
 
 	bulletArray: Array<any>;
 	crackArray: Array<any>;
+	keys: Array<any>; // 键盘按过的
 
 
 	/**
@@ -31,6 +35,7 @@ class GolbalVariables {
 		this.menu = null;
 		this.bulletArray = [];
 		this.crackArray = [];
+		this.keys = [];
 
 
 		this.enemyOne = Symbol();
