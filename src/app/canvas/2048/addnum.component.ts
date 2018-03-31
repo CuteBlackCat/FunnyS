@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    template: `<canvas #addnum></canvas>`,
-    styles: ['']
-})
+	template: `<canvas #addnum></canvas>`,
+	styles: ['']
+	})
 export class AddnumComponent implements OnInit {
 
-    constructor() {
+	constructor() {
 
-    }
+	}
 
-    ngOnInit() {
+	ngOnInit() {
 
-    }
+	}
 }
 

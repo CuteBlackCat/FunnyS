@@ -14,7 +14,6 @@ export class GlobalService {
 		/**
 		 * 移除某一项
 		 */
-		const remove = Symbol('remove');
 		if (!Array.prototype['remove']) {
 			Array.prototype['remove'] = function(value) {
 				if (!this.includes(value)) {

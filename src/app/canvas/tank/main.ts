@@ -1,6 +1,7 @@
 import { PlayerTank } from './tanks';
 import { Constant } from './constant';
 import { Menu } from './menu';
+import { Stage } from './stage';
 
 class GolbalVariables {
 	emenyStopTime: number;
@@ -11,6 +12,7 @@ class GolbalVariables {
 	 */
 	map: object;
 	menu: Menu;
+	stage: Stage;
 	player1: PlayerTank;
 	player2: PlayerTank;
 
@@ -33,6 +35,7 @@ class GolbalVariables {
 
 		this.map = null;
 		this.menu = null;
+		this.stage = null;
 		this.bulletArray = [];
 		this.crackArray = [];
 		this.keys = [];
@@ -44,4 +47,4 @@ class GolbalVariables {
 	}
 }
 
-export let globalVariables = new GolbalVariables();
+export let GV = new GolbalVariables();

@@ -1,5 +1,5 @@
 import { Constant } from './constant';
-import { globalVariables } from './main';
+import { GV } from './main';
 import { Map } from './map';
 import { Bullet } from './bullet';
 import { CrackAnimation } from './crackanimation';
@@ -39,11 +39,11 @@ class Tank {
 		this.tempX = 0;
 		this.tempY = 0;
 		this.ctx = ctx;
-		this.map = globalVariables.map;
+		this.map = GV.map;
 	}
 
 	move() {
-		if (this.isAI && globalVariables.emenyStopTime > 0) {
+		if (this.isAI && GV.emenyStopTime > 0) {
 
 		}
 
@@ -113,7 +113,7 @@ class Tank {
 	}
 
 	shoot(type) {
-		if (this.isAI && globalVariables.emenyStopTime > 0) {
+		if (this.isAI && GV.emenyStopTime > 0) {
 			return;
 		}
 		if (!this.isShooting) {
@@ -142,7 +142,7 @@ class Tank {
 
 			this.bullet.draw();
 
-			globalVariables.bulletArray.push(this.bullet);
+			GV.bulletArray.push(this.bullet);
 			this.isShooting = true;
 		}
 	}
@@ -205,7 +205,7 @@ export class PlayerTank extends Tank {
 
 	distory() {
 		this.isDestoryed = true;
-		globalVariables.crackArray.push(new CrackAnimation(Constant.CRACK_TYPE_TANK, this.ctx, this));
+		GV.crackArray.push(new CrackAnimation(Constant.CRACK_TYPE_TANK, this.ctx, this));
 		Constant.PLAYER_DESTROY_AUDIO.play();
 	}
 
@@ -243,15 +243,15 @@ class EnemyTank extends Tank {
 		this.isAppear = false;
 		this.times = 0;
 
-		if (type === globalVariables.enemyOne) {
+		if (type === GV.enemyOne) {
 			this.lives = 1;
 			this.speed = 1.5;
 			this.drawMap = Constant.POS['enemy1'];
-		}else if (type === globalVariables.enemyTwo) {
+		}else if (type === GV.enemyTwo) {
 			this.lives = 2;
 			this.speed = 1;
 			this.drawMap = Constant.POS['enemy2'];
-		}else if (type === globalVariables.enemyThree) {
+		}else if (type === GV.enemyThree) {
 			this.lives = 3;
 			this.speed = 0.5;
 			this.drawMap = Constant.POS['enemy3'];
