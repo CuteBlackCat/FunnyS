@@ -1,4 +1,6 @@
 import { Num } from './num';
+import { Constant } from './constant';
+import { GV } from './main';
 
 export class Stage {
 
@@ -22,11 +24,36 @@ export class Stage {
 		this.ctx.fillStyle = '#7f7f7f';
 	}
 
+	init(level) {
+		this.dir = 1;
+		this.isReady = false;
+		this.level = level;
+		this.temp = 0;
+	}
+
 	draw() {
 		if (this.dir === 1) {
 			if (this.temp === 225) {
-				
+				this.ctx.drawImage(Constant.RESOURCE_IMAGE, Constant.POS['stageLevel'][0], Constant.POS['stageLevel'][1], 78, 14, 194, 208, 78, 14);
+				this.levelNum.draw(this.level, 308, 208);
+
+				GV.initMap();
+			}else if (this.temp === 225 + 600) {
+				this.temp = 225;
+				this.dir = -1;
+				Constant.START_AUDIO.play();
+			}else {
+				this.ctx.fillRect(0, this.temp, 512, this.drawHeight);
+				this.ctx.fillRect(0, 408 - this.temp - this.drawHeight, 512, this.drawHeight);
+			}
+		}else {
+			if (this.temp >= 0) {
+				this.ctx.clearRect(0, this.temp, 512, this.drawHeight);
+			}else {
+				this.isReady = true;
 			}
 		}
+
+		this.temp += this.drawHeight * this.dir;
 	}
 }

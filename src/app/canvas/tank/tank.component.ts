@@ -45,7 +45,7 @@ export class TankComponent implements OnInit, AfterViewInit {
 
 	initObject() {
 		GV.menu = new Menu(this.stage);
-		GV.stage = new Stage(this.stage);
+		GV.stage = new Stage(this.stage, GV.level);
 		GV.player1 = new PlayerTank(this.tank);
 		GV.player2 = new PlayerTank(this.tank);
 	}
@@ -60,11 +60,49 @@ export class TankComponent implements OnInit, AfterViewInit {
 				if (GV.stage.isReady) {
 					GV.gameState = Constant.GAME_STATE_START;
 				}
+				break;
+			case Constant.GAME_STATE_START:
+				this.drawAll();
+				if (GV.isGameOver || (GV.player1.lives <= 0 && GV.player2.lives <= 0)) {
+					GV.gameState = Constant.GAME_STATE_OVER;
+					GV.map.homeHit();
+					Constant.PLAYER_DESTROY_AUDIO.play();
+				}
+				if (GV.appearEnemy === GV.maxEnemy && GV.enemyArray.length === 0) {
+					GV.gameState = Constant.GAME_STATE_WIN;
+				}
+				break;
+			case Constant.GAME_STATE_WIN:
+				this.nextLevel();
+				break;
+			case Constant.GAME_STATE_OVER:
+				gameOver();
+				break;
 		}
 
 		requestAnimationFrame(() => {
 			this.gameLoop();
 		});
+	}
+
+	drawAll() {
+
+	}
+
+	nextLevel() {
+		GV.level++;
+		if (GV.level === 22) {
+			GV.level = 1;
+		}
+
+		this.initObject();
+
+		if (GV.menu.playerNum === 1) {
+			GV.player2.lives = 0;
+		}
+
+		GV.stage.init(GV.level);
+		GV.gameState = Constant.GAME_STATE_INIT;
 	}
 
 
@@ -143,19 +181,6 @@ export class TankComponent implements OnInit, AfterViewInit {
 		GV.player2.hit = false;
 		GV.player2.move();
 	}
-
-		// window.addEventListener('keydown', e => {
-		// 	switch (GV.gameState) {
-		// 		case Constant.GAME_STATE_MENU:
-		// 			if (e.keyCode === keyboard.ENTER) {
-
-		// 			}
-		// 			break;
-			
-		// 		default:
-		// 			break;
-		// 	}
-		// })
 
 	ngAfterViewInit() {
 		this.wall = this.wallRef.nativeElement.getContext('2d');
