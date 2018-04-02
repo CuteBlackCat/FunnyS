@@ -81,13 +81,13 @@ export class Map {
 		}
 
 		this.drawNoChange();
-		this.drawEnemyNum(maxEnemy);
-		this.drawLevel();
-		this.drawLives(0, 1);
-		this.drawLives(0, 2);
+		// this.drawEnemyNum(maxEnemy);
+		// this.drawLevel();
+		// this.drawLives(0, 1);
+		// this.drawLives(0, 2);
 	}
 
 	drawNoChange() {
-		this.wallCtx.drawImage
+		// this.wallCtx.drawImage
 	}
 }

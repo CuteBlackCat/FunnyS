@@ -39,7 +39,7 @@ class Tank {
 		this.tempX = 0;
 		this.tempY = 0;
 		this.ctx = ctx;
-		this.map = GV.map;
+		// this.map = GV.map;
 	}
 
 	move() {

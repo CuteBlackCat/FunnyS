@@ -3,7 +3,7 @@ import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 @Component({
 	selector: 'fs-backcanvas',
 	template: `<canvas #backCanvas ></canvas>`,
-	styles: ['canvas{width:100%;height:100%;display:block;position:fixed}']
+	styles: ['canvas{width:100%;height:100%;position:fixed}']
 })
 export class BackcanvasComponent implements OnInit {
 	ctx: CanvasRenderingContext2D;

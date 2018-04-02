@@ -1,3 +1,38 @@
-<fs-backcanvas></fs-backcanvas>
-<!-- <fs-snake></fs-snake> -->
-<fs-tank></fs-tank>
+<div class="main-wrapper">
+    <!-- 背景 -->
+    <fs-backcanvas></fs-backcanvas>
+
+    <header>
+        <!-- logo -->
+        <div class="logo">
+            Funnys
+        </div>
+
+        <!-- 导航栏 -->
+        <nav>
+            <a [routerLink]="[ '/home' ]" routerLinkActive="active">Home</a>
+            <a [routerLink]="[ '/music' ]" routerLinkActive="active">Music</a>
+            <a [routerLink]="[ '/games' ]" routerLinkActive="active">Games</a>
+            <a [routerLink]="[ '/story' ]" routerLinkActive="active">Story</a>
+            <a [routerLink]="[ '/about' ]" routerLinkActive="active">About</a>
+        </nav>
+
+        <!-- 用户登录注册 -->
+        <div class="user-use">
+            <a [routerLink]="[ '/login' ]" routerLinkActive="active">Login</a>
+            <a [routerLink]="[ '/register' ]" routerLinkActive="active">Register</a>
+        </div>
+    </header>
+
+    <!-- body -->
+    <div class="main">
+        <router-outlet></router-outlet>
+    </div>
+
+    <!-- footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">Copyright@ 李嘉欣 | 吴星昊</div>
+        </div>
+    </footer>
+</div>

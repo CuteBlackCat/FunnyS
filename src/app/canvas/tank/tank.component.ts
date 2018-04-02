@@ -65,7 +65,7 @@ export class TankComponent implements OnInit, AfterViewInit {
 				this.drawAll();
 				if (GV.isGameOver || (GV.player1.lives <= 0 && GV.player2.lives <= 0)) {
 					GV.gameState = Constant.GAME_STATE_OVER;
-					GV.map.homeHit();
+					// GV.map.homeHit();
 					Constant.PLAYER_DESTROY_AUDIO.play();
 				}
 				if (GV.appearEnemy === GV.maxEnemy && GV.enemyArray.length === 0) {
@@ -76,7 +76,7 @@ export class TankComponent implements OnInit, AfterViewInit {
 				this.nextLevel();
 				break;
 			case Constant.GAME_STATE_OVER:
-				gameOver();
+				// gameOver();
 				break;
 		}
 
