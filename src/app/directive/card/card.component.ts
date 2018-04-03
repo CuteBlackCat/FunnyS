@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Component({
 	selector: 'fs-card',
@@ -7,5 +7,13 @@ import { Component } from '@angular/core';
 })
 
 export class CardComponent {
+	@Input() card: object;
+
+	@Output() enterCard = new EventEmitter<object>();
+
+	@HostListener('click', ['$event.target'])
+	onClick() {
+		this.enterCard.emit(this.card);
+	}
 
 }

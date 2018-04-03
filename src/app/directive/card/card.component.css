@@ -1,0 +1,17 @@
+.card{
+    width: 216px;
+    height:252px;
+}
+.card .view-box {
+    width:inherit;
+    height:120px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+img{
+    width:100%;
+}
+.card .view-box span{
+    position: absolute;
+}

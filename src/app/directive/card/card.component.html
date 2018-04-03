@@ -1,3 +1,16 @@
 <div class="card">
-    
+    <div class="view-box">
+        <img src="{{card.img}}" alt="">
+        <span *ngFor="let label of card.label" class="label">{{label}}</span>
+    </div>
+
+    <div class="content-box">
+        <div class="title">{{card.title}}</div>
+        <div class="favorite">
+            <i class="iconfont">&#xe870;</i>
+            <span class="num">{{card.hot}}</span>
+            <i class="iconfont">&#xe86d;</i>
+            <span class="num">{{card.collection}}</span>
+        </div>
+    </div>
 </div>

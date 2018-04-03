@@ -1,6 +1,6 @@
 <div class="home-page">
 	<div class="bander bgfff">
-		<fs-slider [imgs]="imgs" (select)="select($event)"></fs-slider>
+		<!-- <fs-slider [imgs]="imgs" (select)="select($event)"></fs-slider> -->
 	</div>
 	<div class="bgfff">
 		<div class="container-types">
@@ -11,7 +11,7 @@
 				<em>荐</em>
 			</h3>
 			<div class="types-content">
-				<fs-card></fs-card>
+				<fs-card [card]="card" (enterCard)="enterCard($event)"></fs-card>
 			</div>
 		</div>
 	</div>
