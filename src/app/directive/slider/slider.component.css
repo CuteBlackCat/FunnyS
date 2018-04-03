@@ -15,7 +15,8 @@ li{
     left:0;
     top:0;
     z-index: 1;
-    /* display: none; */
+    right: 0;
+    border-radius: 4px 0 0 4px;
 }
 li.active{
     z-index: 10;
@@ -50,5 +51,32 @@ li img{
 }
 .slider-dots span.active{
     background:#fff;
+}
+
+.arrow{
+    position:absolute;
+    height:60px;
+    width:36px;
+    margin-top:-30px;
+    top:50%;
+    font-size:24px;
+    color: rgba(255,255,255,.6);
+    text-align: center;
+    line-height: 60px;
+    text-shadow: 0 2px 4px rgba(7,17,27,.6);
+    overflow: hidden;
+    z-index:11;
+}
+.arrow:hover{
+    color: #fff;
+    background: rgba(7,17,27,.6);
+}
+.prev {
+    left:0;
+    border-radius: 0 4px 4px 0;
+}
+.next {
+    right: 0;
+    border-radius: 4px 0 0 4px;
 }
 

@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
+import { HTMLInputEvent } from '../../interface';
+
 import { Snake, SuperSnake } from './snake';
 import { Food } from './foods';
 
@@ -286,9 +288,4 @@ export class SnakeComponent implements OnInit {
 		});
 	}
 }
-
-interface HTMLInputEvent extends Event {
-	target: HTMLInputElement & EventTarget;
-}
-
 
