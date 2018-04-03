@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 // 导入自定义模块
+import { FsDirectiveModule } from './directive/directive.module';
 import { FunnysRoutingModule } from './funnys-routing.module';
 
 // 导入组件
@@ -36,7 +37,8 @@ import { GlobalService } from './service/global.service';
 	],
 	imports: [
 		BrowserModule,
-		FunnysRoutingModule
+		FsDirectiveModule,
+		FunnysRoutingModule,
 	],
 	providers: [{provide: GlobalService, useClass: GlobalService}],
 	bootstrap: [AppComponent]

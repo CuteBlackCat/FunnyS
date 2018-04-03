@@ -1,0 +1,10 @@
+<div class="slider" #slider>
+    <ul class="box">
+		<li *ngFor="let img of imgs; let i = index" [class.active]="curIndex===i"><img src="{{img.src}}" alt="" (click)="blankTo(img.href)"></li>
+	</ul>
+	<div class="slider-dots">
+		<span *ngFor="let img of imgs; let i = index;" [class.active]="curIndex===i" (click)="slideImg(i)"></span>
+	</div>
+	<a href="javascript:;" class="prev" (click)="slideImg(curIndex - 1)"></a>
+	<a href="javascript:;" class="next" (click)="slideImg(curIndex + 1)"></a>
+</div>

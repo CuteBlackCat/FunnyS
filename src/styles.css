@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'iconfont';  /* project id 582845 */
+  src: url('//at.alicdn.com/t/font_582845_ixtnmqbwvlaw0zfr.eot');
+  src: url('//at.alicdn.com/t/font_582845_ixtnmqbwvlaw0zfr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_582845_ixtnmqbwvlaw0zfr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_582845_ixtnmqbwvlaw0zfr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_582845_ixtnmqbwvlaw0zfr.svg#iconfont') format('svg');
+}
