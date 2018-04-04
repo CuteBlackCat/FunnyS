@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 	imgs: Array<object>;
 	cards: object;
-	a:any;
 	gamecards: Array<object>;
 	// hots: Array<object>;
 
@@ -43,7 +42,8 @@ export class HomeComponent implements OnInit {
 			collection: 4000,
 			label: 'game',
 			author: ' lijiaxin',
-			type: 0
+			type: 0,
+			description: '像一颗海草海草哦海草海草随风飘摇，像一颗海草海草海草海草随风飘摇'
 		};
 
 		this.cards = [card, card, card, card, card];

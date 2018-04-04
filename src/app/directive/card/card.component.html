@@ -1,19 +1,31 @@
-<div class="card">
-    <div class="view-box">
-        <img src="{{card.img}}" alt="">
-        <div class="label-box">
-            <span class="label">{{card.label}}</span>
+<div class="card card-front">
+    <div class="card-box">
+        <div class="front">
+            <div class="view-box">
+                <img src="{{card.img}}" alt="">
+                <div class="label-box">
+                    <span class="label">{{card.label}}</span>
+                </div>
+            </div>
+        
+            <div class="content-box">
+                <div class="title">{{card.title}}</div>
+                <div class="favorite">
+                    <i class="iconfont">&#xe870;</i>
+                    <span class="num">{{card.hot}}</span>
+                    <i class="iconfont">&#xe86d;</i>
+                    <span class="num">{{card.collection}}</span>
+                </div>
+                <div class="author">作者: {{card.author}}</div>
+        
+                <div class="back-view">
+                    <i class="iconfont">&#xe64e;</i>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="content-box">
-        <div class="title">{{card.title}}</div>
-        <div class="favorite">
-            <i class="iconfont">&#xe870;</i>
-            <span class="num">{{card.hot}}</span>
-            <i class="iconfont">&#xe86d;</i>
-            <span class="num">{{card.collection}}</span>
+        
+        <div class="back">
+            <p>{{card.description}}</p>
         </div>
-        <div class="author">作者: {{card.author}}</div>
     </div>
 </div>

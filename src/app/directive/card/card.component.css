@@ -8,6 +8,7 @@
     border-radius: 8px;
     overflow: hidden;
     transition: all .4s;
+    position: relative;
 }
 .card .view-box {
     width:inherit;
@@ -18,7 +19,7 @@
 }
 .card:hover {
     box-shadow: 0 2px 6px 0 rgba(7,17,27,.2);
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 }
 img{
     width:100%;
@@ -73,6 +74,57 @@ img{
     color: #f50057;
 }
 .author{
-    color:#4D555D;
-    padding: 0 8px;
+    color: #4D555D;
+    padding: 0 2px;
+    margin-top: 4px;
+}
+
+.back-view{
+    display: flex;
+    justify-content: flex-end;
+    padding:0 2px;
+    color: #93999F;
+}
+.back-view i {
+    transition: font-size .3s;
+}
+.back-view i:hover{
+    color: #d500f9;
+    font-size: 20px;
+}
+
+/* 翻转样式 */
+.card{
+    transform-style: preserve-3d;
+    transform-origin: 50% 50%;
+}
+.card .card-box{
+    position: absolute;
+    backface-visibility: hidden;
+    height: inherit;
+    width: inherit;
+}
+.front, .back{
+    position: absolute;
+    left:0;
+    right: 0;
+    bottom: 0;
+    top:0;
+}
+.back{
+    transform: rotateY(180deg);
+    background: #fff;
+}
+.i-back{
+    transform:rotateY(-180deg);
+}
+.front{
+    transform: rotateY(0deg);
+    background: #fff;
+}
+.card-front.card{
+    transform: rotate(0deg);
+}
+.card-back.card{
+    transform: rotate(180deg);
 }
