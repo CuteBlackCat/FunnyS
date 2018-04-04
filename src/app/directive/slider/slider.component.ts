@@ -28,7 +28,7 @@ export class SliderComponent implements AfterViewInit {
 		if (i >= this.imgs.length) {
 			this.curIndex = 0;
 		}else if (i < 0) {
-			this.curIndex = this.imgs.length;
+			this.curIndex = this.imgs.length - 1;
 		}else {
 			this.curIndex = i;
 		}

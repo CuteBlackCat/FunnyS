@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 	imgs: Array<object>;
-	card: object;
+	cards: object;
+	a:any;
+	gamecards: Array<object>;
+	// hots: Array<object>;
 
 	constructor() {
 		this.imgs = [
@@ -33,13 +36,26 @@ export class HomeComponent implements OnInit {
 			},
 		];
 
-		this.card = {
-			img: 'assets/imgs/home/5.jpg',
+		const card = {
+			img: 'assets/imgs/home/7.jpg',
 			title: '最好听的影月就在Funnys',
 			hot: 5000,
 			collection: 4000,
-			label: ['game', 'music']
+			label: 'game',
+			author: ' lijiaxin',
+			type: 0
 		};
+
+		this.cards = [card, card, card, card, card];
+		this.gamecards = [card, card, card, card, card, card, card, card, card, card];
+		// const hot = {
+		// 	icon: '&#xe668;',
+		// 	title: '坦克大战',
+		// 	description: '带你回忆游戏童年',
+		// 	href: '../'
+		// };
+
+		// this.hots = [hot, hot, hot, hot];
 	}
 
 	/**
@@ -50,6 +66,10 @@ export class HomeComponent implements OnInit {
 		console.log(href);
 	}
 
+	/**
+	 * 选择了card事件
+	 * @param card 返回的card
+	 */
 	enterCard(card: object) {
 		console.log(card);
 	}

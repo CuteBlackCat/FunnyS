@@ -1,7 +1,9 @@
 <div class="card">
     <div class="view-box">
         <img src="{{card.img}}" alt="">
-        <span *ngFor="let label of card.label" class="label">{{label}}</span>
+        <div class="label-box">
+            <span class="label">{{card.label}}</span>
+        </div>
     </div>
 
     <div class="content-box">
@@ -12,5 +14,6 @@
             <i class="iconfont">&#xe86d;</i>
             <span class="num">{{card.collection}}</span>
         </div>
+        <div class="author">作者: {{card.author}}</div>
     </div>
 </div>

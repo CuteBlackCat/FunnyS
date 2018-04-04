@@ -11,7 +11,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 const funnysRoutes: Routes = [
 	{ path: 'home', component: HomeComponent},
-	{ path: 'games', component: GamesComponent },
+	{ path: 'game', component: GamesComponent },
 	{ path: 'music', component: MusicComponent },
 	{ path: 'story', component: StoryComponent },
 	{ path: 'login', component: LoginComponent },

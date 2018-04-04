@@ -1,6 +1,6 @@
 .slider{
-    width: 49vw;
-    height:33.3vh;
+    width: inherit;
+    height:inherit;
     position: relative;
 }
 .slider .box,.slider .box ul{
@@ -29,6 +29,7 @@ li img{
     cursor: pointer;
     opacity:0;
     transition: opacity .5s ease-out;
+    border-radius: 8px;
 }
 
 .slider-dots{

@@ -1,0 +1,85 @@
+.home-page{
+    width:1152px;
+}
+.baner{
+    width:1152px;
+    height:444px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top:32px;
+    box-shadow: 0 12px 24px 0 rgba(7,17,27,.2);
+}
+.baner .slider-box{
+    width:inherit;
+    height:316px;
+    overflow: hidden;
+}
+.baner .slider-box fs-slider{
+    height:inherit;
+}
+.hot-box{
+    display: flex;
+    height: 128px;
+    background: #fff;
+}
+.hot-box .hot-project {
+    flex-grow: 1;
+    text-align: center;
+    width:25%;
+    cursor: pointer;
+    transition: transform .3s;
+}
+.hot-box .hot-project svg{
+    width:36px;
+    height:36px;
+    border-radius: 50%;
+}
+.hot-box .hot-project .img-box{
+    margin-top:22px;
+}
+.hot-box .hot-project .title{
+    margin-top:4px;
+    color:#07111b;
+    font-size: 14px;
+}
+.hot-box .hot-project .description{
+    font-size: 12px;
+    color: #93999F;
+    line-height: 16px;
+    margin-top: 2px;
+    font-weight: 400;
+}
+
+.hot-box .hot-project:hover{
+    transform: translateY(-5px);
+}
+
+
+/* 推荐部分 */
+.container-types {
+    padding: 36px 0 48px;;
+}
+.container-types .types-content{
+    display: flex;
+    justify-content: space-between;
+    margin-top:24px;
+    flex-wrap: wrap;
+}
+.container-types .types-content fs-card {
+    /* flex-grow: 1; */
+}
+.types-title {
+    position: relative;
+    font-size: 14px;
+    color: #93999F;
+    letter-spacing: .6px;
+    line-height: 36px;
+    text-align: center;
+    /* margin-top:24px; */
+}
+.types-title em{
+    font-size: 20px;
+    font-weight: 600;
+    color: #4D555D;
+    margin: 0 3px;
+}

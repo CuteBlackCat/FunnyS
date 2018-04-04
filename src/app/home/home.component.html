@@ -1,8 +1,57 @@
 <div class="home-page">
-	<div class="bander bgfff">
-		<!-- <fs-slider [imgs]="imgs" (select)="select($event)"></fs-slider> -->
+	<div class="baner bgfff">
+		<div class="slider-box">
+			<fs-slider [imgs]="imgs" (select)="select($event)"></fs-slider>
+		</div>
+		<div class="hot-box">
+			<div class="hot-project">
+				<div class="img-box">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-ico_game"></use>
+					</svg>
+				</div>
+				<div class="title">经典游戏</div>
+				<div class="description">带你回忆游戏童年</div>
+			</div>
+			<div class="hot-project">
+				<div class="img-box">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-bijiben"></use>
+					</svg>
+				</div>
+				<div class="title">幽默故事</div>
+				<div class="description">在故事中发现生活的乐趣</div>
+			</div>
+			<div class="hot-project">
+				<div class="img-box">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-yinle-yuanwenjian"></use>
+					</svg>
+				</div>
+				<div class="title">最美声音</div>
+				<div class="description">沐浴轻柔的微风，遇见最美的自己</div>
+			</div>
+			<div class="hot-project">
+				<div class="img-box">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-shengle-yuanwenjian"></use>
+					</svg>
+				</div>
+				<div class="title">陈一发</div>
+				<div class="description">倾听网红的声音</div>
+			</div>
+			<div class="hot-project">
+				<div class="img-box">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-ico_lady"></use>
+					</svg>
+				</div>
+				<div class="title">悲情故事</div>
+				<div class="description">聆听他人的声音，打动自己的内心</div>
+			</div>
+		</div>
 	</div>
-	<div class="bgfff">
+	<div>
 		<div class="container-types">
 			<h3 class="types-title">
 				<em>精</em>／
@@ -11,7 +60,25 @@
 				<em>荐</em>
 			</h3>
 			<div class="types-content">
-				<fs-card [card]="card" (enterCard)="enterCard($event)"></fs-card>
+				<ng-container *ngFor="let card of cards">
+					<fs-card [card]="card" (enterCard)="enterCard($event)"></fs-card>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<div class="container-types">
+			<h3 class="types-title">
+				<em>游</em>／
+				<em>戏</em>／
+				<em>推</em>／
+				<em>荐</em>
+			</h3>
+			<div class="types-content">
+				<ng-container *ngFor="let card of gamecards">
+					<fs-card [card]="card" (enterCard)="enterCard($event)"></fs-card>
+				</ng-container>
 			</div>
 		</div>
 	</div>

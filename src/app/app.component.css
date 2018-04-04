@@ -1,7 +1,10 @@
 
+.main-wrapper{
+    background: #fff;
+}
 header, .main, footer {
     position: relative;
-    width: 100vw;
+    /* width: 100vw; */
     margin:0 auto;
 }
 
@@ -100,6 +103,8 @@ header nav a:hover,header nav a.active, header .user-use a:hover{
 .main{
     min-height: 77.5vh;
     color:#07111B;
+    display: flex;
+    justify-content: center;
 }
 
 /* footer */
