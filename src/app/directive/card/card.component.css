@@ -6,7 +6,7 @@
     margin-bottom: 20px;
     box-shadow: 0 12px 24px 0 rgba(7,17,27,.2);
     border-radius: 8px;
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: all .4s;
     position: relative;
 }
@@ -97,34 +97,29 @@ img{
 .card{
     transform-style: preserve-3d;
     transform-origin: 50% 50%;
-}
-.card .card-box{
-    position: absolute;
-    backface-visibility: hidden;
+    position:absolute;
     height: inherit;
-    width: inherit;
+    width:inherit;
+    transition: all .6s;
 }
 .front, .back{
-    position: absolute;
     left:0;
     right: 0;
     bottom: 0;
     top:0;
+    /* background: #fff; */
+    position: absolute;
+    backface-visibility: hidden;
 }
 .back{
     transform: rotateY(180deg);
-    background: #fff;
-}
-.i-back{
-    transform:rotateY(-180deg);
 }
 .front{
     transform: rotateY(0deg);
-    background: #fff;
 }
 .card-front.card{
-    transform: rotate(0deg);
+    transform: rotateY(0deg);
 }
 .card-back.card{
-    transform: rotate(180deg);
+    transform: rotateY(180deg);
 }

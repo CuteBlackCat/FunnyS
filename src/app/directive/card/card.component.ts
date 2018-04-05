@@ -7,6 +7,8 @@ import { Component, Input, Output, EventEmitter, HostListener } from '@angular/c
 })
 
 export class CardComponent {
+	front  = true;
+
 	@Input() card: object;
 
 	@Output() enterCard = new EventEmitter<object>();
