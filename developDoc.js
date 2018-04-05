@@ -9,17 +9,20 @@ Url: POST http://47.52.238.90:4397/funnys/v1/login
 Postdata:
 {
     “username”: “wuxh”,
-    “password”: “wuxh”
+    “password”: “wuxh”                (进行加密)
+    “timestamp”:"11111111111"         (11位长度)
+    
 }
 ResData:
 {
     code: 0,
         message: ”成功”,
     data: {
-        token: ‘一个随机序列’//判断是否登录
+        token: ‘一个随机序列’//判断是否登录 （登录会刷新token ， 一个帐号只能同时在一台设备登录）
         userName: “wuxh”,
-        userId: 38,
-        userPhoto: 'imgs'
+        --userId: 38,                 (userId 不进行展示，在数据库中是 32位字符串)
+        userPhoto: 'imgs'             (返回的是图片地址)
+        userDescription: ''           (用户简介)
     }
 }
 
@@ -28,10 +31,14 @@ register接口
 Url: POST  .../funnys/v1 / register
 Postdata:
 {
-    userName: "李嘉欣",
-    password: "ling",
-    userPhoto: 'imgs'
+    
+    userName: "李嘉欣",              (not null)
+    userPwd: "ling",                (not null 需要加密后传过来，后端进行解密)
+    userPhoto: 'imgs'               (为空的话，会有默认头像)
+    userEmail:''                    (not null ,用于找回密码使用)
+    userDesription:''               (default null)
 }
+// 是否注册后让其直接登录，有待商榷
 ResData:
 {
     code
