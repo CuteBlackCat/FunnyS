@@ -123,3 +123,15 @@ img{
 .card-back.card{
     transform: rotateY(180deg);
 }
+
+
+/* 背部样式 */
+.back p{
+    padding: 10px;
+    min-height: 218px;
+    box-sizing: border-box;
+    text-indent: 28px;
+}
+.back i{
+    padding-right: 10px;
+}
