@@ -19,7 +19,7 @@
 }
 .card:hover {
     box-shadow: 0 2px 6px 0 rgba(7,17,27,.2);
-    transform: translateY(-3px);
+    /* top:-3px; */
 }
 img{
     width:100%;
@@ -100,7 +100,7 @@ img{
     position:absolute;
     height: inherit;
     width:inherit;
-    transition: all .6s;
+    /* transition: all .6s; */
 }
 .front, .back{
     left:0;
@@ -123,7 +123,12 @@ img{
 .card-back.card{
     transform: rotateY(180deg);
 }
-
+.card-front.card:hover{
+    transform: rotateY(0deg) translateY(-3px);
+}
+.card-back.card:hover{
+    transform: rotateY(180deg) translateY(-3px);
+}
 
 /* 背部样式 */
 .back p{
