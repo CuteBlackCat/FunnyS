@@ -1,0 +1,64 @@
+.story-card {
+    padding: 24px 32px 32px;
+    width: 372px;
+    box-sizing: border-box;
+    background: #FFF;
+    box-shadow: 0 4px 8px 0 rgba(7,17,27,.05);
+    border-radius: 8px;
+    transition: all .3s;
+    margin-right: 18px;
+    margin-bottom: 18px;
+}
+.story-card:hover{
+    box-shadow: 0 8px 16px 0 rgba(7,17,27,.1);
+}
+
+.story-info{
+    display: flex;
+    justify-content: space-between;
+    line-height: 16px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: #93999f;
+}
+
+.story-info .story-type {
+    color:#4285f4;
+}
+.story-info .story-type .iconfont{
+    font-size: inherit;
+}
+
+.title {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 8px;
+}
+.title:hover{
+    color: #4285f4;
+}
+
+.introduction{
+    height:20px;
+    line-height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+}
+
+.content{
+    font-size: 12px;
+    color:#4d555d;
+    line-height: 24px;
+    max-height: 170px;
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all; */
+    /* height: */
+    overflow: hidden;
+}
+
+.about{
+    display: flex;
+}

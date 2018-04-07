@@ -71,6 +71,12 @@
     height:252px;
     margin-bottom: 20px;
 }
+.container-types .types-content .storycard{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 1101px;
+}
 .types-title {
     position: relative;
     font-size: 14px;

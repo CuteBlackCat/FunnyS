@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener} from '@angular/core';
 
 @Component({
 	selector: 'fs-story-card',
@@ -7,5 +7,12 @@ import { Component } from '@angular/core';
 })
 
 export class StoryCardComponent {
+	@Input() card: object;
 
+	@Output() enterCard = new EventEmitter<object>();
+
+	@HostListener('click', ['$event.target'])
+	onClick() {
+		this.enterCard.emit(this.card);
+	}
 }

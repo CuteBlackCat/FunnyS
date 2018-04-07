@@ -82,4 +82,38 @@
 			</div>
 		</div>
 	</div>
+
+	<div>
+		<div class="container-types">
+			<h3 class="types-title">
+				<em>音</em>／
+				<em>乐</em>／
+				<em>推</em>／
+				<em>荐</em>
+			</h3>
+			<div class="types-content">
+				<ng-container *ngFor="let card of gamecards">
+					<fs-card [card]="card" (enterCard)="enterCard($event)"></fs-card>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<div class="container-types">
+			<h3 class="types-title">
+				<em>故</em>／
+				<em>事</em>／
+				<em>推</em>／
+				<em>荐</em>
+			</h3>
+			<div class="types-content">
+				<div class="storycard">
+					<ng-container *ngFor="let card of storycards">
+						<fs-story-card [card]="card" (enterCard)="enterCard($event)"></fs-story-card>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

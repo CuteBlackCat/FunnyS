@@ -1,0 +1,46 @@
+<div class="story-card">
+    <div class="story-info">
+        <div class="story-type">
+            <i class="iconfont">&#xe6a2;</i>
+            <span>{{card.typeId}}</span>
+        </div>
+
+        <div class="author">
+            <span>作者:</span>
+            <span>{{card.author}}</span>
+        </div>
+
+        <div class="time">
+            <span>发布时间:</span>
+            <span>{{card.publicTime}}</span>
+        </div>
+        
+    </div>
+
+    <div class="title">
+        <p>{{card.storyName}}</p>
+    </div>
+
+    <div class="introduction">
+        简介: {{card.introduction}}
+    </div>
+
+    <div class="content">
+        {{card.content}}
+    </div>
+
+    <div class="about">
+        <div class="hot">
+            <span>热度</span>
+            <span>{{card.hot}}</span>
+        </div>
+        <div class="comment">
+            <span>评论</span>
+            <span>{{card.comment | interceptString: 165}}</span>
+        </div>
+        <div class="readall">
+            阅读全文
+            <i class="iconfont">&#xe65b;</i>
+        </div>
+    </div>
+</div>
