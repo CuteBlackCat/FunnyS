@@ -10,7 +10,7 @@ import { InterceptStringPipe } from './storycard/storycard.pipe';
 		CardComponent,
 		SliderComponent,
 		StoryCardComponent,
-		InterceptStringPipe,
+		InterceptStringPipe
 	],
 	imports: [BrowserModule],
 	exports: [SliderComponent, CardComponent, StoryCardComponent, InterceptStringPipe]

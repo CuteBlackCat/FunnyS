@@ -26,7 +26,7 @@
     </div>
 
     <div class="content">
-        {{card.content}}
+        {{card.content | interceptString: 165}}
     </div>
 
     <div class="about">
@@ -36,11 +36,13 @@
         </div>
         <div class="comment">
             <span>评论</span>
-            <span>{{card.comment | interceptString: 165}}</span>
+            <span>{{card.comment}}</span>
         </div>
         <div class="readall">
-            阅读全文
-            <i class="iconfont">&#xe65b;</i>
+            <span>
+                 阅读全文
+            </span>
+            <i class="iconfont">&#xe990;</i>
         </div>
     </div>
 </div>

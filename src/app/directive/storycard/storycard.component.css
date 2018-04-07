@@ -23,7 +23,7 @@
 }
 
 .story-info .story-type {
-    color:#4285f4;
+    color:rgba(66,133,244,.6);
 }
 .story-info .story-type .iconfont{
     font-size: inherit;
@@ -33,9 +33,11 @@
     font-size: 16px;
     line-height: 24px;
     margin-bottom: 8px;
+    transition: all .3s;
+    cursor: pointer;
 }
 .title:hover{
-    color: #4285f4;
+    color:rgba(66,133,244,1);
 }
 
 .introduction{
@@ -61,4 +63,25 @@
 
 .about{
     display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    line-height: 24px;
+    color:#93999f;
+}
+.about .hot, .about .comment{
+    flex-grow: 1;
+}
+.about .readall{
+    flex-grow: 2;
+    display: flex;
+    justify-content: flex-end;
+    color:rgba(66,133,244,.6);
+    transition: all .3s;
+    cursor: pointer;
+}
+.about .readall:hover{
+    color:rgba(66,133,244,1);
+}
+.about .readall .i{
+    font-size: inherit;
 }
