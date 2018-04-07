@@ -21,6 +21,13 @@ header {
 header .logo{
     flex-grow: 1;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+header .logo span{
+    display: block;
+    margin-left:5px;
+    font-size: 16px;
 }
 
 header nav{
@@ -33,7 +40,8 @@ header nav a{
     width: 5vw;
     color:inherit;
     position: relative;
-    transform: translateZ(0)
+    transform: translateZ(0);
+    margin-right: 10px;
 }
 
 
@@ -51,36 +59,35 @@ nav a:after{
     transform: scale(0);
     transform-origin: 50% 50%;
 }
-/* nav a.active:nth-child(1):after{
-    background:#ff1744 !important;
+nav a.active:nth-child(1):after{
+    background:#4285f4 !important;
 }
 nav a:nth-child(2):after{
-    background: #f50057;
+    background: #ea4335;
 }
-nav a.active:nth-child(2):after{
+/* nav a.active:nth-child(2):after{
     background:#f50057 !important;
-}
+} */
 nav a:nth-child(3):after{
-    background: #d500f9;
+    background: #fbbc05;
 }
-nav a.active:nth-child(3):after{
+/* nav a.active:nth-child(3):after{
     background:#d500f9 !important;
-}
+} */
 nav a:nth-child(4):after{
-    background: #651fff;
+    background: #34a853;
 }
-nav a.active:nth-child(4):after{
+/* nav a.active:nth-child(4):after{
     background:#651fff !important;
-}
+} */
 nav a:nth-child(5):after{
-    background: #3d5afe;
+    background: #4285f4;
 }
-nav a.active:nth-child(5):after{
+/* nav a.active:nth-child(5):after{
     background:#3d5afe !important;
 } */
 nav a:hover:after,nav a.active:after{
     transform: scale(1);
-    background: #d500f9;
 }
 
 header .user-use{
