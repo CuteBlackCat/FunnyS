@@ -1,0 +1,5 @@
+<div class="story-list">
+    <ng-container *ngFor="let card of storys">
+        <fs-story-card [card]="card" (enterCard)="enterStory(card)"></fs-story-card>
+    </ng-container>
+</div>

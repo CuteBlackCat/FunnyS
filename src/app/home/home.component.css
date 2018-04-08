@@ -76,6 +76,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     height: 1101px;
+    flex-grow: 1;
 }
 .types-title {
     position: relative;

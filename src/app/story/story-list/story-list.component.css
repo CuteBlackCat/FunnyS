@@ -1,0 +1,8 @@
+.story-list{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.story-list .story-card{
+    padding: 24px 20px 32px;
+}

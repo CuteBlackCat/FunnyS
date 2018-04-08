@@ -11,7 +11,7 @@ export class StoryCardComponent {
 
 	@Output() enterCard = new EventEmitter<object>();
 
-	@HostListener('click', ['$event.target'])
+
 	onClick() {
 		this.enterCard.emit(this.card);
 	}

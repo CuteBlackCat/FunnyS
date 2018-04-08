@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { StoryComponent } from './story.component';
 import { StoryListComponent } from './story-list/story-list.component';
 import { StoryDetailComponent } from './story-detail/story-detail.component';
-// import { StoryTypeComponent } from './story-type/story-type.component';
 
 const Routes: Routes = [
 	{
@@ -14,12 +13,8 @@ const Routes: Routes = [
 				path: 'list',
 				component: StoryListComponent
 			},
-			// {
-			// 	path: 'type:typeid',
-			// 	component: StoryTypeComponent
-			// },
 			{
-				path: 'detail:storyid',
+				path: 'detail',
 				component: StoryDetailComponent
 			}
 		]

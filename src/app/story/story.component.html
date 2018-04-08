@@ -1,3 +1,18 @@
-<p>
-  story works!
-</p>
+<div class="story">
+	<div class="category">
+		<span>
+			故事类型: 
+		</span>
+		<div class="type-box">
+			<span class="story-type" *ngFor="let type of types" (click)="searchStory(type.typeId)" [class.active]="type.typeId===curType">{{type.typeName}}</span>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="title">
+			<span [class.active]="curTitle==='hot'" (click)="searchTitle('hot')">最新</span>
+			<span [class.active]="curTitle==='atleast'" (click)="searchTitle('atleast')">最热</span>
+		</div>
+		<router-outlet></router-outlet>
+	</div>
+</div>

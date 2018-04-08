@@ -5,23 +5,23 @@ import { StoryListComponent } from './story-list/story-list.component';
 // import { StoryTypeComponent } from './story-type/story-type.component';
 import { StoryDetailComponent } from './story-detail/story-detail.component';
 import { StoryRoutingModule } from './story-router.module';
+import { FsDirectiveModule } from '../directive/directive.module';
 
 @NgModule({
 	declarations: [
 		StoryComponent,
 		StoryDetailComponent,
 		StoryListComponent,
-		// StoryTypeComponent
 	],
 	imports: [
 		BrowserModule,
-		StoryRoutingModule
+		FsDirectiveModule,
+		StoryRoutingModule,
 	],
 	exports: [
 		StoryComponent,
 		StoryDetailComponent,
 		StoryListComponent,
-		// StoryTypeComponent
 	]
 })
 export class StoryModule {
