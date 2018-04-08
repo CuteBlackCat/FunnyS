@@ -13,7 +13,6 @@ const funnysRoutes: Routes = [
 	{ path: 'home', component: HomeComponent},
 	{ path: 'game', component: GamesComponent },
 	{ path: 'music', component: MusicComponent },
-	{ path: 'story', component: StoryComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'register', component: RegisterComponent },
 	{ path: '', redirectTo: '/home', pathMatch: 'full' },

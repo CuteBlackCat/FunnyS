@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 // 导入自定义模块
 import { FsDirectiveModule } from './directive/directive.module';
 import { FunnysRoutingModule } from './funnys-routing.module';
+import { StoryModule } from './story/story.module';
 
 // 导入组件
 import { AppComponent } from './app.component';
@@ -16,7 +17,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { GamesComponent } from './games/games.component';
 import { MusicComponent } from './music/music.component';
-import { StoryComponent } from './story/story.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 // 导入管道
@@ -35,12 +35,12 @@ import { GlobalService } from './service/global.service';
 		RegisterComponent,
 		GamesComponent,
 		MusicComponent,
-		StoryComponent,
 		PagenotfoundComponent,
 	],
 	imports: [
 		BrowserModule,
 		FsDirectiveModule,
+		StoryModule,
 		FunnysRoutingModule,
 	],
 	providers: [{provide: GlobalService, useClass: GlobalService}],
