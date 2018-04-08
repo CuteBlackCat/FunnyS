@@ -61,7 +61,7 @@ export class StoryComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
+		this.router.navigate(['/story/list', { type: this.curType, condition: this.curTitle }]);
 	}
 
 }
