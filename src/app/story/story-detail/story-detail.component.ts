@@ -9,6 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class StoryDetailComponent implements OnInit {
 	ancestor: object;
 
+	bookOpen: boolean;
+
+	hot: boolean;
+	lover: boolean;
+	close: boolean;
+
+	allStorys: Array<Array<object>>;
+	currentStory: object;
+
+
 	ngOnInit() {
 		this.ancestor = {
 			storyName: '安河桥的故事',
@@ -22,5 +32,37 @@ export class StoryDetailComponent implements OnInit {
 			typeId: 2,
 			comment: 200
 		};
+
+		this.allStorys = [
+			[
+				this.ancestor,
+				this.ancestor,
+				this.ancestor,
+				this.ancestor,
+				this.ancestor,
+				this.ancestor
+			],
+			[
+				this.ancestor,
+				this.ancestor,
+				this.ancestor,
+				this.ancestor,
+				this.ancestor,
+				this.ancestor
+			],
+			[
+				this.ancestor,
+				this.ancestor,
+				this.ancestor,
+				this.ancestor,
+				this.ancestor,
+				this.ancestor
+			],
+		];
+
+		this.bookOpen = false;
+		this.hot = false;
+		this.lover = false;
+		this.close = false;
 	}
 }

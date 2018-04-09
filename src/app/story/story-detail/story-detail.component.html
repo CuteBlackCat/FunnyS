@@ -1,7 +1,7 @@
 <div class="story-detail">
-    <div class="book preserve-3d" [class.active]="bookOpen">
+    <div class="book preserve-3d" [class.active]="bookOpen" [class.close]="close">
         <!-- 封面 -->
-        <div class="title-page page preserve-3d" [class.active]="bookOpen">
+        <div class="title-page page preserve-3d" [class.active]="bookOpen" [class.close]="close">
             <div class="front">
                 <div class="content">
                     <p>{{ancestor.storyName}}</p>
@@ -9,7 +9,7 @@
                     <p class="font14">故事简介：{{ancestor.introduction}}</p>
                 </div>
                 <div class="read">
-                    <i class="iconfont" (click)="bookOpen = true;">&#xe992;</i>
+                    <i class="iconfont arrow-back" (click)="bookOpen = true; close = false;">&#xe992;</i>
                 </div>
             </div>
             <div class="back">
@@ -17,9 +17,17 @@
                     <p>{{ancestor.storyName}}</p>
                     <p>作者：{{ancestor.author}}</p>
                     <p class="font14">简介：{{ancestor.introduction}}</p>
-                    <p class="font14">内容：{{ancestor.content}}</p>
-                    <p class="font14">发布时间：{{ancestor.publicTime}}</p>
-                    <p><i class="iconfont">&#xe873;</i><i class="iconfont">&#xe871;</i></p>
+                    <p class="chapter">第1章</p>
+                    <p class="font14 message">{{ancestor.content}}</p>
+                    <p class="view">
+                        <i class="iconfont" *ngIf="!hot">&#xe873;</i>
+                        <i class="iconfont" *ngIf="!lover">&#xe871;</i>
+                        <i class="iconfont" *ngIf="hot">&#xe872;</i>
+                        <i class="iconfont" *ngIf="lover">&#xe870;</i>
+                        <span class="font14">发布时间：{{ancestor.publicTime}}</span>
+                    </p>
+                    <i class="iconfont arrow-front" (click)="bookOpen = false; close = true;">&#xe991;</i>
+                    
                 </div>
             </div>
         </div>

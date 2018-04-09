@@ -2,7 +2,7 @@
 .story{
     width:1152px;
     border-radius: 8px;
-    box-shadow: 0 0 8px 0 rgba(7,17,27,.05);
+    box-shadow: 0 0 8px 0 rgba(7,17,27,.1);
     background: #fff;
     margin:32px 0;
 }

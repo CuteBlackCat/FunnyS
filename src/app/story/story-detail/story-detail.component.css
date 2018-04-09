@@ -13,11 +13,15 @@
     /* background: #fff; */
     transform: translateX(-50%);
     perspective: 2000px;
-    transition: all 1s;
     box-shadow: 0 0 8px 0 rgba(7,17,27,.1);
 }
 .story-detail .book.active{
     transform: translateX(0px);
+    transition: all 1s;
+}
+.story-detail .book.close{
+    transform: translateX(-50%);
+    transition: all 1s 2s;
 }
 .page{
     transform-origin: 0 50%;
@@ -25,19 +29,25 @@
     position: absolute;
     width: inherit;
     height: inherit;
-    border-left: 1px solid #fff;
+    border-left: 1px solid rgba(52,168,83,1);
     transform-origin: 0 50%;
     color:#fff;
     perspective-origin: 0 100%;
+    box-shadow: 0 0 8px 0 rgba(7,17,27,.1);
 }
 .page.active{
     animation-name: pageopen;
     animation-duration: 2s;
     animation-fill-mode: forwards;
 }
+.page.close{
+    animation-name: pageclose;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
 .title-page .front, .back-page .back {
     background: rgba(52,168,83,1);
-    
+    color: #fff;
 }
 .title-page{
     z-index: 999;
@@ -57,15 +67,17 @@
 .front, .back{
     width:inherit;
     height: inherit;
-    background: rgba(52,168,83,1);;
+    background: #fff;
     text-align: center;
     font-size: 18px;
     position: absolute;
     backface-visibility: hidden;
-    color: #fff;
+    color: #07111B;
     display: flex; 
     justify-content: center; 
     flex-direction: column;
+    padding:10px;
+    box-sizing: border-box;
 }
 .back{
     transform: rotateY(-180deg);
@@ -96,17 +108,56 @@
 .content .introduction{
     font-size: 14px;
 }
-.read i{
+i.arrow-front, i.arrow-back{
     position: absolute;
     bottom: 10px;
-    right: 10px;
     transition: opacity .3s;
     opacity: .6;
     cursor: pointer;
 }
-.book i:hover{
+i.arrow-back{
+    right:10px;
+}
+i.arrow-front{
+    left:10px;
+}
+i.arrow-front:hover,i.arrow-back:hover{
     opacity: 1;
+}
+p{
+    margin-top:8px;
 }
 p.font14{
     font-size: 14px;
+    margin-top:4px;
+    color:#4D555D;
+}
+.title-page .front .font14{
+    color:#fff;
+}
+p.message{
+    text-align: left;
+    text-indent: 28px;
+    padding: 5px 10px;
+}
+p.view{
+    display: flex;
+    font-size: 16px;
+    justify-content: flex-start;
+    padding:0 10px;
+}
+p.view i{
+    margin-right: 10px;
+    cursor: pointer;
+    color:#f50057;
+}
+p.view span {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 12px;
+    color:#93999F;
+}
+p.chapter{
+    margin-top: 12px;
 }
