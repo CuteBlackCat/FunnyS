@@ -1,19 +1,37 @@
 <div class="story-detail">
-    <div class="book">
+    <div class="book preserve-3d" [class.active]="bookOpen">
         <!-- 封面 -->
-        <div class="title-page page">
-            <div class="front"></div>
-            <div class="back"></div>
+        <div class="title-page page preserve-3d" [class.active]="bookOpen">
+            <div class="front">
+                <div class="content">
+                    <p>{{ancestor.storyName}}</p>
+                    <p>{{ancestor.author}}</p>
+                    <p class="font14">故事简介：{{ancestor.introduction}}</p>
+                </div>
+                <div class="read">
+                    <i class="iconfont" (click)="bookOpen = true;">&#xe992;</i>
+                </div>
+            </div>
+            <div class="back">
+                <div class="content">
+                    <p>{{ancestor.storyName}}</p>
+                    <p>作者：{{ancestor.author}}</p>
+                    <p class="font14">简介：{{ancestor.introduction}}</p>
+                    <p class="font14">内容：{{ancestor.content}}</p>
+                    <p class="font14">发布时间：{{ancestor.publicTime}}</p>
+                    <p><i class="iconfont">&#xe873;</i><i class="iconfont">&#xe871;</i></p>
+                </div>
+            </div>
         </div>
 
-        <div class="content-page page">
-            <div class="front"></div>
-            <div class="back"></div>
+        <div class="content-page page  preserve-3d">
+            <div class="front">2</div>
+            <div class="back">-2</div>
         </div>
 
-        <div class="back-page page">
-            <div class="front"></div>
-            <div class="back"></div>
+        <div class="back-page page  preserve-3d">
+            <div class="front">3</div>
+            <div class="back">-3</div>
         </div>
     </div>
 </div>

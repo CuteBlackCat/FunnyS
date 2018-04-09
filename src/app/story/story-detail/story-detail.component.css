@@ -1,30 +1,112 @@
 .story-detail {
     position: relative;
-    width: 800px;
-    height:600px;
+    width: 900px;
+    height:800px;
     margin:0 auto;
 }
 .story-detail .book{
     position:absolute;
-    top:50%;
+    top:0;
     left:50%;
-    margin-top:-225px;
-    width:300px;
-    height:300px;
-    background: #fff;
-    transform: rotateX(30deg) translateX(-300px);;
+    width:500px;
+    height:700px;
+    /* background: #fff; */
+    transform: translateX(-50%);
+    perspective: 2000px;
+    transition: all 1s;
+    box-shadow: 0 0 8px 0 rgba(7,17,27,.1);
+}
+.story-detail .book.active{
+    transform: translateX(0px);
 }
 .page{
     transform-origin: 0 50%;
-    transform: rotate(0deg);
+    transform: rotateY(0deg);
     position: absolute;
-    width: 300px;
-    height: 300px;
-    border: 1px solid rgba(52,168,83,1);
+    width: inherit;
+    height: inherit;
+    border-left: 1px solid #fff;
+    transform-origin: 0 50%;
+    color:#fff;
+    perspective-origin: 0 100%;
+}
+.page.active{
+    animation-name: pageopen;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
 }
 .title-page .front, .back-page .back {
     background: rgba(52,168,83,1);
+    
+}
+.title-page{
+    z-index: 999;
+}
+.page.title-page.active{
+    animation-delay: 1s;
+}
+.content-page{
+    z-index:1
+}
+.back-page{
+    z-index: 0;
 }
 .preserve-3d{
     transform-style: preserve-3d;
+}
+.front, .back{
+    width:inherit;
+    height: inherit;
+    background: rgba(52,168,83,1);;
+    text-align: center;
+    font-size: 18px;
+    position: absolute;
+    backface-visibility: hidden;
+    color: #fff;
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column;
+}
+.back{
+    transform: rotateY(-180deg);
+}
+
+@keyframes pageopen{
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(-180deg);
+    }
+}
+@keyframes pageclose{
+    0% {
+        transform: rotateY(-180deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+
+/* 内容样式 */
+.content{
+
+}
+.content .introduction{
+    font-size: 14px;
+}
+.read i{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    transition: opacity .3s;
+    opacity: .6;
+    cursor: pointer;
+}
+.book i:hover{
+    opacity: 1;
+}
+p.font14{
+    font-size: 14px;
 }
