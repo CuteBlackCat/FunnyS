@@ -1,7 +1,7 @@
 <div class="story-detail">
     <div class="book preserve-3d" [class.active]="bookOpen" [class.close]="close">
         <!-- 封面 -->
-        <div class="title-page page preserve-3d" [class.active]="bookOpen" [class.close]="close">
+        <div class="title-page page preserve-3d" [class.active]="bookOpen" [class.close]="close" [style.z-index]="firstIndex">
             <div class="front">
                 <div class="content">
                     <p>{{ancestor.storyName}}</p>
@@ -9,7 +9,7 @@
                     <p class="font14">故事简介：{{ancestor.introduction}}</p>
                 </div>
                 <div class="read">
-                    <i class="iconfont arrow-back" (click)="bookOpen = true; close = false;">&#xe992;</i>
+                    <i class="iconfont arrow-back" (click)="openBook()">&#xe992;</i>
                 </div>
             </div>
             <div class="back">
@@ -20,10 +20,11 @@
                     <p class="chapter">第1章</p>
                     <p class="font14 message">{{ancestor.content}}</p>
                     <p class="view">
-                        <i class="iconfont" *ngIf="!hot">&#xe873;</i>
-                        <i class="iconfont" *ngIf="!lover">&#xe871;</i>
-                        <i class="iconfont" *ngIf="hot">&#xe872;</i>
-                        <i class="iconfont" *ngIf="lover">&#xe870;</i>
+                        <i class="iconfont" *ngIf="!ancestor.callPlay">&#xe873;</i>
+                        <i class="iconfont" *ngIf="!ancestor.lover">&#xe871;</i>
+                        <i class="iconfont" *ngIf="ancestor.callPlay">&#xe872;</i>
+                        <i class="iconfont" *ngIf="ancestor.lover">&#xe870;</i>
+                        <span class="font14 comment">{{ancestor.comment}} 接龙</span>
                         <span class="font14">发布时间：{{ancestor.publicTime}}</span>
                     </p>
                     <i class="iconfont arrow-front" (click)="bookOpen = false; close = true;">&#xe991;</i>
@@ -32,9 +33,35 @@
             </div>
         </div>
 
-        <div class="content-page page  preserve-3d">
-            <div class="front">2</div>
-            <div class="back">-2</div>
+        <div class="content-page page  preserve-3d" *ngFor="let storylist of allStorys; let i = index;" [style.z-index]='checkIndex(i) ? i + 1 : 998 - i' [class.active]="checkActive(i)">
+            <div class="front">
+                <div class="list" *ngFor="let story of storylist">
+                        <p class="story-item">{{story.content | interceptString: 60}}</p>
+                        <div class="msg-box">
+                            <span class="comment">{{story.author}}</span>
+                            <span class="time">{{story.publicTime}}</span>
+                            <span class="comment">{{story.comment}} 接龙</span>
+                        </div>
+                        <div class="read">
+                            <i class="iconfont arrow-back" (click)="checkPage(story, i)">&#xe992;</i>
+                        </div>
+                </div>
+            </div>
+            <div class="back">
+                <div class="content">
+                    <p class="chapter">第{{i + 2}}章</p>
+                    <p class="font14 message">{{currentStory.content}}</p>
+                    <p class="view">
+                    <p class="view">
+                        <i class="iconfont" *ngIf="!currentStory.callPlay">&#xe873;</i>
+                        <i class="iconfont" *ngIf="!currentStory.lover">&#xe871;</i>
+                        <i class="iconfont" *ngIf="currentStory.callPlay">&#xe872;</i>
+                        <i class="iconfont" *ngIf="currentStory.lover">&#xe870;</i>
+                        <span class="font14 comment">{{currentStory.comment}} 接龙</span>
+                        <span class="font14">发布时间：{{currentStory.publicTime}}</span>
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div class="back-page page  preserve-3d">

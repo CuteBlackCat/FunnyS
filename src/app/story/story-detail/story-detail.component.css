@@ -64,6 +64,11 @@
 .preserve-3d{
     transform-style: preserve-3d;
 }
+.title-page .front, .title-page .back{
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column;
+}
 .front, .back{
     width:inherit;
     height: inherit;
@@ -73,11 +78,9 @@
     position: absolute;
     backface-visibility: hidden;
     color: #07111B;
-    display: flex; 
-    justify-content: center; 
-    flex-direction: column;
     padding:10px;
     box-sizing: border-box;
+    overflow: auto;
 }
 .back{
     transform: rotateY(-180deg);
@@ -149,7 +152,7 @@ p.view{
 p.view i{
     margin-right: 10px;
     cursor: pointer;
-    color:#f50057;
+    color:rgba(52,168,83,1);
 }
 p.view span {
     flex-grow: 1;
@@ -160,4 +163,41 @@ p.view span {
 }
 p.chapter{
     margin-top: 12px;
+}
+.comment{
+    color:rgba(52,168,83,.6);
+    cursor: pointer;
+    transition: color .3s;
+}
+.comment:hover{
+    color:rgba(52,168,83,1);
+}
+
+/* list */
+.list{
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    justify-content: flex-start;
+    border-bottom: 1px solid rgba(147,153,159, .2);
+    text-align: left;
+}
+.list p{
+    text-indent: 28px;
+    cursor: pointer;
+    transition: color .3s;
+}
+.list p:hover{
+    color:rgba(52,168,83,1);
+}
+.list .msg-box{
+    margin-top:10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+.list .msg-box span{
+    margin-right:20px;
+}
+.list .time{
+    color:#93999F;
 }

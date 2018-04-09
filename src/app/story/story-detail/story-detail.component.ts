@@ -15,8 +15,39 @@ export class StoryDetailComponent implements OnInit {
 	lover: boolean;
 	close: boolean;
 
+	firstIndex: number;
+
+	activePage: Array<number>;
+
+	pageIndex: Array<number>;
+
 	allStorys: Array<Array<object>>;
 	currentStory: object;
+
+	checkPage(story, i) {
+		this.currentStory = story;
+		this.allStorys.push([story, story]);
+		this.activePage.push(i);
+		setTimeout(() => {
+			this.pageIndex.push(i);
+		}, 3000);
+	}
+	checkActive(i) {
+		return this.activePage.includes(i);
+	}
+
+	checkIndex(i) {
+		return this.pageIndex.includes(i);
+	}
+
+	openBook() {
+		this.bookOpen = true;
+		this.close = false;
+
+		setTimeout(() => {
+			this.firstIndex = 0;
+		}, 3000);
+	}
 
 
 	ngOnInit() {
@@ -30,8 +61,17 @@ export class StoryDetailComponent implements OnInit {
 			storyId: 88,
 			parentId: 0,
 			typeId: 2,
-			comment: 200
+			comment: 200,
+			lover: true,
+			callPlay: true
 		};
+
+		this.firstIndex = 999;
+
+		this.activePage = [];
+		this.pageIndex = [];
+
+		this.currentStory = this.ancestor;
 
 		this.allStorys = [
 			[
@@ -41,23 +81,7 @@ export class StoryDetailComponent implements OnInit {
 				this.ancestor,
 				this.ancestor,
 				this.ancestor
-			],
-			[
-				this.ancestor,
-				this.ancestor,
-				this.ancestor,
-				this.ancestor,
-				this.ancestor,
-				this.ancestor
-			],
-			[
-				this.ancestor,
-				this.ancestor,
-				this.ancestor,
-				this.ancestor,
-				this.ancestor,
-				this.ancestor
-			],
+			]
 		];
 
 		this.bookOpen = false;
