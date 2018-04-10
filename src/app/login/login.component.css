@@ -1,6 +1,5 @@
 div.login-page{
     width:400px;
-    height: 400px;
     background: #fff;
     position: absolute;
     top: 50%;
@@ -19,14 +18,14 @@ form{
     margin-top:40px;
 }
 div.username,div.password,div.email{
-    margin-bottom:10px;
+    margin-bottom:5px;
     height: 80px;
 }
 form label{
     display: block;
 }
 form input{
-    width:250px;
+    width:calc(100% - 20px);
     border-radius: 3px;
     border: 1px solid rgba(7,17,27,.2);
     height:30px;
@@ -36,4 +35,6 @@ form input{
 form button.normal{
     width:200px;
     margin-top:10px;
+    height:35px;
+    margin-bottom: 10px;
 }
