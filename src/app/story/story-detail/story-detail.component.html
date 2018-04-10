@@ -28,7 +28,11 @@
                         <span class="font14">发布时间：{{ancestor.publicTime}}</span>
                     </p>
                     <i class="iconfont arrow-front" (click)="openBook(false)">&#xe991;</i>
-                    
+                    <div class="comment-box">
+                        <p>接: </p>
+                        <textarea name="" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
+                        <button class="normal">发布故事</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,6 +61,11 @@
                         <span class="font14">发布时间：{{currentStory.publicTime}}</span>
                     </p>
                     <i class="iconfont arrow-front" (click)="checkPage(story, i, 'front')">&#xe991;</i>
+                    <div class="comment-box">
+                        <p>接: </p>
+                        <textarea name="" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
+                        <button class="normal">发布故事</button>
+                    </div>
                 </div>
             </div>
         </div>
