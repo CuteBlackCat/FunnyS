@@ -48,6 +48,7 @@ export class StoryComponent implements OnInit {
 				typeName: '其他故事'
 			}
 		];
+		console.log(this.router.url);
 	}
 
 	searchStory(id: number) {
@@ -61,7 +62,7 @@ export class StoryComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		// this.router.navigate(['/story/list', { type: this.curType, condition: this.curTitle }]);
+		
 	}
 
 }
