@@ -83,4 +83,13 @@ button.normal{
     line-height: 1.42858;
     border-radius: 4px;
     color:#fff;
+    transition: background .3s;
+    background: rgba(52,168,83,.6);
+}
+button.normal:hover{
+   background:rgba(52,168,83,1);
+}
+.error{
+  color:rgba(234,67,53,.6);
+  font-size: 12px;
 }

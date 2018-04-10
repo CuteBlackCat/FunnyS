@@ -1,6 +1,7 @@
 // 导入核心模块
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // 导入自定义模块
 import { FsDirectiveModule } from './directive/directive.module';
@@ -24,6 +25,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 // 导入服务
 import { GlobalService } from './service/global.service';
+import { LocalStorage } from './service/local.storage';
 
 
 @NgModule({
@@ -39,11 +41,16 @@ import { GlobalService } from './service/global.service';
 	],
 	imports: [
 		BrowserModule,
+		ReactiveFormsModule,
+		FormsModule,
 		FsDirectiveModule,
 		StoryModule,
 		FunnysRoutingModule,
 	],
-	providers: [{provide: GlobalService, useClass: GlobalService}],
+	providers: [
+		{provide: GlobalService, useClass: GlobalService},
+		{ provide: LocalStorage, useClass: LocalStorage}
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

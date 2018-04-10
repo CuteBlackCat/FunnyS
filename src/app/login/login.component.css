@@ -1,0 +1,39 @@
+div.login-page{
+    width:400px;
+    height: 400px;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    box-shadow: 0 0 8px 0 rgba(7,17,27,.1);
+    border-radius: 8px;
+    transform: translate(-50%,-50%);
+    padding:20px;
+}
+div.introductor{
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+form{
+    margin-top:40px;
+}
+div.username,div.password,div.email{
+    margin-bottom:10px;
+    height: 80px;
+}
+form label{
+    display: block;
+}
+form input{
+    width:250px;
+    border-radius: 3px;
+    border: 1px solid rgba(7,17,27,.2);
+    height:30px;
+    margin-top:10px;
+    padding:0 10px;
+}
+form button.normal{
+    width:200px;
+    margin-top:10px;
+}
