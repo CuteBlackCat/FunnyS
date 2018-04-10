@@ -9,7 +9,7 @@
                     <p class="font14">故事简介：{{ancestor.introduction}}</p>
                 </div>
                 <div class="read">
-                    <i class="iconfont arrow-back" (click)="openBook()">&#xe992;</i>
+                    <i class="iconfont arrow-back" (click)="openBook(true)">&#xe992;</i>
                 </div>
             </div>
             <div class="back">
@@ -27,23 +27,20 @@
                         <span class="font14 comment">{{ancestor.comment}} 接龙</span>
                         <span class="font14">发布时间：{{ancestor.publicTime}}</span>
                     </p>
-                    <i class="iconfont arrow-front" (click)="bookOpen = false; close = true;">&#xe991;</i>
+                    <i class="iconfont arrow-front" (click)="openBook(false)">&#xe991;</i>
                     
                 </div>
             </div>
         </div>
 
-        <div class="content-page page  preserve-3d" *ngFor="let storylist of allStorys; let i = index;" [style.z-index]='checkIndex(i) ? i + 1 : 998 - i' [class.active]="checkActive(i)">
+        <div class="content-page page  preserve-3d" *ngFor="let storylist of allStorys; let i = index;" [style.z-index]='checkIndex(i) ? i + 1 : 998 - i' [class.close]="checkClose(i)" [class.active]="checkActive(i)">
             <div class="front">
                 <div class="list" *ngFor="let story of storylist">
-                        <p class="story-item">{{story.content | interceptString: 60}}</p>
+                        <p class="story-item" (click)="checkPage(story, i, 'back')">{{story.content | interceptString: 60}}</p>
                         <div class="msg-box">
                             <span class="comment">{{story.author}}</span>
                             <span class="time">{{story.publicTime}}</span>
-                            <span class="comment">{{story.comment}} 接龙</span>
-                        </div>
-                        <div class="read">
-                            <i class="iconfont arrow-back" (click)="checkPage(story, i)">&#xe992;</i>
+                            <span class="comment" (click)="checkPage(story, i, 'back')">{{story.comment}} 接龙</span>
                         </div>
                 </div>
             </div>
@@ -52,7 +49,6 @@
                     <p class="chapter">第{{i + 2}}章</p>
                     <p class="font14 message">{{currentStory.content}}</p>
                     <p class="view">
-                    <p class="view">
                         <i class="iconfont" *ngIf="!currentStory.callPlay">&#xe873;</i>
                         <i class="iconfont" *ngIf="!currentStory.lover">&#xe871;</i>
                         <i class="iconfont" *ngIf="currentStory.callPlay">&#xe872;</i>
@@ -60,6 +56,7 @@
                         <span class="font14 comment">{{currentStory.comment}} 接龙</span>
                         <span class="font14">发布时间：{{currentStory.publicTime}}</span>
                     </p>
+                    <i class="iconfont arrow-front" (click)="checkPage(story, i, 'front')">&#xe991;</i>
                 </div>
             </div>
         </div>

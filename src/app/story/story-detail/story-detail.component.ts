@@ -17,36 +17,59 @@ export class StoryDetailComponent implements OnInit {
 
 	firstIndex: number;
 
-	activePage: Array<number>;
+	activePage: number;
+	closePage: Array<number>;
 
-	pageIndex: Array<number>;
+	pageIndex: number;
 
 	allStorys: Array<Array<object>>;
 	currentStory: object;
 
-	checkPage(story, i) {
-		this.currentStory = story;
-		this.allStorys.push([story, story]);
-		this.activePage.push(i);
-		setTimeout(() => {
-			this.pageIndex.push(i);
-		}, 3000);
+	backStory: Array<object>;
+
+	checkPage(story, i, dir) {
+		this.activePage = i;
+		if (dir === 'back') {
+			this.currentStory = story;
+			this.backStory.push(this.currentStory);
+			if (this.allStorys.length <= i + 2) {
+				// 请求数据
+				this.allStorys.push([story, story]);
+			}
+			this.closePage.pop();
+			setTimeout(() => {
+				this.pageIndex = i;
+			}, 1500);
+		}else {
+			this.backStory.pop();
+			this.currentStory = this.backStory[this.backStory.length - 1];
+			this.pageIndex = i - 1;
+			this.closePage.push(i);
+		}
 	}
 	checkActive(i) {
-		return this.activePage.includes(i);
+		return this.activePage >= i;
+	}
+
+	checkClose(i) {
+		return this.closePage.includes(i);
 	}
 
 	checkIndex(i) {
-		return this.pageIndex.includes(i);
+		return this.pageIndex >= i;
 	}
 
-	openBook() {
-		this.bookOpen = true;
-		this.close = false;
+	openBook(yes) {
+		this.bookOpen = yes;
+		this.close = !yes;
 
-		setTimeout(() => {
-			this.firstIndex = 0;
-		}, 3000);
+		if (yes) {
+			setTimeout(() => {
+				this.firstIndex = 0;
+			}, 1500);
+		}else {
+			this.firstIndex = 999;
+		}
 	}
 
 
@@ -68,10 +91,13 @@ export class StoryDetailComponent implements OnInit {
 
 		this.firstIndex = 999;
 
-		this.activePage = [];
-		this.pageIndex = [];
+		this.activePage = -1;
+		this.closePage = [];
+		this.pageIndex = -1;
 
 		this.currentStory = this.ancestor;
+
+		this.backStory = [this.currentStory ];
 
 		this.allStorys = [
 			[
