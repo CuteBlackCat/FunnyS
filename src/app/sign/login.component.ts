@@ -6,7 +6,7 @@ import { LocalStorage } from './../service/local.storage';
 @Component({
 	selector: 'fs-login',
 	templateUrl: './login.component.html',
-	styleUrls: ['./login.component.css']
+	styleUrls: ['./sign.component.css']
 })
 export class LoginComponent implements OnInit {
 

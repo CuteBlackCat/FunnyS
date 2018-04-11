@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 @Component({
 	selector: 'fs-register',
 	templateUrl: './register.component.html',
-	styleUrls: ['../login/login.component.css']
+	styleUrls: ['../sign.component.css']
 	})
 export class RegisterComponent implements OnInit {
 
