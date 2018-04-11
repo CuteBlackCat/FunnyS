@@ -1,0 +1,53 @@
+.about-page{
+    box-sizing: border-box;
+    padding:10px 20px;
+}
+.about-page .title{
+    margin-bottom: 10px;
+}
+.about-page .section{
+    margin-bottom: 40px;
+}
+.about-page .author-box{
+    display: flex;
+    margin-top:30px;
+}
+.author-box .infomation{
+    display: flex;
+    flex-direction: column;
+    /* color:#4D555D; */
+}
+.author-box .infomation span{
+    margin-top:10px;
+    cursor: pointer;
+}
+.about-page .author-box>div{
+    flex-grow: 1;
+}
+.about-page .title{
+    font-size: 16px;
+}
+.content-box{
+    /* width:500px; */
+}
+.content-box span{
+    display: block;
+    text-align: left;
+    text-indent: 28px;
+}
+.link-box{
+    display: flex;
+    justify-content: flex-start
+}
+.link-box a{
+    display: block;
+    color:#fff;
+    border-radius: 4px;
+    padding:5px;
+    margin-right: 20px;
+    opacity: 0.8;
+    transition: all .3s;
+}
+.link-box a:hover{
+    opacity: 1;
+}

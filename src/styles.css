@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
-  font-family: 'iconfont';  /* project id 582845 */
-  src: url('//at.alicdn.com/t/font_582845_d91pofads3ys0pb9.eot');
-  src: url('//at.alicdn.com/t/font_582845_d91pofads3ys0pb9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_582845_d91pofads3ys0pb9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_582845_d91pofads3ys0pb9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_582845_d91pofads3ys0pb9.svg#iconfont') format('svg');
+	font-family: 'iconfont';  /* project id 582845 */
+	src: url('//at.alicdn.com/t/font_582845_d91pofads3ys0pb9.eot');
+	src: url('//at.alicdn.com/t/font_582845_d91pofads3ys0pb9.eot?#iefix') format('embedded-opentype'),
+	url('//at.alicdn.com/t/font_582845_d91pofads3ys0pb9.woff') format('woff'),
+	url('//at.alicdn.com/t/font_582845_d91pofads3ys0pb9.ttf') format('truetype'),
+	url('//at.alicdn.com/t/font_582845_d91pofads3ys0pb9.svg#iconfont') format('svg');
 }
 .iconfont{
     font-family:"iconfont" !important;
@@ -15,10 +15,10 @@
     -moz-osx-font-smoothing: grayscale;
 }
 .icon {
-   width: 1em; height: 1em;
-   vertical-align: -0.15em;
-   fill: currentColor;
-   overflow: hidden;
+	width: 1em; height: 1em;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden;
 }
 
 /* 主区域的布局
@@ -28,31 +28,31 @@
 
 /* 主色采 */
 .bluer{
-  color: #4285f4;
+	color: #4285f4;
 }
 .reder{
-  color:#ea4335;
+	color:#ea4335;
 }
 .yellower{
-  color:#fbbc05;
+	color:#fbbc05;
 }
 .greener{
-  color:#34a853;
+	color:#34a853;
 }
 
 .hidden{
-  display: none;
+	display: none;
 }
 
 /* 滚动条 */
 /* 滚动条 */
 ::-webkit-scrollbar-thumb:horizontal { /*水平滚动条的样式*/
     width: 4px;
-    background-color: #CCCCCC;
+	background-color: #CCCCCC;
     -webkit-border-radius: 6px;
 }
 ::-webkit-scrollbar-track-piece {
-    background-color: #fff; /*滚动条的背景颜色*/
+	background-color: #fff; /*滚动条的背景颜色*/
     -webkit-border-radius: 2px; /*滚动条的圆角宽度*/
 }
 ::-webkit-scrollbar {
@@ -61,7 +61,7 @@
 }
 ::-webkit-scrollbar-thumb:vertical { /*垂直滚动条的样式*/
     height: 50px;
-    background-color: rgba(7,17,27,.05);
+	background-color: rgba(7,17,27,.05);
     -webkit-border-radius: 4px;
     outline: 2px solid #fff;
     outline-offset: -2px;
@@ -82,14 +82,24 @@ button.normal{
     font-size: 14px;
     line-height: 1.42858;
     border-radius: 4px;
-    color:#fff;
+	color:#fff;
     transition: background .3s;
-    background: rgba(52,168,83,.6);
+	background: rgba(52,168,83,.6);
 }
 button.normal:hover{
-   background:rgba(52,168,83,1);
+	background:rgba(52,168,83,1);
 }
 .error{
-  color:rgba(234,67,53,.6);
-  font-size: 12px;
+	color:rgba(234,67,53,.6);
+	font-size: 12px;
+}
+
+/* 每个模块的主题样式 */
+.page-box{
+	width:1152px;
+	border-radius: 8px;
+	box-shadow: 0 0 8px 0 rgba(7,17,27,.1);
+	/* background: #fff; */
+	background: rgba(248,250,252,.2);
+	margin:32px 0;
 }

@@ -1,10 +1,11 @@
 /* 主体样式 */
 .story{
-    width:1152px;
+    /* width:1152px;
     border-radius: 8px;
-    box-shadow: 0 0 8px 0 rgba(7,17,27,.1);
-    background: #fff;
-    margin:32px 0;
+    box-shadow: 0 0 8px 0 rgba(7,17,27,.1); */
+    /* background: #fff; */
+    /* background: rgba(248,250,252,1);
+    margin:32px 0; */
 }
 /* 分类样式 */
 .story .category {

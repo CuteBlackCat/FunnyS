@@ -1,0 +1,80 @@
+div.engineer{
+    position: relative;
+    width: 216px;
+    height: 248px;
+    margin-right: 18px;
+    box-sizing: border-box;
+    text-align: center;
+    background: rgba(255,255,255,.8);
+    box-shadow: 0 4px 8px 0 rgba(7,17,27,.05);
+    border-radius: 12px;
+    transition: all .3s;
+    /* overflow: hidden; */
+    float: left;
+}
+.engineer>img{
+    position: absolute;
+    top: -16.6px;
+    left: 50%;
+    margin-left: -48px;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+}
+.engineer .engineer-name{
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 92px;
+    white-space: nowrap;
+    color: #07111b;
+    font-weight: 700;
+    -webkit-line-clamp: 1;
+}
+.engineer .engineer-title{
+    display: block;
+    font-size: 12px;
+    margin-bottom: 12px;
+    color: #4D555D;
+    height: 24px;
+    line-height: 24px;
+}
+.engineer .engineer-p{
+    position: relative;
+    top: 0;
+    font-size: 12px;
+    line-height: 24px;
+    color: #4D555D;
+    height: 72px;
+    -webkit-line-clamp: 3;
+    text-align: justify;
+    font-weight: 400;
+}
+.engineer .engineer-name, .engineer .engineer-p {
+    display: block;
+    padding: 0 36px;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: -o-ellipsis-lastline;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
+
+.engineer:hover{
+    box-shadow: 0 8px 16px 0 rgba(7,17,27,.2);
+}
+.engineer:hover img{
+    width: 60px;
+    height: 60px;
+    margin-left: -30px;
+    transition: all .3s;
+}
+.engineer:hover .engineer-name,.engineer:hover  .engineer-title{
+    opacity: 0;
+}
+.engineer:hover  .engineer-p{
+    position: relative;
+    height: 168px;
+    top: -92px;
+    color: #07111B;
+    transition: all .3s;
+}

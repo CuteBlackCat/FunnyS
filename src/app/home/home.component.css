@@ -1,12 +1,13 @@
 .home-page{
-    width:1152px;
-    box-shadow: 0 0 8px 0 rgba(7,17,27,.1);
+    /* width:1152px; */
+    /* box-shadow: 0 0 8px 0 rgba(7,17,27,.1); */
     padding:10px;
-    box-sizing: border-box;
-    margin-top:32px;
-    margin-bottom: 32px;
-    border-radius: 8px;
-    background: #fff;
+    /* box-sizing: border-box; */
+    /* margin-top:32px; */
+    /* margin-bottom: 32px; */
+    /* border-radius: 8px; */
+    /* background: #fff; */
+    /* background: rgba(248,250,252,1); */
 }
 .baner{
     width:calc(100% - 20px);

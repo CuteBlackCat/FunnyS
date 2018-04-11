@@ -1,5 +1,22 @@
-<div class="about-page">
-    <div class="author">
+<div class="about-page page-box">
+    <div class="introduction section">
+        <div class="title">
+            <span class="bluer">F</span>
+            <span class="reder">U</span>
+            <span class="yellower">N</span>
+            <span class="bluer">N</span>
+            <span class="greener">Y</span>
+            <span class="reder">S</span>
+            简介
+        </div>
+        <div class="content-box">
+            <ng-container *ngFor="let item of introduction">
+                <span>{{item}}</span>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="author section">
         <div class="title">
             <span class="bluer">F</span>
             <span class="reder">U</span>
@@ -10,7 +27,39 @@
             工程师
         </div>
         <div class="author-box">
-            
+            <div class="fornt">
+                <fs-engineer [engineer]="front_end"></fs-engineer>
+                <div class="infomation">
+                    <div class="info-title">
+                        联系方式：
+                    </div>
+                    <span *ngFor="let info of front_info">{{info.name}}: {{info.address}}</span>
+                </div>
+            </div>
+            <div class="back">
+                <fs-engineer [engineer]="back_end"></fs-engineer>
+                <div class="infomation">
+                    <div class="info-title">
+                        联系方式：
+                    </div>
+                    <span *ngFor="let info of back_info">{{info.name}}: {{info.address}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-link section">
+        <div class="title">
+            <span class="bluer">F</span>
+            <span class="reder">U</span>
+            <span class="yellower">N</span>
+            <span class="bluer">N</span>
+            <span class="greener">Y</span>
+            <span class="reder">S</span>
+            相关链接
+        </div>
+        <div class="link-box">
+            <a href="{{link.href}}" *ngFor="let link of links" target="_black" [style.background]="link.background">{{link.name}}</a>
         </div>
     </div>
 </div>
