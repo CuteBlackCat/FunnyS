@@ -7,6 +7,7 @@ import {ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FsDirectiveModule } from './directive/directive.module';
 import { FunnysRoutingModule } from './funnys-routing.module';
 import { StoryModule } from './story/story.module';
+import { SignModule } from './sign/sign.module';
 
 // 导入组件
 import { AppComponent } from './app.component';
@@ -14,10 +15,9 @@ import { BackcanvasComponent } from './canvas/backcanvas/backcanvas.component';
 import { SnakeComponent } from './canvas/snake/snake.component';
 import { TankComponent } from './canvas/tank/tank.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { GamesComponent } from './games/games.component';
 import { MusicComponent } from './music/music.component';
+import { AboutComponent } from './about/about.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 // 导入管道
@@ -33,10 +33,9 @@ import { LocalStorage } from './service/local.storage';
 		AppComponent,
 		BackcanvasComponent,
 		HomeComponent,
-		LoginComponent,
-		RegisterComponent,
 		GamesComponent,
 		MusicComponent,
+		AboutComponent,
 		PagenotfoundComponent,
 	],
 	imports: [
@@ -45,11 +44,12 @@ import { LocalStorage } from './service/local.storage';
 		FormsModule,
 		FsDirectiveModule,
 		StoryModule,
+		SignModule,
 		FunnysRoutingModule,
 	],
 	providers: [
-		{provide: GlobalService, useClass: GlobalService},
-		{ provide: LocalStorage, useClass: LocalStorage}
+		{ provide: GlobalService, useClass: GlobalService },
+		{ provide: LocalStorage, useClass: LocalStorage }
 	],
 	bootstrap: [AppComponent]
 })

@@ -6,6 +6,7 @@
     margin-top:32px;
     margin-bottom: 32px;
     border-radius: 8px;
+    background: #fff;
 }
 .baner{
     width:calc(100% - 20px);
