@@ -1,3 +1,15 @@
-<p>
-  music works!
-</p>
+<div class="music page-box">
+	<div class="header">
+		<nav>
+			<a [routerLink]="[ '/path' ]" routerLinkActive="active">name</a>
+		</nav>
+	</div>
+
+	<div class="list">
+		<router-outlet></router-outlet>
+	</div>
+
+	<div class="player">
+
+	</div>
+</div>
