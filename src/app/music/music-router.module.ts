@@ -14,11 +14,11 @@ const router: Routes = [
 		children: [
 			{
 				path: '',
-				redirectTo: 'list',
+				redirectTo: 'list/0',
 				pathMatch: 'full'
 			},
 			{
-				path: 'list',
+				path: 'list/:id',
 				component: MusicListComponent
 			},
 			{

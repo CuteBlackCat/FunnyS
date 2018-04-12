@@ -1,14 +1,5 @@
-/* 主体样式 */
-.story{
-    /* width:1152px;
-    border-radius: 8px;
-    box-shadow: 0 0 8px 0 rgba(7,17,27,.1); */
-    /* background: #fff; */
-    /* background: rgba(248,250,252,1);
-    margin:32px 0; */
-}
 /* 分类样式 */
-.story .category {
+.category {
     display: flex;
     justify-content: flex-start;
     flex-wrap: nowrap;
@@ -19,16 +10,13 @@
     line-height: 40px;
     border-bottom: 1px solid rgba(147,153,159, .2);
 }
-.story .category>span{
-    
-}
-.story .category .type-box{
+.category .type-box{
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     margin-left: 30px;
 }
-.story .category .type-box span{
+.category .type-box span{
     margin-left: 30px;
     cursor: pointer;
     transform: translateZ(0);
@@ -38,13 +26,14 @@
     padding: 0 5px;
     border-radius: 4px;
 }
-.category .type-box span:hover{
+.type-box span:hover{
     color: rgba(52,168,83,.6);
     transition: all .2s;
 }
- .category .type-box span.active{
+.category .type-box span.active{
      color:#fff;
  }
+
 .type-box span:after{
     content: '';
     position: absolute;
@@ -58,22 +47,22 @@
     z-index: -1;
     background: rgba(52,168,83,.6);
 }
-.type-box span.active:after{
+.category .type-box span.active:after{
     transform: scale(1);
 }
 
 /* 内容样式 */
-.content{
+.story .content{
     margin-top:20px;
     padding: 0 10px;
 }
-.content .title{
+.story .content .title{
     margin-bottom: 20px;
 }
-.content .title span{
+.story .content .title span{
     cursor: pointer;
     margin-right: 10px;
 }
-.content .title span.active{
+.story .content .title span.active{
     color:rgba(52,168,83,.6);
 }

@@ -1,0 +1,43 @@
+.music  .type-box span:hover{
+    color: rgba(234,67,53,.6);
+}
+.music .type-box span:after{
+    background: rgba(234,67,53,1);
+}
+
+/* 全局style */
+.music {
+   height: calc(100% - 30px);
+    position: relative;
+}
+.music .player {
+    position: absolute;
+    bottom: 0px;
+}
+.music .button{
+    position: absolute;
+    right: 20px;
+    bottom: 40px;
+    display: flex;
+    width:400px;
+}
+.music .button .play-music{
+    display: flex;
+    width:200px;
+}
+.music .button .play-music span{
+    background: rgba(234,67,53,1);
+    width:32px;
+    height:32px;
+    border-radius: 50%;
+    margin-left: 10px;
+    text-align: center;
+    color:#fff;
+    line-height: 32px;
+    cursor: pointer;
+}
+ .button .play-music span.playing {
+     height:36px;
+     line-height: 36px;
+     width: 36px;
+ }

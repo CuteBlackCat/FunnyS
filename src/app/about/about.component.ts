@@ -59,6 +59,11 @@ export class AboutComponent implements OnInit {
 			{
 				name: 'segmentfault',
 				href: 'https://segmentfault.com/',
+				background: '#4285f4'
+			},
+			{
+				name: '网易云音乐',
+				href: 'https://music.163.com/',
 				background: '#ea4335'
 			}
 		];

@@ -1,15 +1,43 @@
 <div class="music page-box">
-	<div class="header">
-		<nav>
-			<a [routerLink]="[ '/path' ]" routerLinkActive="active">name</a>
-		</nav>
+	<div class="category">
+		<span>
+			故事类型:
+		</span>
+		<div class="type-box">
+			<span class="story-type" *ngFor="let type of types" (click)="searchMusic(type.typeId)" [class.active]="type.typeId===curType">{{type.typeName}}</span>
+		</div>
 	</div>
 
 	<div class="list">
 		<router-outlet></router-outlet>
 	</div>
 
-	<div class="player">
+	<div class="player" #music (click)="iframeEvent($event)">
+		<!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?{{current_music.songUrl}}&auto=1&height=66"></iframe> -->
+		<audio src="http://music.163.com/song/media/outer/url?id={{current_music.songId}}"  play="play"  controls="controls">Your browser does not support the audio tag.</audio>
+		<!-- <iframe #iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=1152 height=86 [src]=current_music.songUrl></iframe> -->
+		<div class="button">
+			<div class="play-music">
+				<span>
+					<i class="iconfont">&#xe61b;</i>
+				</span>
+				<span class="playing" *ngIf="playing" (click)="playMusic(false)">
+					<i class="iconfont">&#xe61a;</i>
+				</span>
+				<span class="playing" *ngIf="!playing" (click)="playMusic(true)">
+					<i class="iconfont">&#xe61f;</i>
+				</span>
+				<span>
+					<i class="iconfont">&#xe61c;</i>
+				</span>
+			</div>
 
+			<div class="play-order">
+				<span><i class="iconfont">&#xe743;</i></span>
+				<span><i class="iconfont">&#xe66e;</i></span>
+				<span><i class="iconfont">&#xe66f;</i></span>
+				<span><i class="iconfont">&#xe622;</i></span>
+			</div>
+		</div>
 	</div>
 </div>

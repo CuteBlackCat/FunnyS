@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
 	selector: 'fs-story',
@@ -10,7 +10,7 @@ export class StoryComponent implements OnInit {
 
 	types: Array<object>;
 
-	curType: number;
+	curType: string;
 
 	curTitle: string;
 
@@ -18,40 +18,39 @@ export class StoryComponent implements OnInit {
 		private router: Router,
 		private route: ActivatedRoute
 	) {
-		this.curType = 0;
 
 		this.curTitle = 'hot';
 
 		this.types = [
 			{
-				typeId: 0,
+				typeId: '0',
 				typeName: '全部'
 			},
 			{
-				typeId: 1,
+				typeId: '1',
 				typeName: '内涵段子'
 			},
 			{
-				typeId: 2,
+				typeId: '2',
 				typeName: '恐怖故事'
 			},
 			{
-				typeId: 3,
+				typeId: '3',
 				typeName: '伤感故事'
 			},
 			{
-				typeId: 4,
+				typeId: '4',
 				typeName: '爱情故事'
 			},
 			{
-				typeId: 5,
+				typeId: '5',
 				typeName: '其他故事'
 			}
 		];
 		console.log(this.router.url);
 	}
 
-	searchStory(id: number) {
+	searchStory(id: string) {
 		this.curType = id;
 		this.router.navigate(['/story/list', { type: id, condition: this.curTitle}]);
 	}
@@ -62,7 +61,12 @@ export class StoryComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		
+		this.route.firstChild.paramMap.subscribe(
+			(params: ParamMap) => {
+				this.curType = params.get('id');
+			}
+		);
+
 	}
 
 }
