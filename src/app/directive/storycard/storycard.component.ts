@@ -9,6 +9,8 @@ import { Component, Input, Output, EventEmitter, HostListener} from '@angular/co
 export class StoryCardComponent {
 	@Input() card: object;
 
+	@Input() color: string;
+
 	@Output() enterCard = new EventEmitter<object>();
 
 

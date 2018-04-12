@@ -11,7 +11,6 @@ import { AboutComponent } from './about/about.component';
 const funnysRoutes: Routes = [
 	{ path: 'home', component: HomeComponent},
 	{ path: 'game', component: GamesComponent },
-	{ path: 'music', component: MusicComponent },
 	{ path: 'about', component: AboutComponent },
 	{ path: '', redirectTo: '/home', pathMatch: 'full' },
 	{ path: '**', component: PagenotfoundComponent }

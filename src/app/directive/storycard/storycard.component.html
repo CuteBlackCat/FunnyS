@@ -1,6 +1,6 @@
 <div class="story-card">
     <div class="story-info">
-        <div class="story-type">
+        <div class="story-type"  [ngClass]="color">
             <i class="iconfont">&#xe6a2;</i>
             <span>{{card.typeId}}</span>
         </div>
@@ -17,7 +17,7 @@
         
     </div>
 
-    <div class="title" (click)="onClick()">
+    <div class="title"  [ngClass]="color" (click)="onClick()">
         <p>{{card.storyName}}</p>
     </div>
 
@@ -38,7 +38,7 @@
             <span>评论</span>
             <span>{{card.comment}}</span>
         </div>
-        <div class="readall" (click)="onClick()">
+        <div class="readall" (click)="onClick()" [ngClass]="color">
             <span>
                  阅读全文
             </span>

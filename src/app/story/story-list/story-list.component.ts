@@ -12,6 +12,7 @@ export class StoryListComponent implements OnInit {
 	type: string;
 	condition: string;
 	storys: Array<object>;
+	color: string;
 
 	constructor(
 		private router: Router,
@@ -62,5 +63,7 @@ export class StoryListComponent implements OnInit {
 		};
 
 		this.storys = [story, story, story, story, story, story, story, story];
+
+		this.color = 'greener';
 	}
 }
