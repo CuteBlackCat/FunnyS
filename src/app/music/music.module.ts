@@ -7,6 +7,7 @@ import { MusicPlayComponent } from './music-play/music-play.component';
 import { MusicCommentComponent } from './music-comment/music-comment.component';
 import { MusicSongerComponent } from './music-songer/music-songer.component';
 import { FsDirectiveModule } from '../directive/directive.module';
+import { ToSecondPipe } from './music.pipe';
 
 @NgModule({
 	declarations: [
@@ -14,7 +15,8 @@ import { FsDirectiveModule } from '../directive/directive.module';
 		MusicListComponent,
 		MusicPlayComponent,
 		MusicCommentComponent,
-		MusicSongerComponent
+		MusicSongerComponent,
+		ToSecondPipe
 	],
 	imports: [
 		BrowserModule,
@@ -26,7 +28,8 @@ import { FsDirectiveModule } from '../directive/directive.module';
 		MusicListComponent,
 		MusicPlayComponent,
 		MusicCommentComponent,
-		MusicSongerComponent
+		MusicSongerComponent,
+		ToSecondPipe
 	]
 })
 export class MusicModule {

@@ -21,7 +21,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	// 是否播放中
 	playing: boolean;
 
-	// 播放顺序 0/1/2/3 顺序/循环/
+	// 播放顺序 0/1/2/3 顺序/循环/单曲/随机
 	playorder: number;
 
 	// audio的属性设置
@@ -31,6 +31,24 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	@ViewChild('music') music: ElementRef;
 	// 播放节点
 	audioNode: any;
+
+	// 播放定时器
+	timer: any;
+
+	// 播放条的长度
+	audioWidth: number;
+
+	// 1s在这个音乐中所占的比例
+	oneSecond: number;
+
+	// 当前音乐的时间
+	allTime: number;
+
+	// 当前播放的时间
+	currentTime: number;
+
+	// 时间进度条的宽度
+	timeWidth: number;
 
 	constructor(
 		private sanitizer: DomSanitizer,
@@ -61,6 +79,64 @@ export class MusicComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	initData() {
+		this.allTime = this.audioNode.duration,
+		this.currentTime = this.audioNode.currentTime,
+		this.timeWidth = 0;
+		this.oneSecond = 1 / this.allTime;
+		this.updateData();
+	}
+
+	updateData() {
+		this.timer = setTimeout(() => {
+			this.currentTime++;
+			this.timeWidth += this.oneSecond * this.audioWidth;
+			this.updateData();
+		}, 1000);
+	}
+
+	nextPlayMusic(click: boolean) {
+		switch (this.playorder) {
+			case 0:
+				// 播放列表的下一首,当到最后一首结束
+				break;
+			case 1:
+				// 播放列表的下一首,当到最后一首从第一首播放
+				break;
+			case 2:
+				if (click) {
+					// 播放下一首
+				} else {
+					// 播放当前位置
+				}
+				break;
+			case 3:
+				// 随机播放
+		}
+	}
+
+	/**
+	 * 切换播放模式
+	 */
+	switchPlayType() {
+		this.playorder = this.playorder === 3 ? 0 : this.playorder + 1;
+	}
+
+	/**
+	 * 移动进度条
+	 * @param percent 所移动的百分比
+	 */
+	moveTime(percent) {
+		clearTimeout(this.timer);
+		clearTimeout(this.timer);
+		this.timer = null;
+		this.currentTime = this.allTime * percent;
+		console.log(percent);
+		this.timeWidth = percent * this.audioWidth;
+		this.audioNode.currentTime = this.currentTime;
+		// this.updateData();
+	}
+
 	ngOnInit() {
 		const url = '//music.163.com/outchain/player?type=2&id=&auto=1&height=66';
 
@@ -70,17 +146,38 @@ export class MusicComponent implements OnInit, AfterViewInit {
 			songPicUrl: ''
 		};
 
+		this.playorder = 0;
+
 		this.playing = true;
 
 		this.audioNode = this.music.nativeElement.querySelector('audio');
+
+
+		this.allTime = 0,
+		this.currentTime = 0,
+		this.timeWidth = 0;
+		this.audioWidth = 630;
+
+
+		// 加载到可以播放
+		this.audioNode.oncanplaythrough = () => {
+			this.initData();
+			this.audioNode.play();
+		};
+
+		// 歌曲播放完成
+		this.audioNode.onended = () => {
+			clearTimeout(this.timer);
+			// 如何播放
+			this.nextPlayMusic(false);
+		};
 
 		this.audio = {
 			play: true,
 			volume: 0.8,
 			loop: false,
-			currentTime: this.audioNode.currentTime
+			currentTime: this.audioNode.currentTime,
 		};
-
 
 		this.types = [
 			{
@@ -116,7 +213,6 @@ export class MusicComponent implements OnInit, AfterViewInit {
 		this.route.firstChild.paramMap.subscribe(
 			(params: ParamMap) => {
 				this.curType = params.get('id');
-				console.log(this.curType );
 			}
 		);
 	}

@@ -14,7 +14,7 @@
 
 	<div class="player" #music>
 		<!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?{{current_music.songUrl}}&auto=1&height=66"></iframe> -->
-		<audio src="http://music.163.com/song/media/outer/url?id={{current_music.songId}}"  controls="controls">Your browser does not support the audio tag.</audio>
+		<audio src="http://music.163.com/song/media/outer/url?id={{current_music.songId}}" autoplay="autoplay"  controls="controls">Your browser does not support the audio tag.</audio>
 		<!-- <iframe #iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=1152 height=86 [src]=current_music.songUrl></iframe> -->
 		<div class="button">
 			<div class="play-music">
@@ -32,13 +32,18 @@
 				</span>
 			</div>
 
-			<fs-progress [width]="timeWidth" (moveTime)="moveTime" [type]="'timeing'"></fs-progress>
 
-			<div class="play-order">
-				<span><i class="iconfont">&#xe743;</i></span>
-				<span><i class="iconfont">&#xe66e;</i></span>
-				<span><i class="iconfont">&#xe66f;</i></span>
-				<span><i class="iconfont">&#xe622;</i></span>
+			<div class="play-msg">
+				<span>{{currentTime | tosecond}}</span>
+				<fs-progress [width]="timeWidth" (move)="moveTime($event)" [type]="'timeing'"></fs-progress>
+				<span>{{allTime | tosecond}}</span>
+			</div>
+
+			<div class="play-order" (click)="switchPlayType()">
+				<span *ngIf="playorder === 0"><i class="iconfont">&#xe743;</i></span>
+				<span *ngIf="playorder === 1"><i class="iconfont">&#xe66e;</i></span>
+				<span *ngIf="playorder === 2"><i class="iconfont">&#xe66f;</i></span>
+				<span *ngIf="playorder === 3"><i class="iconfont">&#xe622;</i></span>
 			</div>
 		</div>
 	</div>
