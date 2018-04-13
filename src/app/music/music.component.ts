@@ -74,7 +74,12 @@ export class MusicComponent implements OnInit, AfterViewInit {
 
 		this.audioNode = this.music.nativeElement.querySelector('audio');
 
-		this.audioNode.volume = 0.2;
+		this.audio = {
+			play: true,
+			volume: 0.8,
+			loop: false,
+			currentTime: this.audioNode.currentTime
+		};
 
 
 		this.types = [

@@ -1,7 +1,7 @@
 <div class="music page-box">
 	<div class="category">
 		<span>
-			故事类型:
+			音乐类型:
 		</span>
 		<div class="type-box">
 			<span class="story-type" *ngFor="let type of types" (click)="searchMusic(type.typeId)" [class.active]="type.typeId===curType">{{type.typeName}}</span>
@@ -12,9 +12,9 @@
 		<router-outlet></router-outlet>
 	</div>
 
-	<div class="player" #music (click)="iframeEvent($event)">
+	<div class="player" #music>
 		<!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?{{current_music.songUrl}}&auto=1&height=66"></iframe> -->
-		<audio src="http://music.163.com/song/media/outer/url?id={{current_music.songId}}"  play="play"  controls="controls">Your browser does not support the audio tag.</audio>
+		<audio src="http://music.163.com/song/media/outer/url?id={{current_music.songId}}"  controls="controls">Your browser does not support the audio tag.</audio>
 		<!-- <iframe #iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=1152 height=86 [src]=current_music.songUrl></iframe> -->
 		<div class="button">
 			<div class="play-music">
@@ -31,6 +31,8 @@
 					<i class="iconfont">&#xe61c;</i>
 				</span>
 			</div>
+
+			<fs-progress [width]="timeWidth" (moveTime)="moveTime" [type]="'timeing'"></fs-progress>
 
 			<div class="play-order">
 				<span><i class="iconfont">&#xe743;</i></span>

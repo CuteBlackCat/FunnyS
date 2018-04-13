@@ -1,0 +1,51 @@
+.progress{
+    background: rgba(147,153,159, .2);
+    height:5px;
+    border-radius: 2.5px;
+    position: relative;
+}
+.progress.timeing{
+    width: 630px;
+}
+.progress.volume{
+    width:105px;
+}
+.progress .cur-time{
+    background: rgba(234,67,53,1);
+    position: absolute;
+    left: 0;
+    top:0;
+    bottom: 0;
+    border-radius: 2.5px;
+}
+.progress .time-node{
+    position: absolute;
+    border-radius: 50%;
+    text-align: center;
+    background: #fff;
+    box-shadow:0px 0 8px  rgba(147,153,159, .2);
+    cursor: pointer;
+
+    width:16px;
+    height:16px;
+    line-height: 16px;
+    transform: translateX(-50%);
+    top:-5.5px;
+}
+/* .progress.timeing .time-node{
+    
+} */
+/* .progress.volume .time-node{
+    width:12px;
+    height:12px;
+} */
+.progress .time-node span{
+    width:4px;
+    height:4px;
+    background: rgba(234,67,53,1);
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    left: 6px;
+    top:6px;
+}

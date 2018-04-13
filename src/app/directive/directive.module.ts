@@ -5,6 +5,7 @@ import { CardComponent } from './card/card.component';
 import { StoryCardComponent } from './storycard/storycard.component';
 import { InterceptStringPipe } from './storycard/storycard.pipe';
 import { EngineerComponent } from './engineer/engineer.component';
+import { ProgressComponent } from './progress/progress.component';
 
 @NgModule({
 	declarations: [
@@ -12,10 +13,11 @@ import { EngineerComponent } from './engineer/engineer.component';
 		SliderComponent,
 		StoryCardComponent,
 		InterceptStringPipe,
-		EngineerComponent
+		EngineerComponent,
+		ProgressComponent
 	],
 	imports: [BrowserModule],
-	exports: [SliderComponent, CardComponent, StoryCardComponent, EngineerComponent, InterceptStringPipe]
+	exports: [SliderComponent, CardComponent, StoryCardComponent, EngineerComponent, ProgressComponent, InterceptStringPipe]
 })
 
 export class FsDirectiveModule {
