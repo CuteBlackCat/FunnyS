@@ -13,18 +13,20 @@
 .music .player {
     position: absolute;
     bottom: 0px;
+    
 }
 .music .button{
     position: absolute;
     bottom: 0px;
     display: flex;
-    width:400px;
+    width:1152px;
     background: #fff;
     height:60px;
+    border-top:1px solid rgba(147,153,159, .2);
 }
 .music .button .play-music{
     display: flex;
-    width:200px;
+    width:130px;
     align-items: center;
     margin-right: 20px;
 }
@@ -50,14 +52,58 @@
  }
 
  .music .button .play-msg {
-     display: flex;
  }
 .button .play-msg>span:first-child{
       margin-right:10px;
   }
-.button fs-progress{
-      margin-top:8px;
-  }
+.button .play-msg>span:last-child {
+    margin-left: 10px;
+}
 .button .volumn {
+    margin:0 20px;
+}
+.button .volumn i{
+    margin-right: 10px;
+}
+.button i {
+    
+    cursor: pointer;
+}
+ .button .play-msg, .button .volumn, .button .play-order,.button .author{
+     display: flex;
+     align-items: center;
+ }
+ img{
+     width:100%;
+ }
+.button .author{
+    position: absolute;
+    top:-60px;
+    border:1px solid rgba(147,153,159, .2);
+    border-bottom: none;
+    align-items: center;
+    height:60px;
+    width:200px;
+    opacity: 0;
+    transition: opacity .5s;
+}
+.button:hover .author{
+    opacity: 1;
+    background: #fff;
+}
+.button .author .picture{
+     width:50px;
+     height: 50px;
+}
+.button .author .singer-msg{
+    width:120px;
+    margin-left: 10px
+}
+.button .author .control{
     display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.iconfont.love{
+    color:rgba(234,67,53,1);
 }

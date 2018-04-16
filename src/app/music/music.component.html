@@ -17,6 +17,20 @@
 		<audio src="http://music.163.com/song/media/outer/url?id={{current_music.songId}}" autoplay="autoplay"  controls="controls">Your browser does not support the audio tag.</audio>
 		<!-- <iframe #iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=1152 height=86 [src]=current_music.songUrl></iframe> -->
 		<div class="button">
+			<div class="author">
+				<div class="picture">
+					<img [src]="current_music.songPicUrl" alt="">
+				</div>
+				<div class="singer-msg">
+					<div class="title">{{current_music.songTitle}}</div>
+					<div class="author-name">{{current_music.singerName}}</div>
+				</div>
+				<div class="control">
+					<i class="iconfont" *ngIf="!current_music.love">&#xe871;</i>
+					<i class="iconfont love" *ngIf="current_music.love">&#xe870;</i>
+					<i class="iconfont">&#xe620;</i>
+				</div>
+			</div>
 			<div class="play-music">
 				<span>
 					<i class="iconfont">&#xe61b;</i>

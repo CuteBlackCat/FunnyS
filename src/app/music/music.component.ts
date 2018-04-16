@@ -185,8 +185,10 @@ export class MusicComponent implements OnInit, AfterViewInit {
 
 		this.current_music = {
 			songId: '432506345',
+			songTitle: '童话镇',
 			singerName: '陈一发儿',
-			songPicUrl: ''
+			songPicUrl: 'assets/imgs/music/1.jpg',
+			love: true
 		};
 
 		this.playorder = 0;
