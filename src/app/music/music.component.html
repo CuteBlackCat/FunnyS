@@ -21,10 +21,10 @@
 				<span>
 					<i class="iconfont">&#xe61b;</i>
 				</span>
-				<span class="playing" *ngIf="playing" (click)="playMusic(false)">
+				<span class="playing" *ngIf="!playing" (click)="playMusic(true)">
 					<i class="iconfont">&#xe61a;</i>
 				</span>
-				<span class="playing" *ngIf="!playing" (click)="playMusic(true)">
+				<span class="playing" *ngIf="playing" (click)="playMusic(false)">
 					<i class="iconfont">&#xe61f;</i>
 				</span>
 				<span>
@@ -37,6 +37,12 @@
 				<span>{{currentTime | tosecond}}</span>
 				<fs-progress [width]="timeWidth" (move)="moveTime($event)" [type]="'timeing'"></fs-progress>
 				<span>{{allTime | tosecond}}</span>
+			</div>
+
+			<div class="volumn">
+				<i class="iconfont" *ngIf="closeVolume" (click)="triggerVolume(false)">&#xe926;</i>
+				<i class="iconfont" *ngIf="!closeVolume"  (click)="triggerVolume(true)">&#xe88f;</i>
+				<fs-progress [width]="volumnWidth" (move)="moveVolumn($event)" [type]="'volume'"></fs-progress>
 			</div>
 
 			<div class="play-order" (click)="switchPlayType()">

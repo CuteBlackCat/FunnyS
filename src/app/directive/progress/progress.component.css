@@ -18,12 +18,12 @@
     bottom: 0;
     border-radius: 2.5px;
 }
-.progress .time-node{
+.progress .volume,.progress .timeing{
     position: absolute;
     border-radius: 50%;
     text-align: center;
     background: #fff;
-    box-shadow:0px 0 8px  rgba(147,153,159, .2);
+    box-shadow:0px 0 8px  rgba(26, 33, 41, 0.2);
     cursor: pointer;
 
     width:16px;
@@ -39,7 +39,7 @@
     width:12px;
     height:12px;
 } */
-.progress .time-node span{
+.progress .volume span,.progress .timeing span{
     width:4px;
     height:4px;
     background: rgba(234,67,53,1);

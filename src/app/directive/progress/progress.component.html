@@ -1,4 +1,4 @@
 <div #progress class="progress"  [ngClass]="type">
     <div class="cur-time" [style.width]="viewWidth"></div>
-    <div class="time-node"  [style.left]="viewWidth"><span></span></div>
+    <div [ngClass]="type"  [style.left]="viewWidth"><span></span></div>
 </div>

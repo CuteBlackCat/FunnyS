@@ -16,14 +16,17 @@
 }
 .music .button{
     position: absolute;
-    right: 20px;
-    bottom: 40px;
+    bottom: 0px;
     display: flex;
     width:400px;
+    background: #fff;
+    height:60px;
 }
 .music .button .play-music{
     display: flex;
     width:200px;
+    align-items: center;
+    margin-right: 20px;
 }
 .music .button .play-music span{
     background: rgba(234,67,53,1);
@@ -41,3 +44,20 @@
      line-height: 36px;
      width: 36px;
  }
+
+ audio{
+     display: none;
+ }
+
+ .music .button .play-msg {
+     display: flex;
+ }
+.button .play-msg>span:first-child{
+      margin-right:10px;
+  }
+.button fs-progress{
+      margin-top:8px;
+  }
+.button .volumn {
+    display: flex;
+}

@@ -50,6 +50,15 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	// 时间进度条的宽度
 	timeWidth: number;
 
+	// 声音进度条的宽度
+	volumnWidth: number;
+
+	// 是否关闭声音
+	closeVolume: boolean;
+
+	// 关闭声音前的音量
+	oldVolume: number;
+
 	constructor(
 		private sanitizer: DomSanitizer,
 		private router: Router,
@@ -66,7 +75,15 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	 * @param play 是否播放
 	 */
 	playMusic(play) {
+		console.log(play);
 		this.playing = play;
+		if (play && this.audioNode.paused) {
+			this.audioNode.play();
+			this.updateData();
+		}else {
+			this.audioNode.pause();
+			clearTimeout(this.timer);
+		}
 	}
 
 	ngAfterViewInit() {
@@ -88,8 +105,8 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	}
 
 	updateData() {
+		this.currentTime = this.audioNode.currentTime;
 		this.timer = setTimeout(() => {
-			this.currentTime++;
 			this.timeWidth += this.oneSecond * this.audioWidth;
 			this.updateData();
 		}, 1000);
@@ -128,13 +145,39 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	 */
 	moveTime(percent) {
 		clearTimeout(this.timer);
-		clearTimeout(this.timer);
-		this.timer = null;
 		this.currentTime = this.allTime * percent;
-		console.log(percent);
 		this.timeWidth = percent * this.audioWidth;
 		this.audioNode.currentTime = this.currentTime;
-		// this.updateData();
+		this.updateData();
+	}
+
+	/**
+	 * 调节声音
+	 * @param persent 百分比
+	 */
+	moveVolumn(persent) {
+		this.oldVolume = persent;
+		if (persent <= 0) {
+			this.triggerVolume(true);
+		} else {
+			this.triggerVolume(false);
+		}
+	}
+
+	/**
+	 * 关闭声音
+	 * @param close 是否静音
+	 */
+	triggerVolume(close) {
+		this.closeVolume = close;
+		if (close) {
+			this.audioNode.volume = 0;
+			this.volumnWidth = 0;
+		}else {
+			this.audioNode.volume = this.oldVolume;
+			this.volumnWidth = this.oldVolume === 0 ? 105 : this.oldVolume * 105;
+			console.log(this.volumnWidth);
+		}
 	}
 
 	ngOnInit() {
@@ -158,11 +201,19 @@ export class MusicComponent implements OnInit, AfterViewInit {
 		this.timeWidth = 0;
 		this.audioWidth = 630;
 
+		this.volumnWidth = 105;
+		this.oldVolume = 1;
+
+		this.closeVolume = false;
+
 
 		// 加载到可以播放
 		this.audioNode.oncanplaythrough = () => {
-			this.initData();
-			this.audioNode.play();
+			// 每次设置时间也会触发当前是否能播放
+			if (!this.timeWidth) {
+				this.initData();
+				this.audioNode.play();
+			}
 		};
 
 		// 歌曲播放完成

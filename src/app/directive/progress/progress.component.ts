@@ -20,20 +20,23 @@ export class ProgressComponent implements OnInit, OnChanges {
 	ngOnInit() {
 		this.draging = false;
 
-		this.timeNode = this.progress.nativeElement.querySelector('.time-node');
+		this.timeNode = this.progress.nativeElement.querySelector('.' + this.type);
 
 		this.allWidth = this.type === 'timeing' ? 630 : 105;
 
 		const drag = {
-			disX: 0,
 			curX: 0,
 			oldX: 0
 		};
 
 		const moveBtn = (e) => {
 			drag.curX = e.clientX;
-			drag.disX = drag.curX - drag.oldX;
-			this.width = drag.disX;
+			// if (this.type === 'volume') {
+			// 	this.width = 105 - drag.oldX + drag.curX;
+			// }else {
+			// 	this.width = drag.curX - drag.oldX;
+			// }
+			this.width = drag.curX - drag.oldX;
 
 			if (this.width < 0) {
 				this.width = 0;
@@ -45,7 +48,6 @@ export class ProgressComponent implements OnInit, OnChanges {
 		};
 
 		const moveUp = () => {
-			console.log(this.width, this.allWidth);
 			this.move.emit(this.width / this.allWidth);
 			window.removeEventListener('mousemove', moveBtn);
 			window.removeEventListener('mouseup', moveUp);
@@ -58,9 +60,9 @@ export class ProgressComponent implements OnInit, OnChanges {
 		};
 
 		window.addEventListener('mousedown', (e: any) => {
-			if (e.target.className === 'time-node') {
+			if (e.target.className === this.type) {
 				this.draging = true;
-				drag.oldX = e.clientX;
+				drag.oldX = e.clientX - this.width;
 				clickBtn();
 			}
 		});
@@ -70,7 +72,6 @@ export class ProgressComponent implements OnInit, OnChanges {
 		if (!this.draging) {
 			this.width = changes['width'].currentValue;
 			this.viewWidth = this.width + 'px';
-			console.log(1);
 		}
 	}
 }
