@@ -145,6 +145,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	 */
 	moveTime(percent) {
 		clearTimeout(this.timer);
+		this.timer = null;
 		this.currentTime = this.allTime * percent;
 		this.timeWidth = percent * this.audioWidth;
 		this.audioNode.currentTime = this.currentTime;
