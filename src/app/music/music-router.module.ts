@@ -9,18 +9,18 @@ import { MusicSongerComponent } from './music-songer/music-songer.component';
 
 const router: Routes = [
 	{
-		path: 'music',
+		path: 'music/:id',
 		component: MusicComponent,
 		children: [
-			{
-				path: '',
-				redirectTo: 'list/0',
-				pathMatch: 'full'
-			},
-			{
-				path: 'list/:id',
-				component: MusicListComponent
-			},
+			// {
+			// 	path: '',
+			// 	redirectTo: 'list/0',
+			// 	pathMatch: 'full'
+			// },
+			// {
+			// 	path: 'list/:id',
+			// 	component: MusicListComponent
+			// },
 			{
 				path: 'play',
 				component: MusicPlayComponent,
@@ -36,6 +36,11 @@ const router: Routes = [
 				component: MusicSongerComponent
 			}
 		]
+	},
+	{
+		path: 'music',
+		redirectTo: 'music/0',
+		pathMatch: 'full'
 	}
 ];
 

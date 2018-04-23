@@ -67,7 +67,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 
 	searchMusic(id: string) {
 		this.curType = id;
-		this.router.navigate([`/music/list/${id}`]);
+		this.router.navigate([`/music/list/${id}`, { playorder: this.playorder}]);
 	}
 
 	/**

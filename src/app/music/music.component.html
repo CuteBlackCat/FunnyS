@@ -8,8 +8,14 @@
 		</div>
 	</div>
 
-	<div class="list">
-		<router-outlet></router-outlet>
+	<div class="content">
+		<ng-container *ngIf="list">
+			<fs-music-list></fs-music-list>
+		</ng-container>
+
+		<ng-container *ngIf="!list">
+			<router-outlet></router-outlet>
+		</ng-container>
 	</div>
 
 	<div class="player" #music>
