@@ -12,7 +12,7 @@
         <div class="item" *ngFor="let item of musicList; let i = index">
             <div class="id">{{i > 8 ? i + 1 : '0' + ( i + 1 )}}</div>
             <div class="controler"><i class="iconfont">&#xe870;</i></div>
-            <div class="title">{{item.songTitle}}</div>
+            <div class="title" (click)="playMusic(item, i)">{{item.songTitle}}</div>
             <div class="songer">{{item.singerName}}</div>
             <div class="time">{{item.time}}</div>
         </div>

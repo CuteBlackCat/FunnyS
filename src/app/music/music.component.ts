@@ -62,6 +62,9 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	// 是否在列表页
 	list: boolean;
 
+	// 当前播放的数
+	curNext: number;
+
 	constructor(
 		private sanitizer: DomSanitizer,
 		private router: Router,
@@ -89,6 +92,13 @@ export class MusicComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	playSong(music) {
+		clearTimeout(this.timer);
+		this.timer = null;
+		this.current_music = music;
+		this.initData();
+	}
+
 	ngAfterViewInit() {
 
 	}
@@ -100,7 +110,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	}
 
 	initData() {
-		this.allTime = this.audioNode.duration,
+		this.allTime = this.audioNode.duration;
 		console.log(this.allTime);
 		this.currentTime = this.audioNode.currentTime,
 		this.timeWidth = 0;
@@ -109,6 +119,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	}
 
 	updateData() {
+		clearTimeout(this.timer);
 		this.currentTime = this.audioNode.currentTime;
 		this.timer = setTimeout(() => {
 			this.timeWidth += this.oneSecond * this.audioWidth;
@@ -116,23 +127,37 @@ export class MusicComponent implements OnInit, AfterViewInit {
 		}, 1000);
 	}
 
-	nextPlayMusic(click: boolean) {
+	clickNextPlayMusic(next) {
+		if (next) {
+			this.curNext++;
+		}else {
+			this.curNext--;
+		}
+	}
+
+	autoNextPlayMusic() {
 		switch (this.playorder) {
 			case 0:
 				// 播放列表的下一首,当到最后一首结束
+				this.curNext++;
 				break;
 			case 1:
 				// 播放列表的下一首,当到最后一首从第一首播放
+				this.curNext++;
 				break;
 			case 2:
-				if (click) {
+				// if (click) {
 					// 播放下一首
-				} else {
+					// this.curNext++;
+				// } else {
 					// 播放当前位置
-				}
+					// this.audioNode.currentTime = 0;
+					// this.initData();
+				// }
 				break;
 			case 3:
 				// 随机播放
+				this.curNext++;
 		}
 	}
 
@@ -229,7 +254,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 		this.audioNode.onended = () => {
 			clearTimeout(this.timer);
 			// 如何播放
-			this.nextPlayMusic(false);
+			this.autoNextPlayMusic();
 		};
 
 		this.audio = {

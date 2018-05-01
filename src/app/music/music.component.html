@@ -10,7 +10,7 @@
 
 	<div class="content">
 		<ng-container *ngIf="list">
-			<fs-music-list></fs-music-list>
+			<fs-music-list [playOrder]="playOrder" [next]="curNext" (playSong)="playSong($event)"></fs-music-list>
 		</ng-container>
 
 		<ng-container *ngIf="!list">
@@ -39,7 +39,7 @@
 			</div>
 			<div class="play-music">
 				<span>
-					<i class="iconfont">&#xe61b;</i>
+					<i class="iconfont" (click)="clickNextPlayMusic(false)">&#xe61b;</i>
 				</span>
 				<span class="playing" *ngIf="!playing" (click)="playMusic(true)">
 					<i class="iconfont">&#xe61a;</i>
@@ -48,7 +48,7 @@
 					<i class="iconfont">&#xe61f;</i>
 				</span>
 				<span>
-					<i class="iconfont">&#xe61c;</i>
+					<i class="iconfont" (click)="clickNextPlayMusic(true)">&#xe61c;</i>
 				</span>
 			</div>
 
