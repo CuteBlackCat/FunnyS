@@ -35,6 +35,7 @@ import { LocalStorage } from './service/local.storage';
 		HomeComponent,
 		GamesComponent,
 		AboutComponent,
+		SnakeComponent,
 		PagenotfoundComponent,
 	],
 	imports: [

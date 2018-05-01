@@ -29,6 +29,21 @@ export class MusicListComponent implements OnInit {
 	ngOnInit() {
 		this.id = Number(this.route.snapshot.paramMap.get('id'));
 
-		this.musicList = {}
+		const musiTemp = {
+			songId: '432506345',
+			songTitle: '童话镇',
+			singerName: '陈一发儿',
+			songPicUrl: 'assets/imgs/music/1.jpg',
+			love: true,
+			time: '04:17'
+		};
+
+		this.musicList = [];
+
+		let i = 0;
+		while (i < 20) {
+			i++;
+			this.musicList.push(musiTemp);
+		}
 	}
 }

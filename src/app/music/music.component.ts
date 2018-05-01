@@ -59,6 +59,9 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	// 关闭声音前的音量
 	oldVolume: number;
 
+	// 是否在列表页
+	list: boolean;
+
 	constructor(
 		private sanitizer: DomSanitizer,
 		private router: Router,
@@ -67,7 +70,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 
 	searchMusic(id: string) {
 		this.curType = id;
-		this.router.navigate([`/music/list/${id}`, { playorder: this.playorder}]);
+		this.router.navigate([`/music/${id}`, { playorder: this.playorder}]);
 	}
 
 	/**
@@ -98,6 +101,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 
 	initData() {
 		this.allTime = this.audioNode.duration,
+		console.log(this.allTime);
 		this.currentTime = this.audioNode.currentTime,
 		this.timeWidth = 0;
 		this.oneSecond = 1 / this.allTime;
@@ -198,6 +202,8 @@ export class MusicComponent implements OnInit, AfterViewInit {
 
 		this.audioNode = this.music.nativeElement.querySelector('audio');
 
+		this.list = true;
+
 
 		this.allTime = 0,
 		this.currentTime = 0,
@@ -264,7 +270,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 			}
 		];
 
-		this.route.firstChild.paramMap.subscribe(
+		this.route.paramMap.subscribe(
 			(params: ParamMap) => {
 				this.curType = params.get('id');
 			}

@@ -1,0 +1,56 @@
+.music-list{
+    height:400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.info{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: left;
+}
+.item{
+    text-align: left;
+    height:30px;
+    line-height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(147,153,159, .2);
+    padding:0 10px;
+}
+.item:hover{
+    background: rgba(147,153,159, .3);
+}
+.item .id{
+    /* flex-grow: 1; */
+    width:10%;
+}
+.item .controler{
+    /* flex-grow: 1; */
+    width:15%;
+}
+.item .title{
+    /* flex-grow: 3; */
+    width:35%;
+    cursor: pointer;
+}
+.item .songer{
+    /* flex-grow: 2; */
+    width:25%;
+}
+.item .time{
+    /* flex-grow: 1; */
+    width:15%;
+}
+i{
+    color:rgba(234,67,53,1);
+}
+
+.item.header>div{
+    /* border-left: 1px solid rgba(147,153,159, .2); */
+}
+.item.header>div.id{
+    border-left: none;
+}
