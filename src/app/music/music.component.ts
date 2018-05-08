@@ -81,7 +81,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	 * @param play 是否播放
 	 */
 	playMusic(play) {
-		console.log(play);
+		// console.log(play);
 		this.playing = play;
 		if (play && this.audioNode.paused) {
 			this.audioNode.play();
@@ -110,10 +110,13 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	}
 
 	initData() {
+		clearTimeout(this.timer);
 		this.allTime = this.audioNode.duration;
-		console.log(this.allTime);
+		// console.log(this.allTime);
 		this.currentTime = this.audioNode.currentTime,
-		this.timeWidth = 0;
+		setTimeout(() => {
+			this.timeWidth = 0;
+		}, 0);
 		this.oneSecond = 1 / this.allTime;
 		this.updateData();
 	}
@@ -130,6 +133,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	clickNextPlayMusic(next) {
 		if (next) {
 			this.curNext++;
+			console.log(this.curNext);
 		}else {
 			this.curNext--;
 		}
@@ -206,7 +210,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 		}else {
 			this.audioNode.volume = this.oldVolume;
 			this.volumnWidth = this.oldVolume === 0 ? 105 : this.oldVolume * 105;
-			console.log(this.volumnWidth);
+			// console.log(this.volumnWidth);
 		}
 	}
 
@@ -234,6 +238,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 		this.currentTime = 0,
 		this.timeWidth = 0;
 		this.audioWidth = 630;
+		this.curNext = 0;
 
 		this.volumnWidth = 105;
 		this.oldVolume = 1;

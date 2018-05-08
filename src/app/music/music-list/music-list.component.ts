@@ -29,7 +29,8 @@ export class MusicListComponent implements OnInit, OnChanges {
 	 * @param id 音乐ID
 	 */
 	playMusic(music, i) {
-		this.curnum = i;
+		console.log(music);
+		this.curnext = i;
 		this.playSong.emit(music);
 		this.router.navigate([`/music/${this.id}`, {musicid: music.songId}]);
 	}
@@ -37,22 +38,23 @@ export class MusicListComponent implements OnInit, OnChanges {
 	selectMusic(next) {
 		if (this.playOrder === 3) {
 			const num = Math.random() * this.musicList.length;
-			if (num === this.curnum) {
+			if (num === this.curnext) {
 				this.selectMusic(next);
 			}else {
-				this.curnum = num;
-				return this.curnum;
+				this.curnext = num;
+				return this.curnext;
 			}
 		}else {
-			return next ? this.curnum++ : this.curnext--;
+			return next ? this.curnext + 1 : this.curnext - 1;
 		}
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes.next.firstChange === false && this.curnext !== changes.next.currentValue) {
-			console.log(this.curnum < changes.next.currentValue ? true : false);
-			this.curnum = this.selectMusic(true);
-			this.playMusic(this.musicList[this.curnum], this.curnum);
+			const next = this.curnum < changes.next.currentValue ? true : false;
+			this.curnum = changes.next.currentValue;
+			this.curnext = this.selectMusic(next);
+			this.playMusic(this.musicList[this.curnext], this.curnext);
 		}
 	}
 
@@ -60,6 +62,7 @@ export class MusicListComponent implements OnInit, OnChanges {
 		this.id = Number(this.route.snapshot.paramMap.get('id'));
 
 		this.curnum = 0;
+		this.curnext = 0;
 
 		const musiTemp = {
 			songId: '432506345',
