@@ -7,8 +7,12 @@
 
 /* 全局style */
 .music {
-   height: calc(100% - 30px);
+   height: 80vh;
     position: relative;
+}
+.music .content{
+    max-height: calc(100% - 111px);
+    overflow: auto;
 }
 .music .player {
     position: absolute;

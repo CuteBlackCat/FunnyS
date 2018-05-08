@@ -1,6 +1,6 @@
 .music-list{
-    height:400px;
-    overflow-y: auto;
+    /* height:400px; */
+    /* overflow-y: auto; */
     overflow-x: hidden;
 }
 

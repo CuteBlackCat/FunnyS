@@ -9,13 +9,13 @@
 	</div>
 
 	<div class="content">
-		<ng-container *ngIf="list">
+		<div [style.display]="list ? 'block' : 'none'">
 			<fs-music-list [playOrder]="playOrder" [next]="curNext" (playSong)="playSong($event)"></fs-music-list>
-		</ng-container>
+		</div>
 
-		<ng-container *ngIf="!list">
+		<div [style.display]="list ? 'none' : 'block'">
 			<router-outlet></router-outlet>
-		</ng-container>
+		</div>
 	</div>
 
 	<div class="player" #music>
@@ -24,7 +24,7 @@
 		<!-- <iframe #iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=1152 height=86 [src]=current_music.songUrl></iframe> -->
 		<div class="button">
 			<div class="author">
-				<div class="picture">
+				<div class="picture" (click)="showDetail(current_music.songId)">
 					<img [src]="current_music.songPicUrl" alt="">
 				</div>
 				<div class="singer-msg">

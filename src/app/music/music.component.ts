@@ -7,7 +7,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 	templateUrl: './music.component.html',
 	styleUrls: ['./music.component.css', '../story/story.component.css']
 })
-export class MusicComponent implements OnInit, AfterViewInit {
+export class MusicComponent implements OnInit {
 
 	// 当前播放的音乐链接
 	current_music: object;
@@ -72,6 +72,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 	) { }
 
 	searchMusic(id: string) {
+		this.list = true;
 		this.curType = id;
 		this.router.navigate([`/music/${id}`, { playorder: this.playorder}]);
 	}
@@ -97,10 +98,6 @@ export class MusicComponent implements OnInit, AfterViewInit {
 		this.timer = null;
 		this.current_music = music;
 		this.initData();
-	}
-
-	ngAfterViewInit() {
-
 	}
 
 	setAudioAttr(obj) {
@@ -165,6 +162,10 @@ export class MusicComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	showDetail(id) {
+		this.list = !this.list;
+		this.router.navigate([`/music/${this.curType}/play`, { musicid: id }]);
+	}
 	/**
 	 * 切换播放模式
 	 */
@@ -231,7 +232,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
 
 		this.audioNode = this.music.nativeElement.querySelector('audio');
 
-		this.list = true;
+		
 
 
 		this.allTime = 0,
@@ -305,6 +306,18 @@ export class MusicComponent implements OnInit, AfterViewInit {
 				this.curType = params.get('id');
 			}
 		);
+
+		console.log(this.route.firstChild);
+		if (this.route.firstChild) {
+			this.route.firstChild.url.forEach((item) => {
+				if (item[0].path === 'play') {
+					this.list = false;
+				}
+			});
+		}else {
+			this.list = true;
+		}
+
 	}
 
 }
