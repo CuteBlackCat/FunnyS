@@ -6,6 +6,8 @@ import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
 import { SignRouterModule } from './sign-router.module';
 
+import { ConfigService } from './sign.service';
+
 @NgModule({
 	declarations: [
 		LoginComponent,
@@ -18,7 +20,8 @@ import { SignRouterModule } from './sign-router.module';
 	],
 	exports: [
 		LoginComponent, RegisterComponent
-	]
+	],
+	providers: [{provide: ConfigService, useClass: ConfigService}]
 })
 export class SignModule {
 

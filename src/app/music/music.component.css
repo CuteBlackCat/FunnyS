@@ -11,8 +11,11 @@
     position: relative;
 }
 .music .content{
-    max-height: calc(100% - 111px);
+    height: calc(100% - 111px);
     overflow: auto;
+}
+.music .content>div{
+    height: 100%;
 }
 .music .player {
     position: absolute;

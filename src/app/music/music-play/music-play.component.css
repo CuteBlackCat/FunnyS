@@ -2,6 +2,10 @@
     display: flex;
     justify-content: center;
 }
+.play{
+        height: 100%;
+    overflow: auto;
+}
 .cvrwrap{
     position: relative;
     display: block;
@@ -21,6 +25,7 @@
     height: 205px;
     top: -4px;
     left: -4px;
-    background-position: -140px -580px;
     background: url('../../../assets/imgs/music/coverall.png') no-repeat;
+    background-position: -140px -580px;
+    
 }

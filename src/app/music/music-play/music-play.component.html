@@ -8,11 +8,49 @@
         </div>
         
         <div class="content">
-            
+            <div class="title">
+                潼湖镇
+            </div>
+            <div class="info">
+                <span>歌手: cehngyifaer</span>
+            </div>
+
+            <div class="songer">
+                <span>作曲: 鞍钢</span>
+                <span>作词: 驻军</span>
+                <span>编曲: 鞍钢</span>
+            </div>
+
+            <div class="lyrics">
+                <span *ngFor="let item of lyrics">{{item}}</span><br/>
+            </div>
         </div>
     </div>
 
     <div class="comment-box">
+        <div class="comment-header">
+            <div class="comment-title">评论</div>
+            <span>共{{commentNum}}条评论</span>
+        </div>
 
+        <div class="comment-ox">
+            <div class="header-pic"></div>
+            <div class="comment-text">
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <button class="normal">评论</button>
+            </div>
+        </div>
+
+        <div class="wonderful-comment">
+            <div class="comment-line">
+                <div class="header-pic"></div>
+                <div class="comment-detail">
+                    <div class="name">称一发而:<div class="comment-words">对了...</div></div>
+                    <div class="small-info">
+                        <span class="time">2016-2231-213</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

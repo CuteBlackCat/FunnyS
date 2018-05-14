@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // 导入自定义模块
 import { FsDirectiveModule } from './directive/directive.module';
@@ -40,6 +41,7 @@ import { LocalStorage } from './service/local.storage';
 	],
 	imports: [
 		BrowserModule,
+		HttpClientModule,
 		ReactiveFormsModule,
 		FormsModule,
 		FsDirectiveModule,

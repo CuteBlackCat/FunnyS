@@ -1,13 +1,13 @@
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 @Component({
 	selector: 'fs-music-play',
 	templateUrl: './music-play.component.html',
 	styleUrls: ['./music-play.component.css']
 })
-export class MusicPlayComponent implements OnInit {
+export class MusicPlayComponent implements OnInit, OnChanges {
 
-	musicid: string;
+	@Input() musicid: string;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -16,11 +16,19 @@ export class MusicPlayComponent implements OnInit {
 
 	}
 
+	getData(id) {
+		console.log(id);
+	}
+
 	ngOnInit() {
 		this.route.paramMap.subscribe(
 			(params: ParamMap) => {
 				this.musicid = params.get('musicid');
 			}
 		);
+	}
+
+	ngOnChanges(changes: SimpleChanges) {
+		this.getData(changes.musicid.currentValue);
 	}
 }

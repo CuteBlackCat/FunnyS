@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { LocalStorage } from './../service/local.storage';
+import { ConfigService } from './sign.service';
 
 @Component({
 	selector: 'fs-login',
@@ -14,11 +15,26 @@ export class LoginComponent implements OnInit {
 
 	constructor(
 		private local: LocalStorage,
-		private fb: FormBuilder
+		private fb: FormBuilder,
+		private http: ConfigService
 	) { }
 
 	onSubmit() {
 		console.log(this.user.value);
+		const data = {
+			'username': this.user.value.username,
+			'password': this.http.md5(this.user.value.password, Math.trunc(Date.now() / 1000)),
+			'timestamp': Math.trunc(Date.now() / 1000)
+		};
+
+		const url = 'login';
+
+		this.http.postConfig(url, data).subscribe(
+			data => {
+				console.log(data);
+			}
+		);
+
 	}
 
 	ngOnInit() {
