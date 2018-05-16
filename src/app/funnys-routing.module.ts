@@ -20,7 +20,7 @@ const funnysRoutes: Routes = [
 	imports: [
 		RouterModule.forRoot(
 			funnysRoutes,
-			{ enableTracing: true }
+			{ enableTracing: false }
 		)
 	],
 	exports: [

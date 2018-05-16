@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
 		const url = 'login';
 
 		this.http.postConfig(url, data).subscribe(
-			data => {
-				console.log(data);
+			res => {
+				console.log(res);
 			}
 		);
 

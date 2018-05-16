@@ -45,13 +45,22 @@ export class StoryComponent implements OnInit {
 			{
 				typeId: '5',
 				typeName: '其他故事'
+			},
+			{
+				typeId: '6',
+				typeName: '我要发布'
 			}
 		];
 		console.log(this.router.url);
 	}
 
 	searchStory(id: string) {
-		this.curType = id;
+		this.curType = String(id);
+		if (id === '6') {
+			this.router.navigate(['/story/public', { type: id, condition: this.curTitle }]);
+			return;
+		}
+		console.log(this.curType);
 		this.router.navigate(['/story/list', { type: id, condition: this.curTitle}]);
 	}
 
@@ -63,7 +72,9 @@ export class StoryComponent implements OnInit {
 	ngOnInit() {
 		this.route.firstChild.paramMap.subscribe(
 			(params: ParamMap) => {
-				this.curType = params.get('id');
+				this.curType = params.get('type');
+				console.log(this.curType);
+				this.curType = this.curType ? this.curType : '0';
 			}
 		);
 

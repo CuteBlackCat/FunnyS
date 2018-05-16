@@ -1,0 +1,45 @@
+.edit-box{
+    display: flex;
+}
+.title{
+    font-size: 16px;
+    margin-bottom: 10px;line-height: 30px;
+}
+.avater {
+    width:50px;
+    height:50px;
+    margin-right: 20px;
+}
+.avater img{
+    width:100%;
+}
+textarea{
+    resize: none;
+    width:calc(100% - 30px);
+    overflow: auto;
+    padding: 5px 10px;
+}
+.edit{
+    width:100%;
+}
+.label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.label>span{
+    /* background: rgba(52,168,83,.6); */
+    margin-right: 20px;
+    border-radius: 4px;
+    transition: all .3s;
+    padding:5px 10px;
+    border: 1px solid rgba(147,153,159, 1);
+    cursor: pointer;
+} 
+.label>span:hover{
+    background: rgba(52,168,83,.6);
+    color: #fff;
+    border: 1px solid rgba(52,168,83,.6);
+}
+button{
+    float: right;
+}

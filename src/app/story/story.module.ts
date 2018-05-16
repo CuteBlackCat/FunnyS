@@ -6,12 +6,14 @@ import { StoryListComponent } from './story-list/story-list.component';
 import { StoryDetailComponent } from './story-detail/story-detail.component';
 import { StoryRoutingModule } from './story-router.module';
 import { FsDirectiveModule } from '../directive/directive.module';
+import { StoryLPublicComponent } from './story-public/story-public.component';
 
 @NgModule({
 	declarations: [
 		StoryComponent,
 		StoryDetailComponent,
 		StoryListComponent,
+		StoryLPublicComponent
 	],
 	imports: [
 		BrowserModule,
@@ -22,6 +24,7 @@ import { FsDirectiveModule } from '../directive/directive.module';
 		StoryComponent,
 		StoryDetailComponent,
 		StoryListComponent,
+		StoryLPublicComponent
 	]
 })
 export class StoryModule {
