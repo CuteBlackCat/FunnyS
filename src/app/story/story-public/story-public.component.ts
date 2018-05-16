@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 @Component({
 	selector: 'fs-story-public',
 	templateUrl: './story-public.component.html',
@@ -11,8 +11,15 @@ export class StoryLPublicComponent implements OnInit {
 
 	types: Array<object>;
 
+	length: number;
+
+	curType: string;
+
+	user: FormGroup;
+
 	constructor(
 		private router: Router,
+		private fb: FormBuilder,
 		private route: ActivatedRoute
 	) {
 		this.types = [
@@ -37,6 +44,25 @@ export class StoryLPublicComponent implements OnInit {
 				typeName: '其他故事'
 			}
 		];
+
+		this.curType = this.types[0]['typeId'];
+
+		this.length = 0;
+	}
+
+	onSubmit() {
+		console.log(this.user);
+	}
+
+	selectType(id: string) {
+		this.curType = id;
+	}
+
+	cacularLen() {
+		setTimeout(() => {
+			this.length = this.user.value.text.length;
+		}, 0);
+		
 	}
 
 
@@ -44,5 +70,9 @@ export class StoryLPublicComponent implements OnInit {
 
 	ngOnInit() {
 
+		const text = '';
+		this.user = this.fb.group({
+			text: [text]
+		});
 	}
 }

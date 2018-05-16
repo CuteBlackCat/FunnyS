@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { StoryComponent } from './story.component';
 import { StoryListComponent } from './story-list/story-list.component';
@@ -17,6 +18,8 @@ import { StoryLPublicComponent } from './story-public/story-public.component';
 	],
 	imports: [
 		BrowserModule,
+		ReactiveFormsModule,
+		FormsModule,
 		FsDirectiveModule,
 		StoryRoutingModule,
 	],

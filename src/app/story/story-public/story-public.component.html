@@ -9,12 +9,18 @@
         </div>
 
         <div class="edit">
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
+                <textarea name="text" maxlength="500" (ngModelChange)="cacularLen()" id="" cols="30" rows="10" formControlName="text"></textarea>
 
-            <div class="label">
-                <span *ngFor="let item of types">{{item.typeName}}</span>
-            </div>
-            <button class="normal">发布</button>
+                <div class="label">
+                    <span [class.active]="item.typeId === curType" *ngFor="let item of types" (click)="selectType(item.typeId)">{{item.typeName}}</span>
+                </div>
+                <div class="button">
+                    <span>{{length}} / 500</span>
+                    <button class="normal" type="submit" (click)="onSubmit(f)">发布</button>
+                </div>
+            </form>
+            
         </div>
     </div>
 
