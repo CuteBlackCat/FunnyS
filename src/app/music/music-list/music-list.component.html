@@ -1,6 +1,6 @@
 <div class="music-list">
 
-    <div class="list-box">
+    <div class="list-box" *ngIf="curType==='0'">
         <div class="item header">
             <div class="id"></div>
             
@@ -19,5 +19,27 @@
             <div class="songer">{{item.song.artists[0].name}}</div>
             <div class="time">{{item.song.duration | date: 'mm:ss'}}</div>
         </div>
+    </div>
+
+    <div class="list-box pic-line" *ngIf="curType!=='0'">
+        <div class="item header">
+            <div class="id"></div>
+            
+            <div class="controler">美图</div>
+            <div class="title">音乐标题</div>
+            <div class="songer">歌手</div>
+            <div class="time">时常</div>
+        </div>
+        <div class="item pic-item" *ngFor="let item of musicList; let i = index">
+            <div class="id">{{i > 8 ? i + 1 : '0' + ( i + 1 )}}</div>
+            <div class="controler">
+                <img class="songer" [src]="item.al.picUrl">
+            </div>
+            <div class="title" (click)="playMusic(item, i)">{{item.name}}</div>
+            <div class="songer">{{item.ar[0].name}}</div>
+            <div class="time">{{item.dt | date: 'mm:ss'}}</div>
+        </div>
+        <div class="item load-more" (click)="loadMore()" *ngIf="page_id < maxLoad">加载更多...</div>
+        <div class="item" *ngIf="page_id >= maxLoad">客观，只有这么多了噢~</div>
     </div>
 </div>

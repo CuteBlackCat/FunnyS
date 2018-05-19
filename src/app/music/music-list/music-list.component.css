@@ -48,9 +48,22 @@ i{
     color:rgba(234,67,53,1);
 }
 
+img.songer{
+    width:50px;
+    margin-top: 10px;
+}
+
 .item.header>div{
     /* border-left: 1px solid rgba(147,153,159, .2); */
 }
 .item.header>div.id{
     border-left: none;
+}
+
+.list-box.pic-line .pic-item{
+    height: 60px;
+    line-height: 60px;
+}
+.load-more {
+    cursor: pointer;
 }

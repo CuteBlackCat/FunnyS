@@ -76,7 +76,7 @@ export class MusicComponent implements OnInit {
 	searchMusic(id: string) {
 		this.list = true;
 		this.curType = id;
-		this.router.navigate([`/music/${id}`, { playorder: this.playorder}]);
+		this.router.navigate([`/music/${id}`, {musicid: this.current_music['id']}]);
 	}
 
 	/**
@@ -108,7 +108,7 @@ export class MusicComponent implements OnInit {
 				this.initData();
 				console.log(this.current_music['al'].pic);
 
-				this.current_music['al'].pic = `http://p1.music.126.net/tkwRHzFfJjnJBhUIt3l5_w==/${this.current_music.al.pic}.jpg?param=130y130`;
+				this.current_music['al'].pic = `http://p4.music.126.net/N2HO5xfYEqyQ8q6oxCw8IQ==/${this.current_music.al.pic}.jpg`;
 				this.current_music['canDislike'] = music['canDislike'];
 
 				console.log(this.current_music);

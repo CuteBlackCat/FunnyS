@@ -10,11 +10,17 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 	id: number;
 
+	page_id: number;
+
+	allMusic: Array<object>;
+
 	types: Array<object>;
 
 	musicList: Array<object>;
 	curnext: number;
 	curnum: number;
+
+	maxLoad: number;
 
 	first: boolean;
 
@@ -38,7 +44,7 @@ export class MusicListComponent implements OnInit, OnChanges {
 	playMusic(music, i) {
 		this.curnext = i;
 		this.playSong.emit(music);
-		this.router.navigate([`/music/${this.id}`, {musicid: music.id}]);
+		this.router.navigate([`/music/${this.curType}`, {musicid: music.id}]);
 	}
 
 	selectMusic(next) {
@@ -72,10 +78,15 @@ export class MusicListComponent implements OnInit, OnChanges {
 	getMusicList(url) {
 		this.http.getConfig(url, {}).subscribe(
 			data => {
+
+				this.page_id = 1;
+
 				if ( this.curType === '0') {
 					this.musicList = data['result'];
 				}else if (this.curType === '1') {
-					// this.musicList = data['playlist']['tracks'].slice(0, 50);
+					this.allMusic = data['playlist']['tracks'];
+					this.maxLoad = this.allMusic.length / 20;
+					this.musicList = data['playlist']['tracks'].slice(0, this.page_id * 20);
 				}
 
 				if (this.first) {
@@ -84,6 +95,12 @@ export class MusicListComponent implements OnInit, OnChanges {
 				}
 			}
 		);
+	}
+
+	loadMore() {
+		const newMusic = this.allMusic.slice(this.page_id * 20, (this.page_id + 1) * 20);
+		this.musicList = this.musicList.concat(newMusic);
+		this.page_id++;
 	}
 
 	findUrl(id) {
@@ -106,8 +123,14 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 		this.first = true;
 
+		this.page_id = 1;
+
 
 		this.musicList = [];
+
+		this.allMusic = [];
+
+		this.maxLoad = 1;
 
 		this.types = [
 			{
