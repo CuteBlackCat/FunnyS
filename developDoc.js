@@ -570,4 +570,24 @@ ResData:
         message: 'success'
 }
 
+//发布故事
+url: GET .../funnys/rest / story / publicStory
+request:
+{
+    userName: 'lijiaxin',
+    publicTime: '2018.3.7',
+    storyName: '安河桥的故事',
+    introduction: '从南到北...',
+    content: '让我在卡你一眼，从南到北...',
+    parentId: 0,//所有为0的代表最初发布的故事，
+    typeId: 2//故事类型
+}
+response:
+{
+    code: 0,
+    message:...
+}
+
+
+
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { DomSanitizer  } from '@angular/platform-browser';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MusicService } from './music.service';
 
 @Component({
 	selector: 'fs-music',
@@ -68,7 +69,8 @@ export class MusicComponent implements OnInit {
 	constructor(
 		private sanitizer: DomSanitizer,
 		private router: Router,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private http: MusicService
 	) { }
 
 	searchMusic(id: string) {
@@ -96,8 +98,22 @@ export class MusicComponent implements OnInit {
 	playSong(music) {
 		clearTimeout(this.timer);
 		this.timer = null;
-		this.current_music = music;
-		this.initData();
+		this.getDetailMusic(music);
+	}
+
+	getDetailMusic(music) {
+		this.http.getConfig('/song/detail?ids=' + music.id, {}).subscribe(
+			data => {
+				this.current_music = data['songs'][0];
+				this.initData();
+				console.log(this.current_music['al'].pic);
+
+				this.current_music['al'].pic = `http://p1.music.126.net/tkwRHzFfJjnJBhUIt3l5_w==/${this.current_music.al.pic}.jpg?param=130y130`;
+				this.current_music['canDislike'] = music['canDislike'];
+
+				console.log(this.current_music);
+			}
+		);
 	}
 
 	setAudioAttr(obj) {
@@ -219,11 +235,16 @@ export class MusicComponent implements OnInit {
 		const url = '//music.163.com/outchain/player?type=2&id=&auto=1&height=66';
 
 		this.current_music = {
-			songId: '432506345',
-			songTitle: '童话镇',
-			singerName: '陈一发儿',
-			songPicUrl: 'assets/imgs/music/1.jpg',
-			love: true
+			id: '',
+			name: '',
+			ar: [
+				{
+					name: '',
+				}
+			],
+			al: {
+				pic: ''
+			}
 		};
 
 		this.playorder = 0;
@@ -231,9 +252,6 @@ export class MusicComponent implements OnInit {
 		this.playing = true;
 
 		this.audioNode = this.music.nativeElement.querySelector('audio');
-
-		
-
 
 		this.allTime = 0,
 		this.currentTime = 0,
@@ -267,45 +285,48 @@ export class MusicComponent implements OnInit {
 			play: true,
 			volume: 0.8,
 			loop: false,
-			currentTime: this.audioNode.currentTime,
+			currentTime: 0,
 		};
 
 		this.types = [
 			{
 				typeId: '0',
-				typeName: '每日推荐'
+				typeName: '排行榜',
+				url: '/personalized/newsong'
 			},
 			{
 				typeId: '1',
-				typeName: '排行榜'
+				typeName: '最新音乐',
+				url: '/top/list?idx=0'
 			},
 			{
 				typeId: '2',
-				typeName: '最新音乐'
+				typeName: '最热音乐',
+				url: '/top/list?idx=1'
 			},
 			{
 				typeId: '3',
-				typeName: '最热音乐'
+				typeName: '飙升音乐',
+				url: '/top/list?idx=3'
 			},
 			{
 				typeId: '4',
-				typeName: '飙升音乐'
+				typeName: '我喜欢的音乐',
+				url: ''
 			},
 			{
 				typeId: '5',
-				typeName: '我喜欢的音乐'
+				typeName: '歌手',
+				url: '/toplist/artist'
 			},
 			{
 				typeId: '6',
-				typeName: '歌手'
+				typeName: '每日推荐',
+				url: '/recommend/resource'
 			}
 		];
 
-		this.route.paramMap.subscribe(
-			(params: ParamMap) => {
-				this.curType = params.get('id');
-			}
-		);
+		this.loginNetMusic();
 
 		console.log(this.route.firstChild);
 		if (this.route.firstChild) {
@@ -318,6 +339,21 @@ export class MusicComponent implements OnInit {
 			this.list = true;
 		}
 
+	}
+
+	// 暂时只模拟我个人的每日推荐
+	loginNetMusic() {
+		const self = this;
+		const url = '/login/cellphone?phone=18796000256&password=ling.520';
+		this.http.getConfig(url, {}).subscribe(
+			data => {
+				this.route.paramMap.subscribe(
+					(params: ParamMap) => {
+						this.curType = params.get('id');
+					}
+				);
+			}
+		);
 	}
 
 }

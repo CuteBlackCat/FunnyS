@@ -1,5 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MusicService } from '../music.service';
 @Component({
 	selector: 'fs-music-list',
 	templateUrl: './music-list.component.html',
@@ -9,17 +10,23 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 	id: number;
 
+	types: Array<object>;
+
 	musicList: Array<object>;
 	curnext: number;
 	curnum: number;
 
+	first: boolean;
+
 	@Input() next: number;
 	@Input() playOrder: number;
+	@Input() curType: string;
 	@Output() playSong = new EventEmitter<object>();
 
 	constructor(
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private http: MusicService
 	) {
 
 	}
@@ -29,10 +36,9 @@ export class MusicListComponent implements OnInit, OnChanges {
 	 * @param id 音乐ID
 	 */
 	playMusic(music, i) {
-		console.log(music);
 		this.curnext = i;
 		this.playSong.emit(music);
-		this.router.navigate([`/music/${this.id}`, {musicid: music.songId}]);
+		this.router.navigate([`/music/${this.id}`, {musicid: music.id}]);
 	}
 
 	selectMusic(next) {
@@ -50,12 +56,46 @@ export class MusicListComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		if (changes.next.firstChange === false && this.curnext !== changes.next.currentValue) {
+		console.log(changes);
+		if (changes.next && changes.next.firstChange === false && this.curnext !== changes.next.currentValue) {
 			const next = this.curnum < changes.next.currentValue ? true : false;
 			this.curnum = changes.next.currentValue;
 			this.curnext = this.selectMusic(next);
 			this.playMusic(this.musicList[this.curnext], this.curnext);
 		}
+
+		if (changes.curType.previousValue !== changes.curType.currentValue) {
+			this.getMusicList(this.findUrl(this.curType));
+		}
+	}
+
+	getMusicList(url) {
+		this.http.getConfig(url, {}).subscribe(
+			data => {
+				if ( this.curType === '0') {
+					this.musicList = data['result'];
+				}else if (this.curType === '1') {
+					// this.musicList = data['playlist']['tracks'].slice(0, 50);
+				}
+
+				if (this.first) {
+					this.playMusic(this.musicList[0], 0);
+					this.first = false;
+				}
+			}
+		);
+	}
+
+	findUrl(id) {
+		let result = '';
+		for (let i = 0; i < this.types.length; i++) {
+			if (this.types[i]['typeId'] === String(id)) {
+				result = this.types[i]['url'];
+				break;
+			}
+		}
+		console.log(result);
+		return result;
 	}
 
 	ngOnInit() {
@@ -64,29 +104,51 @@ export class MusicListComponent implements OnInit, OnChanges {
 		this.curnum = 0;
 		this.curnext = 0;
 
-		const musiTemp = {
-			songId: '432506345',
-			songTitle: '童话镇',
-			singerName: '陈一发儿',
-			songPicUrl: 'assets/imgs/music/1.jpg',
-			love: true,
-			time: '04:17'
-		};
+		this.first = true;
+
 
 		this.musicList = [];
 
-		let i = 0;
-		while (i < 20) {
-			i++;
-			this.musicList.push({
-				songId: '436514312',
-				songTitle: '成都',
-				singerName: '赵雷',
-				songPicUrl: 'assets/imgs/music/1.jpg',
-				love: true,
-				time: '04:17'
-			});
-			this.musicList.push(musiTemp);
-		}
+		this.types = [
+			{
+				typeId: '0',
+				typeName: '排行榜',
+				url: '/personalized/newsong'
+			},
+			{
+				typeId: '1',
+				typeName: '最新音乐',
+				url: '/top/list?idx=0'
+			},
+			{
+				typeId: '2',
+				typeName: '最热音乐',
+				url: '/top/list?idx=1'
+			},
+			{
+				typeId: '3',
+				typeName: '飙升音乐',
+				url: '/top/list?idx=3'
+			},
+			{
+				typeId: '4',
+				typeName: '我喜欢的音乐',
+				url: ''
+			},
+			{
+				typeId: '5',
+				typeName: '歌手',
+				url: '/toplist/artist'
+			},
+			{
+				typeId: '6',
+				typeName: '每日推荐',
+				url: '/recommend/resource'
+			}
+		];
+
+		this.curType = String(this.id);
+		this.getMusicList(this.findUrl(this.id));
+
 	}
 }

@@ -9,6 +9,8 @@ import { MusicSongerComponent } from './music-songer/music-songer.component';
 import { FsDirectiveModule } from '../directive/directive.module';
 import { ToSecondPipe } from './music.pipe';
 
+import { MusicService } from './music.service';
+
 @NgModule({
 	declarations: [
 		MusicComponent,
@@ -30,7 +32,8 @@ import { ToSecondPipe } from './music.pipe';
 		MusicCommentComponent,
 		MusicSongerComponent,
 		ToSecondPipe
-	]
+	],
+	providers: [{ provide: MusicService, useClass: MusicService}]
 })
 export class MusicModule {
 }

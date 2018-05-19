@@ -111,6 +111,9 @@
     justify-content: center;
     flex-direction: column;
 }
+.iconfont{
+    cursor: pointer;
+}
 .iconfont.love{
     color:rgba(234,67,53,1);
 }
