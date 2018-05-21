@@ -66,12 +66,18 @@ export class MusicComponent implements OnInit {
 	// 当前播放的数
 	curNext: number;
 
+	// 搜多关键字
+	keyWords: string;
+
 	constructor(
 		private sanitizer: DomSanitizer,
 		private router: Router,
 		private route: ActivatedRoute,
 		private http: MusicService
-	) { }
+	) {
+
+		this.keyWords = '';
+	}
 
 	searchMusic(id: string) {
 		this.list = true;
@@ -108,10 +114,23 @@ export class MusicComponent implements OnInit {
 				this.initData();
 				console.log(this.current_music['al'].pic);
 
-				this.current_music['al'].pic = `http://p4.music.126.net/N2HO5xfYEqyQ8q6oxCw8IQ==/${this.current_music.al.pic}.jpg`;
+				this.current_music['al']['pic'] = `http://p4.music.126.net/N2HO5xfYEqyQ8q6oxCw8IQ==/${this.current_music['al']['pic']}.jpg`;
 				this.current_music['canDislike'] = music['canDislike'];
 
 				console.log(this.current_music);
+			}
+		);
+	}
+
+	searchInfo() {
+		console.log(this.keyWords);
+	}
+
+	likeMusic(like) {
+		this.http.getConfig('/like?id=' + this.current_music['id'], {}).subscribe(
+			data => {
+				console.log(data);
+				this.current_music['canDislike'] = true;
 			}
 		);
 	}
@@ -344,14 +363,15 @@ export class MusicComponent implements OnInit {
 	// 暂时只模拟我个人的每日推荐
 	loginNetMusic() {
 		const self = this;
+		this.route.paramMap.subscribe(
+			(params: ParamMap) => {
+				this.curType = params.get('id');
+			}
+		);
 		const url = '/login/cellphone?phone=18796000256&password=ling.520';
 		this.http.getConfig(url, {}).subscribe(
 			data => {
-				this.route.paramMap.subscribe(
-					(params: ParamMap) => {
-						this.curType = params.get('id');
-					}
-				);
+				
 			}
 		);
 	}

@@ -1,3 +1,6 @@
+.music  .type-box{
+    flex-grow: 1;
+}
 .music  .type-box span:hover{
     color: rgba(234,67,53,.6);
 }
@@ -121,4 +124,30 @@
 .music .list {
     height:650px;
     overflow: auto;
+}
+
+.search-box{
+    position: relative;
+}
+.search-box input{
+    border-radius: 4px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    width:200px;
+    border: 1px solid rgba(147,153,159, .2);
+    outline: none;
+}
+.search-box i{
+    position: absolute;
+    right:10px;
+    top:0;
+    font-size: 18px;
+    color: inherit;
+}
+
+.search-box input:focus{
+    /* color: rgba(234,67,53,1); */
+    border: 1px solid rgba(234,67,53,1);
+    appearance: none;
 }

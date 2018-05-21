@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: 'iconfont';  /* project id 582845 */
-  src: url('//at.alicdn.com/t/font_582845_bcrob5uq3mf2mx6r.eot');
-  src: url('//at.alicdn.com/t/font_582845_bcrob5uq3mf2mx6r.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_582845_bcrob5uq3mf2mx6r.woff') format('woff'),
-  url('//at.alicdn.com/t/font_582845_bcrob5uq3mf2mx6r.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_582845_bcrob5uq3mf2mx6r.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_582845_dxi6wva2u0rizfr.eot');
+  src: url('//at.alicdn.com/t/font_582845_dxi6wva2u0rizfr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_582845_dxi6wva2u0rizfr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_582845_dxi6wva2u0rizfr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_582845_dxi6wva2u0rizfr.svg#iconfont') format('svg');
 }
 .iconfont{
     font-family:"iconfont" !important;

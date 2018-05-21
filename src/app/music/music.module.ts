@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MusicRoutingModule } from './music-router.module';
 import { MusicComponent } from './music.component';
 import { MusicListComponent } from './music-list/music-list.component';
@@ -22,6 +23,7 @@ import { MusicService } from './music.service';
 	],
 	imports: [
 		BrowserModule,
+		FormsModule,
 		MusicRoutingModule,
 		FsDirectiveModule
 	],

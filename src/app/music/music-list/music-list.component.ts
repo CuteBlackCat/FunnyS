@@ -70,7 +70,7 @@ export class MusicListComponent implements OnInit, OnChanges {
 			this.playMusic(this.musicList[this.curnext], this.curnext);
 		}
 
-		if (changes.curType.previousValue !== changes.curType.currentValue) {
+		if (changes.curType && changes.curType.previousValue !== changes.curType.currentValue) {
 			this.getMusicList(this.findUrl(this.curType));
 		}
 	}
@@ -83,7 +83,7 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 				if ( this.curType === '0') {
 					this.musicList = data['result'];
-				}else if (this.curType === '1') {
+				}else if (this.curType === '1' || this.curType === '2' || this.curType === '3') {
 					this.allMusic = data['playlist']['tracks'];
 					this.maxLoad = this.allMusic.length / 20;
 					this.musicList = data['playlist']['tracks'].slice(0, this.page_id * 20);

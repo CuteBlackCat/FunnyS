@@ -2,27 +2,27 @@
     <div class="song-words-box">
         <div class="cvrwrap">
             <div class="u-cover">
-                <img src="" alt="">
+                <img [src]="album.blurPicUrl" alt="">
                 <span class="mask"></span>
             </div>
         </div>
         
-        <div class="content">
+        <div class="content" *ngIf="current_music">
             <div class="title">
-                潼湖镇
+                {{current_music.name}}
             </div>
             <div class="info">
-                <span>歌手: cehngyifaer</span>
+                <span>歌手: {{current_music.ar[0].name}}</span>
             </div>
 
             <div class="songer">
-                <span>作曲: 鞍钢</span>
+                <!-- <span>作曲: 鞍钢</span>
                 <span>作词: 驻军</span>
-                <span>编曲: 鞍钢</span>
+                <span>编曲: 鞍钢</span> -->
             </div>
 
             <div class="lyrics">
-                <span *ngFor="let item of lyrics">{{item}}</span><br/>
+                <span *ngFor="let item of lyric">{{item}}</span><br/>
             </div>
         </div>
     </div>

@@ -6,6 +6,10 @@
 		<div class="type-box">
 			<span class="story-type" *ngFor="let type of types" (click)="searchMusic(type.typeId)" [class.active]="type.typeId===curType">{{type.typeName}}</span>
 		</div>
+		<div class="search-box">
+			<input type="text" name="keyWords"  [(ngModel)]="keyWords" (change)="searchInfo()">
+			<i class="iconfont">&#xe651;</i>
+		</div>
 	</div>
 
 	<div class="content">
@@ -14,7 +18,7 @@
 		</div>
 
 		<div [style.display]="list ? 'none' : 'block'">
-			<fs-music-play [musicid]="current_music.songId"></fs-music-play>
+			<fs-music-play [albumId]="current_music.al.id" [musicid]="current_music.id"></fs-music-play>
 		</div>
 	</div>
 
@@ -32,8 +36,8 @@
 					<div class="author-name">{{current_music.ar[0].name}}</div>
 				</div>
 				<div class="control">
-					<i class="iconfont" *ngIf="!current_music.canDislike">&#xe871;</i>
-					<i class="iconfont love" *ngIf="current_music.canDislike">&#xe870;</i>
+					<i class="iconfont" *ngIf="!current_music.canDislike" (click)="likeMusic(true)">&#xe871;</i>
+					<i class="iconfont love" *ngIf="current_music.canDislike" (click)="likeMusic(false)">&#xe870;</i>
 					<i class="iconfont">&#xe620;</i>
 				</div>
 			</div>
