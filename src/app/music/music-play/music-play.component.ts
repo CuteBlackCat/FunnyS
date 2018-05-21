@@ -14,16 +14,20 @@ export class MusicPlayComponent implements OnInit, OnChanges {
 	lyric: Array<string>;
 	album: object;
 	current_music: object;
+	lyricHeight: string;
 
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
 		private http: MusicService
 	) {
-
+		this.lyricHeight = '200px';
 	}
 
 	getData(id) {
+		if (!id) {
+			return;
+		}
 		this.http.getConfig('/lyric?id=' + id, {}).subscribe(
 			data => {
 				const lyric = data['lrc']['lyric'].replace(/[\[\d{2}:\d{2}.\d{2}]/g, '').replace(']', '');
@@ -44,6 +48,9 @@ export class MusicPlayComponent implements OnInit, OnChanges {
 	}
 
 	getAlbum(id) {
+		if (!id) {
+			return;
+		}
 		this.http.getConfig('/album?id=' + id, {}).subscribe(
 			data => {
 				this.album = data['album'];
@@ -83,6 +90,7 @@ export class MusicPlayComponent implements OnInit, OnChanges {
 		}
 
 		if (changes.albumId && changes.albumId.previousValue !== changes.albumId.currentValue) {
+			console.log(changes.albumId.currentValue);
 			this.getAlbum(changes.albumId.currentValue);
 		}
 

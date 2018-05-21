@@ -2,8 +2,11 @@
     <div class="song-words-box">
         <div class="cvrwrap">
             <div class="u-cover">
-                <img [src]="album.blurPicUrl" alt="">
+                <img [src]="album.blurPicUrl">
                 <span class="mask"></span>
+            </div>
+            <div class="title" *ngIf="current_music">
+                {{current_music.name}}
             </div>
         </div>
         
@@ -22,7 +25,11 @@
             </div>
 
             <div class="lyrics">
-                <span *ngFor="let item of lyric">{{item}}</span><br/>
+                <div class="lyric" [style.height]="lyricHeight">
+                    <span *ngFor="let item of lyric">{{item}}</span>
+                    <br/>
+                </div>
+                <div class="show-all" (click)="lyricHeight = 'auto'">展开</div>
             </div>
         </div>
     </div>

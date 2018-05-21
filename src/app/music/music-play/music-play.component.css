@@ -5,6 +5,7 @@
 .play{
         height: 100%;
     overflow: auto;
+    padding:10px;
 }
 .cvrwrap{
     position: relative;
@@ -37,4 +38,24 @@
 .lyrics{
     display: flex;
     flex-direction: column;
+}
+.lyrics .lyric{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.content .title{
+    font-size: 18px;
+    color: rgba(234,67,53,1);
+}
+.cvrwrap .title{
+    text-align: center;
+    width:206px;
+    margin-top:20px;
+}
+.show-all {
+    cursor: pointer;
+}
+.show-all:hover{
+    text-decoration: underline;
 }
