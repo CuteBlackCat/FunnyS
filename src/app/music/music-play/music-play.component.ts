@@ -43,8 +43,6 @@ export class MusicPlayComponent implements OnInit, OnChanges {
 			}
 		);
 
-		
-
 		this.http.getConfig('/song/detail?ids=' + id, {}).subscribe(
 			data => {
 				this.current_music = data['songs'][0];
@@ -79,13 +77,12 @@ export class MusicPlayComponent implements OnInit, OnChanges {
 	}
 
 	likedComment(liked, item) {
-		
 		this.http.getConfig(`/comment/like?id=${this.current_music['id']}&cid=${item.commentId}&t=${liked}&type=0`, {}).subscribe(
 			data => {
 				item.liked = liked === 1 ? true : false;
 				item.likedCount = liked === 1 ? item.likedCount + 1 : item.likedCount - 1;
 			}
-		)
+		);
 	}
 
 	ngOnInit() {

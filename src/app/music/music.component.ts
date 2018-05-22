@@ -113,9 +113,8 @@ export class MusicComponent implements OnInit {
 				this.current_music = data['songs'][0];
 				this.initData();
 				console.log(this.current_music['al'].pic);
-
-				this.current_music['al']['pic'] = `http://p4.music.126.net/N2HO5xfYEqyQ8q6oxCw8IQ==/${this.current_music['al']['pic']}.jpg`;
 				this.current_music['canDislike'] = music['canDislike'];
+				this.current_music['pic'] = music.pic;
 
 				console.log(this.current_music);
 			}

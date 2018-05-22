@@ -24,6 +24,10 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 	first: boolean;
 
+	topTen: Array<object>;
+
+	hotSonger: Array<object>;
+
 	@Input() next: number;
 	@Input() playOrder: number;
 	@Input() curType: string;
@@ -43,6 +47,11 @@ export class MusicListComponent implements OnInit, OnChanges {
 	 */
 	playMusic(music, i) {
 		this.curnext = i;
+		if (music['album']) {
+			music['pic'] = music['album']['picUrl'];
+		} else if (music['al']) {
+			music['pic'] = music['al']['picUrl'];
+		}
 		this.playSong.emit(music);
 		this.router.navigate([`/music/${this.curType}`, {musicid: music.id}]);
 	}
@@ -81,15 +90,42 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 				this.page_id = 1;
 
+				let canPlay = false;
+
 				if ( this.curType === '0') {
 					this.musicList = data['result'];
+					canPlay = true;
 				}else if (this.curType === '1' || this.curType === '2' || this.curType === '3') {
 					this.allMusic = data['playlist']['tracks'];
 					this.maxLoad = this.allMusic.length / 20;
 					this.musicList = data['playlist']['tracks'].slice(0, this.page_id * 20);
+					canPlay = true;
+				}else if (this.curType === '4') {
+					console.log(data);
+					const playlistId = data['playlist'][0]['id'];
+					this.http.getConfig(`/playlist/detail?id=${playlistId}`, {}).subscribe(
+						res => {
+							console.log(res);
+							this.allMusic = res['result']['tracks'];
+							this.maxLoad = this.allMusic.length / 20;
+							this.musicList = res['result']['tracks'].slice(0, this.page_id * 20);
+							if (this.first) {
+								this.playMusic(this.musicList[0], 0);
+								this.first = false;
+							}
+						}
+					);
+				}else if (this.curType === '6') {
+					this.allMusic = data['recommend'];
+					this.maxLoad = this.allMusic.length / 20;
+					this.musicList = data['recommend'].slice(0, this.page_id * 20);
+					canPlay = true;
+				}else if (this.curType === '5') {
+					this.topTen = data['artists'].slice(0, 10);
+					this.hotSonger = data['artists'].slice(10);
 				}
 
-				if (this.first) {
+				if (this.first && canPlay) {
 					this.playMusic(this.musicList[0], 0);
 					this.first = false;
 				}
@@ -161,17 +197,17 @@ export class MusicListComponent implements OnInit, OnChanges {
 			{
 				typeId: '4',
 				typeName: '我喜欢的音乐',
-				url: ''
+				url: '/user/playlist?uid=408651069'
 			},
 			{
 				typeId: '5',
 				typeName: '歌手',
-				url: '/toplist/artist'
+				url: '/top/artists'
 			},
 			{
 				typeId: '6',
 				typeName: '每日推荐',
-				url: '/recommend/resource'
+				url: '/recommend/songs'
 			}
 		];
 

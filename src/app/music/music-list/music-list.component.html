@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="list-box pic-line" *ngIf="curType!=='0'">
+    <div class="list-box pic-line" *ngIf="curType ==='1' || curType ==='2' || curType ==='3'">
         <div class="item header">
             <div class="id"></div>
             
@@ -32,14 +32,53 @@
         </div>
         <div class="item pic-item" *ngFor="let item of musicList; let i = index">
             <div class="id">{{i > 8 ? i + 1 : '0' + ( i + 1 )}}</div>
-            <div class="controler">
+            <div class="controler" *ngIf="item.al">
                 <img class="songer" [src]="item.al.picUrl">
             </div>
             <div class="title" (click)="playMusic(item, i)">{{item.name}}</div>
-            <div class="songer">{{item.ar[0].name}}</div>
+            <div class="songer" *ngIf="item.ar">{{item.ar[0].name}}</div>
             <div class="time">{{item.dt | date: 'mm:ss'}}</div>
         </div>
         <div class="item load-more" (click)="loadMore()" *ngIf="page_id < maxLoad">加载更多...</div>
         <div class="item" *ngIf="page_id >= maxLoad">客观，只有这么多了噢~</div>
+    </div>
+
+    <div class="list-box pic-line" *ngIf="curType ==='4' || curType === '6'">
+        <div class=" item header ">
+            <div class="id "></div>
+            <div class="controler ">美图</div>
+            <div class="title ">音乐标题</div>
+            <div class="songer ">歌手</div>
+            <div class="time ">时常</div>
+        </div>
+        <div class="item pic-item " *ngFor="let item of musicList; let i=index ">
+            <div class="id">{{i > 8 ? i + 1 : '0' + ( i + 1 )}}</div>
+            <div class="controler " *ngIf="item.album ">
+                <img class="songer " [src]="item.album.picUrl">
+            </div>
+            <div class="title " (click)="playMusic(item, i) ">{{item.name}}</div>
+            <div class="songer " *ngIf="item.artists ">{{item.artists[0].name}}</div>
+            <div class="time ">{{item.duration | date: 'mm:ss'}}</div>
+        </div>
+        <div class="item load-more " (click)="loadMore() " *ngIf="page_id < maxLoad ">加载更多...</div>
+        <div class="item " *ngIf="page_id>= maxLoad">客观，只有这么多了噢~</div>
+    </div>
+
+    <div class="list-box" *ngIf="curType === '5'">
+        <div class="songer-header">
+            <span>热门歌手</span>
+        </div>
+
+        <div class="top-songer-box">
+            <div class="songer-item" *ngFor="let item of topTen">
+                <img [src]="item.img1v1Url" alt="">
+                <span class="name">{{item.name}}</span>
+                <span class="music-size">{{item.musicSize}}</span>
+            </div>
+        </div>
+
+        <div class="hot-songer-box">
+            <span class="songer" *ngFor="let item of hotSonger">{{item.name}}</span>
+        </div>
     </div>
 </div>
