@@ -7,14 +7,14 @@
 			<span class="story-type" *ngFor="let type of types" (click)="searchMusic(type.typeId)" [class.active]="type.typeId===curType">{{type.typeName}}</span>
 		</div>
 		<div class="search-box">
-			<input type="text" name="keyWords"  [(ngModel)]="keyWords" (change)="searchInfo()">
-			<i class="iconfont">&#xe651;</i>
+			<input type="text" name="keyWords" placeholder="音乐 / 歌手"  [(ngModel)]="keyWords">
+			<i class="iconfont" (click)="searchInfo()">&#xe651;</i>
 		</div>
 	</div>
 
 	<div class="content">
 		<div [style.display]="list ? 'block' : 'none'">
-			<fs-music-list [curType]="curType" [playOrder]="playOrder" [next]="curNext" (playSong)="playSong($event)"></fs-music-list>
+			<fs-music-list [keyWords]="keyWords" [curType]="curType" [playOrder]="playOrder" [next]="curNext" (playSong)="playSong($event)"></fs-music-list>
 		</div>
 
 		<div [style.display]="list ? 'none' : 'block'">

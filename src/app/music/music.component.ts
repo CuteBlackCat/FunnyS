@@ -80,6 +80,9 @@ export class MusicComponent implements OnInit {
 	}
 
 	searchMusic(id: string) {
+		if (id === '7') {
+			return;
+		}
 		this.list = true;
 		this.curType = id;
 		this.router.navigate([`/music/${id}`, {musicid: this.current_music['id']}]);
@@ -90,7 +93,6 @@ export class MusicComponent implements OnInit {
 	 * @param play 是否播放
 	 */
 	playMusic(play) {
-		// console.log(play);
 		this.playing = play;
 		if (play && this.audioNode.paused) {
 			this.audioNode.play();
@@ -112,23 +114,21 @@ export class MusicComponent implements OnInit {
 			data => {
 				this.current_music = data['songs'][0];
 				this.initData();
-				console.log(this.current_music['al'].pic);
 				this.current_music['canDislike'] = music['canDislike'];
 				this.current_music['pic'] = music.pic;
-
-				console.log(this.current_music);
 			}
 		);
 	}
 
 	searchInfo() {
-		console.log(this.keyWords);
+		if (this.keyWords === '') {
+			return;
+		}
 	}
 
 	likeMusic(like) {
 		this.http.getConfig('/like?id=' + this.current_music['id'], {}).subscribe(
 			data => {
-				console.log(data);
 				this.current_music['canDislike'] = true;
 			}
 		);
@@ -143,7 +143,6 @@ export class MusicComponent implements OnInit {
 	initData() {
 		clearTimeout(this.timer);
 		this.allTime = this.audioNode.duration;
-		// console.log(this.allTime);
 		this.currentTime = this.audioNode.currentTime,
 		setTimeout(() => {
 			this.timeWidth = 0;
@@ -164,7 +163,6 @@ export class MusicComponent implements OnInit {
 	clickNextPlayMusic(next) {
 		if (next) {
 			this.curNext++;
-			console.log(this.curNext);
 		}else {
 			this.curNext--;
 		}
@@ -245,7 +243,6 @@ export class MusicComponent implements OnInit {
 		}else {
 			this.audioNode.volume = this.oldVolume;
 			this.volumnWidth = this.oldVolume === 0 ? 105 : this.oldVolume * 105;
-			// console.log(this.volumnWidth);
 		}
 	}
 
@@ -341,12 +338,15 @@ export class MusicComponent implements OnInit {
 				typeId: '6',
 				typeName: '每日推荐',
 				url: '/recommend/resource'
+			}, {
+				typeId: '7',
+				typeName: '搜索列表',
+				url: ''
 			}
 		];
 
 		this.loginNetMusic();
 
-		console.log(this.route.firstChild);
 		if (this.route.firstChild) {
 			this.route.firstChild.url.forEach((item) => {
 				if (item[0].path === 'play') {
@@ -356,6 +356,12 @@ export class MusicComponent implements OnInit {
 		}else {
 			this.list = true;
 		}
+
+		window.addEventListener('keyup', (e) => {
+			if (e.keyCode === 13) {
+				this.searchInfo();
+			}
+		});
 
 	}
 
@@ -370,7 +376,7 @@ export class MusicComponent implements OnInit {
 		const url = '/login/cellphone?phone=18796000256&password=ling.520';
 		this.http.getConfig(url, {}).subscribe(
 			data => {
-				
+
 			}
 		);
 	}

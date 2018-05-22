@@ -28,9 +28,12 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 	hotSonger: Array<object>;
 
+	search: boolean;
+
 	@Input() next: number;
 	@Input() playOrder: number;
 	@Input() curType: string;
+	@Input() keyWords: string;
 	@Output() playSong = new EventEmitter<object>();
 
 	constructor(
@@ -82,6 +85,17 @@ export class MusicListComponent implements OnInit, OnChanges {
 		if (changes.curType && changes.curType.previousValue !== changes.curType.currentValue) {
 			this.getMusicList(this.findUrl(this.curType));
 		}
+
+		if (changes.keyWords && changes.keyWords.previousValue !== changes.keyWords.currentValue) {
+			this.keyWords = changes.keyWords.currentValue;
+		}
+	}
+
+	songerMusic(id) {
+		this.curType = '7';
+		this.search = false;
+		this.getMusicList(`/artists?id=${id}`);
+		this.router.navigate([`/music/7`]);
 	}
 
 	getMusicList(url) {
@@ -123,6 +137,11 @@ export class MusicListComponent implements OnInit, OnChanges {
 				}else if (this.curType === '5') {
 					this.topTen = data['artists'].slice(0, 10);
 					this.hotSonger = data['artists'].slice(10);
+				}else if (this.curType === '7') {
+					this.allMusic = this.search ? data['result']['songs'] : data['hotSongs'];
+					this.maxLoad = this.allMusic.length / 20;
+					this.musicList = this.allMusic.slice(0, this.page_id * 20);
+					canPlay = true;
 				}
 
 				if (this.first && canPlay) {
@@ -153,11 +172,7 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 	ngOnInit() {
 		this.id = Number(this.route.snapshot.paramMap.get('id'));
-		this.route.paramMap.subscribe(
-			(params: ParamMap) => {
-				const musicid = params.get('musicid');
-			}
-		);
+		
 
 		this.curnum = 0;
 		this.curnext = 0;
@@ -208,11 +223,38 @@ export class MusicListComponent implements OnInit, OnChanges {
 				typeId: '6',
 				typeName: '每日推荐',
 				url: '/recommend/songs'
+			}, {
+				typeId: '7',
+				typeName: '搜索列表',
+				url: ''
 			}
 		];
 
 		this.curType = String(this.id);
+
+		this.route.paramMap.subscribe(
+			(params: ParamMap) => {
+				const musicid = params.get('musicid');
+
+				if (musicid && this.curType === '7') {
+					this.search = true;
+					this.getMusicList(`/search?keywords=${musicid}`);
+				} else {
+					this.getMusicList(this.findUrl(this.id));
+				}
+			}
+		);
+
 		this.getMusicList(this.findUrl(this.id));
+
+		window.addEventListener('keyup', e => {
+			if (e.keyCode === 13 && this.keyWords !== '') {
+				this.curType = '7';
+				this.search = true;
+				this.getMusicList(`/search?keywords=${this.keyWords}`);
+				this.router.navigate([`/music/7`]);
+			}
+		});
 
 	}
 }
