@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Component, OnInit, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MusicService } from '../music.service';
 @Component({
@@ -117,6 +117,11 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 	ngOnInit() {
 		this.id = Number(this.route.snapshot.paramMap.get('id'));
+		this.route.paramMap.subscribe(
+			(params: ParamMap) => {
+				const musicid = params.get('musicid');
+			}
+		);
 
 		this.curnum = 0;
 		this.curnext = 0;

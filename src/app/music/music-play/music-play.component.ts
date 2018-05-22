@@ -15,13 +15,18 @@ export class MusicPlayComponent implements OnInit, OnChanges {
 	album: object;
 	current_music: object;
 	lyricHeight: string;
+	limit: number;
+	offset: number;
+	comment: object;
 
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
 		private http: MusicService
 	) {
-		this.lyricHeight = '200px';
+		this.lyricHeight = '210px';
+		this.limit = 20;
+		this.offset = 1;
 	}
 
 	getData(id) {
@@ -47,6 +52,21 @@ export class MusicPlayComponent implements OnInit, OnChanges {
 		);
 	}
 
+	getComment(limit, id, offset) {
+		if (offset < 1) {
+			return;
+		}
+		if (this.comment && this.comment['total'] / this.limit < offset) {
+			return;
+		}
+		this.offset = offset;
+		this.http.getConfig(`/comment/music?id=${id}&limit=${limit}&offset=${offset}`, {}).subscribe(
+			data => {
+				this.comment = data;
+			}
+		);
+	}
+
 	getAlbum(id) {
 		if (!id) {
 			return;
@@ -56,6 +76,16 @@ export class MusicPlayComponent implements OnInit, OnChanges {
 				this.album = data['album'];
 			}
 		);
+	}
+
+	likedComment(liked, item) {
+		
+		this.http.getConfig(`/comment/like?id=${this.current_music['id']}&cid=${item.commentId}&t=${liked}&type=0`, {}).subscribe(
+			data => {
+				item.liked = liked === 1 ? true : false;
+				item.likedCount = liked === 1 ? item.likedCount + 1 : item.likedCount - 1;
+			}
+		)
 	}
 
 	ngOnInit() {
@@ -87,6 +117,7 @@ export class MusicPlayComponent implements OnInit, OnChanges {
 	ngOnChanges(changes: SimpleChanges) {
 		if (changes.musicid && changes.musicid.previousValue !== changes.musicid.currentValue) {
 			this.getData(changes.musicid.currentValue);
+			this.getComment(this.limit, changes.musicid.currentValue, this.offset);
 		}
 
 		if (changes.albumId && changes.albumId.previousValue !== changes.albumId.currentValue) {
