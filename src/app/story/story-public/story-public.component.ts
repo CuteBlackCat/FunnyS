@@ -21,6 +21,8 @@ export class StoryLPublicComponent implements OnInit {
 
 	title: string;
 
+	info: string;
+
 	oldType: number;
 
 	constructor(
@@ -29,15 +31,7 @@ export class StoryLPublicComponent implements OnInit {
 		private route: ActivatedRoute,
 		private http: ConfigService
 	) {
-		this.types = ['玄幻', '武侠', '幽默', '爱情', '恐怖'];
-
-		this.title = '';
-
-		this.curType = 0;
-
-		this.oldType = this.curType;
-
-		this.length = 0;
+		
 	}
 
 	onSubmit() {
@@ -51,6 +45,18 @@ export class StoryLPublicComponent implements OnInit {
 		}).subscribe(
 			res => {
 				console.log(res);
+				if (res['code'] === '0') {
+					this.info = '发布成功';
+
+					this.user.reset({
+						title: '',
+						text: ''
+					});
+
+					this.getStoryTypes();
+				}else {
+					this.info = res['message'];
+				}
 			}
 		);
 	}
@@ -77,10 +83,26 @@ export class StoryLPublicComponent implements OnInit {
 		}, 0);
 	}
 
-
-
+	getStoryTypes() {
+		this.http.getConfig('/get_novel_type', {}).subscribe(
+			data => {
+				console.log(data);
+				this.types = data['data'];
+				this.curType = this.oldType;
+			}
+		);
+	}
 
 	ngOnInit() {
+		this.getStoryTypes();
+
+		this.title = '';
+
+		this.curType = 0;
+
+		this.oldType = this.curType;
+
+		this.length = 0;
 
 		const text = ''; const title = '';
 		this.user = this.fb.group({

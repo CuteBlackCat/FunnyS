@@ -20,6 +20,7 @@ textarea{
     padding: 5px 10px;
     height: 200px;
     outline: none;
+    background: transparent;
 }
 input{
     outline :none;
@@ -29,6 +30,7 @@ input{
     padding: 0 10px;
     font-size: 14px;
     margin-right: 10px;
+    background: transparent;
 }
 input:focus,textarea:focus {
     border: 1px solid rgba(52,168,83,1);

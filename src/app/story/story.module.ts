@@ -9,13 +9,15 @@ import { StoryRoutingModule } from './story-router.module';
 import { FsDirectiveModule } from '../directive/directive.module';
 import { StoryLPublicComponent } from './story-public/story-public.component';
 import { ConfigService } from './story.service';
+import { StoryTypeComponent } from './story-type/story-type.component';
 
 @NgModule({
 	declarations: [
 		StoryComponent,
 		StoryDetailComponent,
 		StoryListComponent,
-		StoryLPublicComponent
+		StoryLPublicComponent,
+		StoryTypeComponent
 	],
 	imports: [
 		BrowserModule,
@@ -28,7 +30,8 @@ import { ConfigService } from './story.service';
 		StoryComponent,
 		StoryDetailComponent,
 		StoryListComponent,
-		StoryLPublicComponent
+		StoryLPublicComponent,
+		StoryTypeComponent
 	],
 	providers: [{provide: ConfigService, useClass: ConfigService}]
 })

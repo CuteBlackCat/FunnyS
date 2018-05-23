@@ -1,5 +1,6 @@
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ConfigService } from '../story.service';
 
 @Component({
 	selector: 'fs-story-list',
@@ -10,13 +11,15 @@ import { Component, OnInit } from '@angular/core';
 export class StoryListComponent implements OnInit {
 
 	type: string;
-	condition: string;
+	condition: number;
 	storys: Array<object>;
 	color: string;
+	name: string;
 
 	constructor(
 		private router: Router,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private http: ConfigService
 	) {
 
 	}
@@ -29,6 +32,15 @@ export class StoryListComponent implements OnInit {
 		this.router.navigate(['../detail', {storyid: story.storyId}], {relativeTo: this.route});
 	}
 
+	getStory() {
+		this.http.postConfig(`/get_novel_base_info?novelType=${this.name}&type=${this.condition}`, {})
+			.subscribe(
+				res => {
+					console.log(res);
+				}
+			);
+	}
+
 
 	ngOnInit() {
 
@@ -37,13 +49,17 @@ export class StoryListComponent implements OnInit {
 		this.route.paramMap.subscribe(
 			(params: ParamMap) => {
 				this.type = params.get('type');
-				this.condition = params.get('condition');
+				this.condition = Number(params.get('condition'));
 
 				this.type = this.type === null ? '0' : this.type;
 
-				if (this.condition !== 'hot' && this.condition !== 'atleast') {
-					this.condition = 'hot';
+				this.name = params.get('name');
+
+				if (this.condition !== 0 && this.condition !== 1) {
+					this.condition = 0;
 				}
+
+				this.getStory();
 			}
 		);
 

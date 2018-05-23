@@ -13,7 +13,7 @@ export class StoryComponent implements OnInit {
 
 	curType: string;
 
-	curTitle: string;
+	curTitle: number;
 
 	constructor(
 		private router: Router,
@@ -21,54 +21,28 @@ export class StoryComponent implements OnInit {
 		private http: ConfigService
 	) {
 
-		this.curTitle = 'hot';
+		this.curTitle = 0;
 
-		this.types = [
-			{
-				typeId: '0',
-				typeName: '全部'
-			},
-			{
-				typeId: '1',
-				typeName: '内涵段子'
-			},
-			{
-				typeId: '2',
-				typeName: '恐怖故事'
-			},
-			{
-				typeId: '3',
-				typeName: '伤感故事'
-			},
-			{
-				typeId: '4',
-				typeName: '爱情故事'
-			},
-			{
-				typeId: '5',
-				typeName: '其他故事'
-			},
-			{
-				typeId: '6',
-				typeName: '我要发布'
-			}
-		];
 		console.log(this.router.url);
 	}
 
 	searchStory(id: string) {
 		this.curType = String(id);
-		if (id === '6') {
-			this.router.navigate(['/story/public', { type: id, condition: this.curTitle }]);
+		if (id === '10') {
+			this.router.navigate(['/story/public', { type: id,   condition: this.curTitle }]);
+			return;
+		}
+		if (id === '11') {
+			this.router.navigate(['/story/type', { type: id, condition: this.curTitle }]);
 			return;
 		}
 		console.log(this.curType);
-		this.router.navigate(['/story/list', { type: id, condition: this.curTitle}]);
+		this.router.navigate(['/story/list', { type: id, name: this.types[this.curType],  condition: this.curTitle}]);
 	}
 
-	searchTitle(title: string) {
+	searchTitle(title: number) {
 		this.curTitle = title;
-		this.router.navigate(['/story/list', { type: this.curType, condition: this.curTitle }]);
+		this.router.navigate(['/story/list', { type: this.curType, name: this.types[this.curType], condition: this.curTitle }]);
 	}
 
 	ngOnInit() {
@@ -82,7 +56,7 @@ export class StoryComponent implements OnInit {
 
 		this.http.getConfig('/get_novel_type', {}).subscribe(
 			data => {
-				console.log(data);
+				this.types = data['data'].slice(0, 10);
 			}
 		);
 

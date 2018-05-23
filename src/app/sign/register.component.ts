@@ -21,13 +21,13 @@ export class RegisterComponent implements OnInit {
 
 		const params = {
 			userName: this.user.value.username,
-			userPwd: this.http.md5(this.user.value.password, Math.trunc(Date.now() / 1000)),
+			userPwd: this.http.md5(this.user.value.password, String(Math.trunc(Date.now() / 1000))),
 			userEmail: this.user.value.email,
 			userPhoto: '',
 			userDesription: ''
 		};
 
-		const url = 'register';
+		const url = '/register';
 
 		this.http.postConfig(url, params).subscribe(
 			data => {

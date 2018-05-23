@@ -1,0 +1,7 @@
+<div class="type">
+    <div class="type-box">
+        <span class="type-item" (click)="searchStory(type, i)" [class.active]="activeType === type" *ngFor="let type of types;let i = index">
+            {{type}}
+        </span>
+    </div>
+</div>

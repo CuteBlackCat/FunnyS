@@ -30,10 +30,11 @@ export class LoginComponent implements OnInit {
 			username: 'ljx',
 			password: 'ĸ1ĸ1ĸ1ĸ1ĸ1ĸ1ĸ1ĸ111',
 			// 'password': this.http.md5(this.user.value.password, Math.trunc(Date.now() / 1000)),
-			'timestamp': Math.trunc(Date.now() / 1000)
+			timestamp: Math.trunc(Date.now() / 1000)
 		};
 
-		const url = 'login';
+		const url = '/login';
+		// const url = `login?username=${data.username}&password=${data.password}&timestamp=${data.timestamp}`;
 
 		this.http.postConfig(url, data).subscribe(
 			res => {

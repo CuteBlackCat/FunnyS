@@ -4,14 +4,16 @@
 			故事类型: 
 		</span>
 		<div class="type-box">
-			<span class="story-type" *ngFor="let type of types" (click)="searchStory(type.typeId)" [class.active]="type.typeId===curType">{{type.typeName}}</span>
+			<span class="story-type" *ngFor="let type of types; let i = index" (click)="searchStory(i)" [class.active]="i==curType">{{type}}</span>
+			<span class="story-type" (click)="searchStory('11')" [class.active]="'11'===curType">更多类型</span>
+			<span class="story-type" (click)="searchStory('10')" [class.active]="'10'===curType">我要发布</span>
 		</div>
 	</div>
 
 	<div class="content">
 		<div class="title">
-			<span [class.active]="curTitle==='hot'" (click)="searchTitle('hot')">最新</span>
-			<span [class.active]="curTitle==='atleast'" (click)="searchTitle('atleast')">最热</span>
+			<span [class.active]="curTitle===0" (click)="searchTitle(0)">最新</span>
+			<span [class.active]="curTitle===1" (click)="searchTitle(1)">最热</span>
 		</div>
 		<router-outlet></router-outlet>
 	</div>
