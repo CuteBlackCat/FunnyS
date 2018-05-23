@@ -1,6 +1,6 @@
 <div class="slider" #slider>
     <ul class="box">
-		<li *ngFor="let img of imgs; let i = index" [class.active]="curIndex===i"><img src="{{img.src}}" alt="" (click)="blankTo(img.href)"></li>
+		<li *ngFor="let img of imgs; let i = index" [class.active]="curIndex===i"><img src="{{img.src}}" alt="" (click)="blankTo(img)"></li>
 	</ul>
 	<div class="slider-dots">
 		<span *ngFor="let img of imgs; let i = index;" [class.active]="curIndex===i" (click)="slideImg(i)"></span>

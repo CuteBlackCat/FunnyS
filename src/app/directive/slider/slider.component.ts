@@ -14,7 +14,7 @@ export class SliderComponent implements AfterViewInit {
 	@Input() imgs: Array<object>;
 	@Input() timing: number;
 
-	@Output() select = new EventEmitter<string>();
+	@Output() select = new EventEmitter<object>();
 
 	curIndex: number;
 	timer: any;
@@ -38,8 +38,8 @@ export class SliderComponent implements AfterViewInit {
 	 * 点击图片出发的跳转事件
 	 * @param href 点击图片所要跳转的路由
 	 */
-	blankTo(href: string) {
-		this.select.emit(href);
+	blankTo(img: object) {
+		this.select.emit(img);
 	}
 
 	/**

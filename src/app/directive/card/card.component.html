@@ -8,7 +8,7 @@
         </div>
     
         <div class="content-box">
-            <div class="title">{{card.title}}</div>
+            <div class="title" [title]="card.title">{{card.title | interceptString: 10}}</div>
             <div class="favorite">
                 <i class="iconfont">&#xe870;</i>
                 <span class="num">{{card.hot}}</span>
@@ -24,7 +24,7 @@
     </div>
     
     <div class="back">
-        <p>{{card.description}}</p>
+        <p>{{card.description | interceptString: 125}}</p>
         <div class="back-view">
             <i class="iconfont" (click)="front = !front">&#xe64e;</i>
         </div>

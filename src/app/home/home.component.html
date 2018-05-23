@@ -60,7 +60,7 @@
 				<em>荐</em>
 			</h3>
 			<div class="types-content">
-				<ng-container *ngFor="let card of cards">
+				<ng-container *ngFor="let card of wonderCards">
 					<fs-card [card]="card" (enterCard)="enterCard($event)"></fs-card>
 				</ng-container>
 			</div>
@@ -92,7 +92,7 @@
 				<em>荐</em>
 			</h3>
 			<div class="types-content">
-				<ng-container *ngFor="let card of gamecards">
+				<ng-container *ngFor="let card of musicCards">
 					<fs-card [card]="card" (enterCard)="enterCard($event)"></fs-card>
 				</ng-container>
 			</div>

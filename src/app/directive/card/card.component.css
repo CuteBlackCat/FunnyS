@@ -23,6 +23,7 @@
 }
 img{
     width:100%;
+    height:120px;
 }
 .card .view-box .label-box{
     position: absolute;
@@ -113,6 +114,7 @@ img{
 }
 .back{
     transform: rotateY(180deg);
+    overflow: auto;
 }
 .front{
     transform: rotateY(0deg);
