@@ -27,20 +27,44 @@ export class ConfigService {
 	}
 
 	md5(pwd, time) {
-		time = String(time);
-		pwd = String(pwd);
+		let res = '';
+		if (pwd.length >= 10) {
 
-		let result = '';
-		const maxLen = Math.max(time.length, pwd.length);
+			for (let i = 0; i < 10; i++) {
+				res += String.fromCharCode(pwd.charCodeAt(i) + 256);
+				res += time.charAt(i);
+			}
+			for (let i = 10; i < pwd.length; i++) {
+				res += String.fromCharCode(pwd.charCodeAt(i) + 256);
+			}
+		} else {
+			for (let i = 0; i < pwd.length; i++) {
+				res += String.fromCharCode(pwd.charCodeAt(i) + 256);
+				res += time.charAt(i);
+			}
 
-		for (let i = 0; i < maxLen; i++) {
-			result += pwd[i] + time[i];
+
+			for (let i = pwd.length; i < 10; i++) {
+
+				res += time.charAt(i);
+			}
 		}
+		// time = String(time);
+		// pwd = String(pwd);
 
-		result = result.replace(/undefined/g, '');
+		// let result = '';
+		// const maxLen = Math.max(time.length, pwd.length);
 
-		console.log(time);
+		// for (let i = 0; i < maxLen; i++) {
+		// 	console.log(pwd[i]);
+		// 	const p = String(pwd[i]);
+		// 	result += p.charCodeAt() + 256 + time[i];
+		// }
 
-		return result;
+		// result = result.replace(/undefined/g, '');
+
+		// console.log(time);
+
+		return res;
 	}
 }

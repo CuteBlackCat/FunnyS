@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ConfigService } from './story.service';
 
 @Component({
 	selector: 'fs-story',
@@ -16,7 +17,8 @@ export class StoryComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private http: ConfigService
 	) {
 
 		this.curTitle = 'hot';
@@ -75,6 +77,12 @@ export class StoryComponent implements OnInit {
 				this.curType = params.get('type');
 				console.log(this.curType);
 				this.curType = this.curType ? this.curType : '0';
+			}
+		);
+
+		this.http.getConfig('/get_novel_type', {}).subscribe(
+			data => {
+				console.log(data);
 			}
 		);
 

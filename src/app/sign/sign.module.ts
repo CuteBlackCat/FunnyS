@@ -7,6 +7,7 @@ import { RegisterComponent } from './register.component';
 import { SignRouterModule } from './sign-router.module';
 
 import { ConfigService } from './sign.service';
+import { FsDirectiveModule } from '../directive/directive.module';
 
 @NgModule({
 	declarations: [
@@ -16,7 +17,8 @@ import { ConfigService } from './sign.service';
 	imports: [
 		BrowserModule,
 		SignRouterModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		FsDirectiveModule
 	],
 	exports: [
 		LoginComponent, RegisterComponent

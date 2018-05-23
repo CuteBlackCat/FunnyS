@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { LocalStorage } from './../service/local.storage';
 import { ConfigService } from './sign.service';
@@ -12,18 +13,23 @@ import { ConfigService } from './sign.service';
 export class LoginComponent implements OnInit {
 
 	user: FormGroup;
+	info: string;
 
 	constructor(
 		private local: LocalStorage,
 		private fb: FormBuilder,
-		private http: ConfigService
-	) { }
+		private http: ConfigService,
+		private router: Router
+	) {
+
+	}
 
 	onSubmit() {
 		console.log(this.user.value);
 		const data = {
-			'username': this.user.value.username,
-			'password': this.http.md5(this.user.value.password, Math.trunc(Date.now() / 1000)),
+			username: 'ljx',
+			password: 'ĸ1ĸ1ĸ1ĸ1ĸ1ĸ1ĸ1ĸ111',
+			// 'password': this.http.md5(this.user.value.password, Math.trunc(Date.now() / 1000)),
 			'timestamp': Math.trunc(Date.now() / 1000)
 		};
 
@@ -31,7 +37,13 @@ export class LoginComponent implements OnInit {
 
 		this.http.postConfig(url, data).subscribe(
 			res => {
-				console.log(res);
+				if (res['code'] === 200) {
+					this.info = '登录成功';
+					this.local.setObject('user', res['data']);
+					this.router.navigate([`/`]);
+				} else {
+					this.info = res['message'];
+				}
 			}
 		);
 

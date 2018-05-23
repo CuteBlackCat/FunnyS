@@ -1,15 +1,26 @@
 import { GlobalService } from './service/global.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LocalStorage } from './service/local.storage';
 
 @Component({
 	selector: 'fs-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	title = 'Funnys';
 
-	constructor(globalService: GlobalService) {
+	user: object;
+
+	constructor(
+		globalService: GlobalService,
+		private local: LocalStorage
+	) {
 		globalService.arrayFuc();
+	}
+
+	ngOnInit() {
+		this.user = this.local.getObject('user');
+		console.log(this.user);
 	}
 }

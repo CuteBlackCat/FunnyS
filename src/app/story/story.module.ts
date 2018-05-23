@@ -8,6 +8,7 @@ import { StoryDetailComponent } from './story-detail/story-detail.component';
 import { StoryRoutingModule } from './story-router.module';
 import { FsDirectiveModule } from '../directive/directive.module';
 import { StoryLPublicComponent } from './story-public/story-public.component';
+import { ConfigService } from './story.service';
 
 @NgModule({
 	declarations: [
@@ -28,7 +29,8 @@ import { StoryLPublicComponent } from './story-public/story-public.component';
 		StoryDetailComponent,
 		StoryListComponent,
 		StoryLPublicComponent
-	]
+	],
+	providers: [{provide: ConfigService, useClass: ConfigService}]
 })
 export class StoryModule {
 

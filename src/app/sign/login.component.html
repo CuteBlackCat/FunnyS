@@ -22,7 +22,7 @@
 
 		<div class="password">
 			<label for="password">Password: </label>
-			<input type="text" placeholder="password" name="password" formControlName="password">
+			<input type="password" placeholder="password" name="password" formControlName="password">
 			<div class="error" *ngIf="user.get('password').hasError('minlength') && user.get('password').touched">
 				密码长度必须大于6
 			</div>
@@ -31,4 +31,6 @@
 
 		<button class="normal" type="submit" [disabled]="user.invalid">Sign in</button>
 	</form>
+
+	<fs-alert-info [info]="info"></fs-alert-info>
 </div>
