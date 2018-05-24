@@ -9,7 +9,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 			position: fixed;
 			top: 50%;
 			left:50%;
-			transform: translate(-50%);
+			transform: translate(-50%, -50%);
 			padding: 15px 30px;
 			border-radius: 8px;
 			line-height:30px;
@@ -50,15 +50,11 @@ export class AlertComponent implements OnChanges {
 			}
 		}
 
-		console.log(changes);
-
 		if (changes.change && changes.change.firstChange !== true) {
-			console.log(this.active);
 			if (this.active) {
 				return;
 			}
 			this.active = true;
-			console.log(this.active);
 			if (this.active) {
 				setTimeout(() => {
 					this.active = false;

@@ -49,32 +49,18 @@ export class HomeComponent implements OnInit {
 
 		const card = {
 			img: 'assets/imgs/home/7.jpg',
-			title: '最好听的影月就在Funnys',
+			title: '敬请期待',
 			hot: 5000,
 			collection: 4000,
 			label: 'game',
-			author: ' lijiaxin',
-			type: 0,
-			description: '像一颗海草海草哦海草海草随风飘摇，像一颗海草海草海草海草随风飘摇'
+			author: ' funnys',
+			type: 0, //
+			description: '更多好玩的游戏正在开发中...'
 		};
 
 		this.cards = [card, card, card, card, card];
 		this.gamecards = [card, card, card, card, card, card, card, card, card, card];
 
-		const story = {
-			storyName: '安河桥的故事',
-			hot: 4396,
-			introduction: '从南到北...',
-			content: '故事到这里就结束了最近有观看我主讲的《Hadoop基础与演练》课程的同学问到Hadoop环境到底应该怎么安装。Hadoop的安装其实非常的简单，网上有很多教程，官网也有示例。但是可能部分同学对于linux不太熟悉，导致安装的时候会遇到各种问题，打击学习激情。本文就来详细的讲解一下如何配置Hadoop2的伪分布式环境，帮助我们对其进行学习。 注：大家还是要学习一些linux基本命令，用到的时候很多 接下来我们进入正题',
-			author: 'lijiaxin',
-			publicTime: '2018.3.7',
-			storyId: 88,
-			parentId: 0,
-			typeId: 2,
-			comment: 200
-		};
-
-		this.storycards = [story, story, story, story, story, story, story, story] ;
 	}
 
 	/**
@@ -94,8 +80,32 @@ export class HomeComponent implements OnInit {
 	 * 选择了card事件
 	 * @param card 返回的card
 	 */
-	enterCard(card: object) {
-		// console.log(card);
+	enterMusicCard(card: object) {
+		console.log(card);
+		if (card['type'] === 0) {
+			this.router.navigate(['/music/7', { music: card['title'] }]);
+		} else if (card['type'] === 1) {
+			this.router.navigate(['/music/7', { album: card['id'] }]);
+		}
+	}
+
+	enterStoryCard(card: object) {
+		this.router.navigate(['/story/detail', { storyid: card['storyID'] }]);
+	}
+
+	enterGameCard(card: object) {
+		console.log(card);
+	}
+
+	enterWonderCard(card: object) {
+		console.log(card);
+		if (card['type'] === 0 || card['type'] === 1) {
+			this.enterMusicCard(card);
+		} else if (card['type'] === 2) {
+			this.enterStoryCard(card);
+		} else if (card['type'] === 3) {
+			this.enterGameCard(card);
+		}
 	}
 
 	getConfig(
@@ -106,7 +116,16 @@ export class HomeComponent implements OnInit {
 		return this.http.get(url, params);
 	}
 
+	postConfig(
+		url: string,
+		params: object
+	) {
+		// console.log(url);
+		return this.http.post(url, params);
+	}
+
 	ngOnInit() {
+		this.storycards = [];
 		this.musicCards = [];
 		this.wonderCards = [
 			{
@@ -116,7 +135,7 @@ export class HomeComponent implements OnInit {
 				collection: 14982,
 				label: 'music',
 				author: '花粥',
-				type: 0,
+				type: 0, // 音乐 1 ablum 2 故事 3 游戏
 				description: '某音很火的歌'
 			},
 			{
@@ -126,7 +145,7 @@ export class HomeComponent implements OnInit {
 				collection: 23132,
 				label: 'music',
 				author: '薛之谦',
-				type: 0,
+				type: 0, // 音乐
 				description: '热门歌手'
 			},
 			{
@@ -172,13 +191,20 @@ export class HomeComponent implements OnInit {
 							collection: item.subscribedCount,
 							label: item.tag,
 							author: item.creator.nickname,
-							type: 1,
+							type: 1, // 专辑
 							description: item.description
 					};
 					this.musicCards.push(obj);
 				});
 			}
 		);
+
+		this.postConfig('http://47.52.238.90:4396/funnys/rest/novels/get_novel_base_info?novelType=&type=1', {})
+			.subscribe(
+				res => {
+					this.storycards = res['data'].slice(0, 10);
+				}
+			);
 	}
 
 }

@@ -26,6 +26,18 @@ export class ConfigService {
 		return this.http.post(this.baseUrl + url, params);
 	}
 
+	postUrlConfig(
+		url: string,
+		params: object
+	) {
+		url += '?';
+		// tslint:disable-next-line:forin
+		for (const prop in params) {
+			url += `${prop}=${params[prop]}&`;
+		}
+		return this.http.post(this.baseUrl + url, {});
+	}
+
 	md5(pwd, time) {
 		time = String(time);
 		pwd = String(pwd);

@@ -9,7 +9,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 			position: fixed;
 			top: 50%;
 			left:50%;
-			transform: translate(-50%);
+			transform: translate(-50%, -50%);
 			padding: 0 30px;
 			border-radius: 8px;
 			line-height:60px;
@@ -42,7 +42,6 @@ export class LoadingComponent implements OnChanges {
 	@Input() active: string;
 
 	ngOnChanges(changes: SimpleChanges) {
-		console.log(changes);
 		if (changes.active) {
 			this.active = changes.active.currentValue;
 		}

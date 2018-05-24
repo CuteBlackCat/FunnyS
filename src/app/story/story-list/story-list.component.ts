@@ -61,6 +61,7 @@ export class StoryListComponent implements OnInit {
 				this.condition = Number(params.get('condition'));
 
 				this.type = this.type === null ? '0' : this.type;
+				console.log(this.type);
 
 				this.name = params.get('name');
 

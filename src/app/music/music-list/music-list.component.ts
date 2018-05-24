@@ -29,6 +29,7 @@ export class MusicListComponent implements OnInit, OnChanges {
 	hotSonger: Array<object>;
 
 	search: boolean;
+	album: boolean;
 
 	@Input() next: number;
 	@Input() playOrder: number;
@@ -99,6 +100,7 @@ export class MusicListComponent implements OnInit, OnChanges {
 	}
 
 	getMusicList(url) {
+		console.log(url);
 		this.http.getConfig(url, {}).subscribe(
 			data => {
 
@@ -138,9 +140,17 @@ export class MusicListComponent implements OnInit, OnChanges {
 					this.topTen = data['artists'].slice(0, 10);
 					this.hotSonger = data['artists'].slice(10);
 				}else if (this.curType === '7') {
-					this.allMusic = this.search ? data['result']['songs'] : data['hotSongs'];
-					this.maxLoad = this.allMusic.length / 20;
-					this.musicList = this.allMusic.slice(0, this.page_id * 20);
+					console.log(data);
+					if (this.album) {
+						this.album = false;
+						this.allMusic = data['result']['tracks'];
+						this.maxLoad = this.allMusic.length / 20;
+						this.musicList = data['result']['tracks'].slice(0, this.page_id * 20);
+					}else {
+						this.allMusic = this.search ? data['result']['songs'] : data['hotSongs'];
+						this.maxLoad = this.allMusic.length / 20;
+						this.musicList = this.allMusic.slice(0, this.page_id * 20);
+					}
 					canPlay = true;
 				}
 
@@ -172,7 +182,6 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 	ngOnInit() {
 		this.id = Number(this.route.snapshot.paramMap.get('id'));
-		
 
 		this.curnum = 0;
 		this.curnext = 0;
@@ -234,18 +243,25 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 		this.route.paramMap.subscribe(
 			(params: ParamMap) => {
-				const musicid = params.get('musicid');
+				const music = params.get('music');
+				const album = params.get('album');
 
-				if (musicid && this.curType === '7') {
+				if (music && this.curType === '7') {
 					this.search = true;
-					this.getMusicList(`/search?keywords=${musicid}`);
-				} else {
+					this.getMusicList(`/search?keywords=${music}`);
+				} else if (album && this.curType === '7') {
+					this.album = true;
+					this.search = true;
+					this.getMusicList(`/playlist/detail?id=${album}`);
+				}else if (!music && !album) {
+					return;
+				}else {
 					this.getMusicList(this.findUrl(this.id));
 				}
 			}
 		);
 
-		this.getMusicList(this.findUrl(this.id));
+		// this.getMusicList(this.findUrl(this.id));
 
 		window.addEventListener('keyup', e => {
 			if (e.keyCode === 13 && this.keyWords !== '') {

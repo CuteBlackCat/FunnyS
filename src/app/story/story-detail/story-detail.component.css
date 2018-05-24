@@ -1,7 +1,6 @@
 .story-detail {
     position: relative;
     width: 900px;
-    height:650px;
     margin:0 auto;
 }
 .story-detail .book{
@@ -222,6 +221,10 @@ p.chapter{
     font-size: 14px;
     line-height: 16px;
 }
+.book-box-x {
+    position: relative;
+    height:650px;
+}
 .back .comment-box textarea{
     width:calc(100% - 40px);
     min-height: 80px;
@@ -238,4 +241,110 @@ p.chapter{
 }
 .back .comment-box button:hover{
     background: rgba(52,168,83,1);
+}
+
+.comment-header{
+    border-bottom: 2px solid rgba(52,168,83,1);
+    height:31px;
+    display: flex;
+}
+.comment-box{
+    padding: 0 30px;
+}
+.comment-header .comment-title{
+    font-size: 20px;
+    line-height: 28px;
+    margin-right: 30px;
+}
+.comment-header>span{
+    line-height: 28px;
+}
+.user-comment{
+    margin-top: 20px;
+    display: flex;
+    padding-bottom: 20px;
+}
+.user-comment .header-pic{
+    width:50px;
+    height: 50px;
+    margin-right: 10px;
+}
+img{
+    width:100%;
+}
+.comment-text{
+    width:calc(100% - 80px);
+}
+.comment-box textarea{
+    width:100%;
+    outline: none;
+    resize: none;
+    height: 100px;
+    padding:5px 10px;
+}
+.comment-box button{
+    float: right;
+    background: #0c73c2;
+    opacity: .6;
+    margin-top:10px;
+}
+.comment-box button:hover{
+    opacity: 1;
+}
+
+.comment-line{
+    border-bottom:1px dotted #ccc;
+    padding: 20px 0;
+    display: flex;
+    font-size: 12px;
+}
+.comment-line .header-pic{
+    width: 50px;
+    height: 50px;;
+    margin-right: 10px;
+}
+.comment-line .comment-detai{
+
+}
+.comment-line .time{
+    
+    color: #93999F;
+    flex-grow: 1;
+}
+.comment-line .name{
+    color: #0c73c2;
+    
+}
+.comment-detail{
+    /* line-height: 30px; */
+    width:100%;
+}
+.small-info{
+    display: flex;
+    width: 100%;
+}
+.comment-type{
+       border-bottom: 1px solid #352b2b;
+}
+.comment-user{
+    margin-bottom: 15px;
+}
+.iconfont{
+    cursor: pointer;
+}
+.liked .iconfont{
+    color:rgba(52,168,83,1);
+}
+.switch-page{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 12px;
+    margin-top:20px;
+}
+.switch-page>span{
+    cursor: pointer;
+    margin-left: 20px;
+}
+.switch-page>span.active{
+    color:#0c73c2;
 }

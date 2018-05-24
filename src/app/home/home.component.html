@@ -61,7 +61,7 @@
 			</h3>
 			<div class="types-content">
 				<ng-container *ngFor="let card of wonderCards">
-					<fs-card [card]="card" (enterCard)="enterCard($event)"></fs-card>
+					<fs-card [card]="card" (enterCard)="enterWonderCard($event)"></fs-card>
 				</ng-container>
 			</div>
 		</div>
@@ -77,7 +77,7 @@
 			</h3>
 			<div class="types-content">
 				<ng-container *ngFor="let card of gamecards">
-					<fs-card [card]="card" (enterCard)="enterCard($event)"></fs-card>
+					<fs-card [card]="card" (enterCard)="enterGameCard($event)"></fs-card>
 				</ng-container>
 			</div>
 		</div>
@@ -93,7 +93,7 @@
 			</h3>
 			<div class="types-content">
 				<ng-container *ngFor="let card of musicCards">
-					<fs-card [card]="card" (enterCard)="enterCard($event)"></fs-card>
+					<fs-card [card]="card" (enterCard)="enterMusicCard($event)"></fs-card>
 				</ng-container>
 			</div>
 		</div>
@@ -110,7 +110,7 @@
 			<div class="types-content">
 				<div class="storycard">
 					<ng-container *ngFor="let card of storycards">
-						<fs-story-card [card]="card" (enterCard)="enterCard($event)"></fs-story-card>
+						<fs-story-card [card]="card" (enterCard)="enterStoryCard($event)"></fs-story-card>
 					</ng-container>
 				</div>
 			</div>

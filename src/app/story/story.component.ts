@@ -46,17 +46,27 @@ export class StoryComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.route.firstChild.paramMap.subscribe(
-			(params: ParamMap) => {
-				this.curType = params.get('type');
-				console.log(this.curType);
-				this.curType = this.curType ? this.curType : '0';
-			}
-		);
 
 		this.http.getConfig('/get_novel_type', {}).subscribe(
 			data => {
 				this.types = data['data'].slice(0, 10);
+
+				let detail = false;
+
+				if (this.router.url.includes('detail')) {
+					detail = true;
+				}
+
+				this.route.firstChild.paramMap.subscribe(
+					(params: ParamMap) => {
+						this.curType = params.get('type');
+						console.log(this.curType);
+						if (!this.curType && !detail) {
+							this.searchStory('0');
+						}
+						this.curType = this.curType ? this.curType : '0';
+					}
+				);
 			}
 		);
 

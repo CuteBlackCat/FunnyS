@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 					this.info = '登录成功';
 					this.infoChange = !this.infoChange;
 					this.local.setObject('user', res['data']);
-					// this.router.navigate([``]);
+					this.router.navigate([``]);
 				} else {
 					this.info = res['message'];
 				}

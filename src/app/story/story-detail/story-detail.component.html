@@ -1,89 +1,92 @@
 <div class="story-detail">
-    <div class="book preserve-3d" [class.active]="bookOpen" [class.close]="close">
-        <!-- 封面 -->
-        <div class="title-page page preserve-3d" [class.active]="bookOpen" [class.close]="close" [style.z-index]="firstIndex">
-            <div class="front">
-                <div class="content">
-                    <p>{{ancestor.storyName}}</p>
-                    <p>{{ancestor.author}}</p>
-                    <p class="font14">故事简介：{{ancestor.introduction}}</p>
+    <div class="book-box-x">
+        <div class="book preserve-3d" [class.active]="bookOpen" [class.close]="close">
+            <!-- 封面 -->
+            <div class="title-page page preserve-3d" [class.active]="bookOpen" [class.close]="close" [style.z-index]="firstIndex">
+                <div class="front">
+                    <div class="content" *ngIf="introduction">
+                        <p>{{introduction.storyTitle}}</p>
+                        <p>{{introduction.author}}</p>
+                        <p class="font14">故事简介：{{introduction.storyIntro | interceptString: 20}}</p>
+                    </div>
+                    <div class="read">
+                        <i class="iconfont arrow-back" (click)="openBook(true)">&#xe992;</i>
+                    </div>
                 </div>
-                <div class="read">
-                    <i class="iconfont arrow-back" (click)="openBook(true)">&#xe992;</i>
-                </div>
-            </div>
-            <div class="back">
-                <div class="content">
-                    <p>{{ancestor.storyName}}</p>
-                    <p>作者：{{ancestor.author}}</p>
-                    <!-- <p class="font14">简介：{{ancestor.introduction}}</p> -->
-                    <p class="chapter">故事简介</p>
-                    <p class="font14 message">{{ancestor.content}}</p>
-                    <p class="view">
-                        <i class="iconfont" *ngIf="!ancestor.callPlay">&#xe873;</i>
-                        <i class="iconfont" *ngIf="!ancestor.lover">&#xe871;</i>
-                        <i class="iconfont" *ngIf="ancestor.callPlay">&#xe872;</i>
-                        <i class="iconfont" *ngIf="ancestor.lover">&#xe870;</i>
-                        <span class="font14 comment">{{ancestor.comment}} 接龙</span>
-                        <span class="font14">发布时间：{{ancestor.publicTime}}</span>
-                    </p>
-                    <i class="iconfont arrow-front" (click)="openBook(false)">&#xe991;</i>
-                    <div class="comment-box">
-                        <p>接: </p>
-                        <textarea name="" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
-                        <button class="normal">发布故事</button>
+                <div class="back">
+                    <div class="content" *ngIf="introduction">
+                        <p>{{introduction.storyTitle}}</p>
+                        <p>作者：{{introduction.author}}</p>
+                        <!-- <p class="font14">简介：{{ancestor.introduction}}</p> -->
+                        <p class="chapter">故事简介</p>
+                        <p class="font14 message">{{introduction.storyIntro}}</p>
+                        <p class="view">
+                            <i class="iconfont" *ngIf="!ancestor.callPlay">&#xe873;</i>
+                            <i class="iconfont" *ngIf="!ancestor.lover">&#xe871;</i>
+                            <i class="iconfont" *ngIf="ancestor.callPlay">&#xe872;</i>
+                            <i class="iconfont" *ngIf="ancestor.lover">&#xe870;</i>
+                            <span class="font14 comment">{{introduction.praiseNum}} 接龙</span>
+                            <span class="font14">发布时间：{{introduction.timestamp | date: 'yyyy-MM-dd mm:ss'}}</span>
+                        </p>
+                        <i class="iconfont arrow-front" (click)="openBook(false)">&#xe991;</i>
+                        <div class="comment-box">
+                            <p>接: </p>
+                            <textarea name="articleText" [(ngModel)]="articleText" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
+                            <button class="normal" (click)="public()">发布故事</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="content-page page  preserve-3d" *ngFor="let storylist of allStorys; let i = index;" [style.z-index]='checkIndex(i) ? i + 1 : 998 - i' [class.close]="checkClose(i)" [class.active]="checkActive(i)">
-            <div class="front"  *ngIf="!storylist">
-                <div class="list" *ngFor="let story of storylist">
+        
+            <div class="content-page page  preserve-3d" *ngFor="let storylist of allStorys; let i = index;" [style.z-index]='checkIndex(i) ? i + 1 : 998 - i'
+                [class.close]="checkClose(i)" [class.active]="checkActive(i)">
+                <div class="front" *ngIf="!storylist">
+                    <div class="list" *ngFor="let story of storylist">
                         <p class="story-item" (click)="checkPage(story, i, 'back')">{{story.content | interceptString: 60}}</p>
                         <div class="msg-box">
                             <span class="comment">{{story.author}}</span>
                             <span class="time">{{story.publicTime}}</span>
                             <span class="comment" (click)="checkPage(story, i, 'back')">{{story.comment}} 接龙</span>
                         </div>
+                    </div>
+        
                 </div>
-                
-            </div>
-            <div class="front" *ngIf="storylist">
-                <div class="list">暂无数据</div>
-            </div>
-            <div class="back">
-                <div class="content">
-                    <p class="chapter">第{{i + 2}}章</p>
-                    <p class="font14 message">{{currentStory.content}}</p>
-                    <p class="view">
-                        <i class="iconfont" *ngIf="!currentStory.callPlay">&#xe873;</i>
-                        <i class="iconfont" *ngIf="!currentStory.lover">&#xe871;</i>
-                        <i class="iconfont" *ngIf="currentStory.callPlay">&#xe872;</i>
-                        <i class="iconfont" *ngIf="currentStory.lover">&#xe870;</i>
-                        <span class="font14 comment">{{currentStory.comment}} 接龙</span>
-                        <span class="font14">发布时间：{{currentStory.publicTime}}</span>
-                    </p>
-                    <i class="iconfont arrow-front" (click)="checkPage(story, i, 'front')">&#xe991;</i>
-                    <div class="comment-box">
-                        <p>接: </p>
-                        <textarea name="" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
-                        <button class="normal">发布故事</button>
+                <div class="front" *ngIf="storylist">
+                    <div class="list">暂无数据</div>
+                </div>
+                <div class="back">
+                    <div class="content">
+                        <p class="chapter">第{{i + 2}}章</p>
+                        <p class="font14 message">{{currentStory.content}}</p>
+                        <p class="view">
+                            <i class="iconfont" *ngIf="!currentStory.callPlay">&#xe873;</i>
+                            <i class="iconfont" *ngIf="!currentStory.lover">&#xe871;</i>
+                            <i class="iconfont" *ngIf="currentStory.callPlay">&#xe872;</i>
+                            <i class="iconfont" *ngIf="currentStory.lover">&#xe870;</i>
+                            <span class="font14 comment">{{currentStory.comment}} 接龙</span>
+                            <span class="font14">发布时间：{{currentStory.publicTime}}</span>
+                        </p>
+                        <i class="iconfont arrow-front" (click)="checkPage(story, i, 'front')">&#xe991;</i>
+                        <div class="comment-box">
+                            <p>接: </p>
+                            <textarea name="" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
+                            <button class="normal">发布故事</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="back-page page  preserve-3d">
-            <div class="front">3</div>
-            <div class="back">-3</div>
+        
+            <div class="back-page page  preserve-3d">
+                <div class="front">3</div>
+                <div class="back">-3</div>
+            </div>
         </div>
     </div>
 
-    <div class="comment-box" *ngIf="comment">
+    <div class="comment-box">
         <div class="comment-header">
             <div class="comment-title">评论</div>
-            <span>共 {{comment.total}} 条评论</span>
+            <span  *ngIf="comment">共 {{comment.total}} 条评论</span>
         </div>
     
         <div class="user-comment">
@@ -91,12 +94,12 @@
                 <img src="assets/imgs/music/default_avatar.jpg" alt="">
             </div>
             <div class="comment-text">
-                <textarea name="" id="" placeholder="评论"></textarea>
-                <button class="normal">评论</button>
+                <textarea name="commentText" id="" placeholder="评论" [(ngModel)]="commentText"></textarea>
+                <button class="normal" (click)="commentCommit()">评论</button>
             </div>
         </div>
     
-        <div class="wonderful-comment">
+        <div class="wonderful-comment"  *ngIf="comment">
             <div class="comment-type">
                 <span>最新评论</span>
             </div>
@@ -126,6 +129,6 @@
         </div>
     </div>
 
-    <fs-alert-info [info]="info"></fs-alert-info>
+    <fs-alert-info [info]="info" [change]="infoChange"></fs-alert-info>
     <fs-loading [active]="loading"></fs-loading>
 </div>
