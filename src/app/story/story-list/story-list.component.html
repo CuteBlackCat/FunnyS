@@ -2,4 +2,6 @@
     <ng-container *ngFor="let card of storys">
         <fs-story-card [card]="card" (enterCard)="enterStory(card)" [color]="color"></fs-story-card>
     </ng-container>
+    <fs-alert-info [info]="info"></fs-alert-info>
+    <fs-loading [active]="loading"></fs-loading>
 </div>

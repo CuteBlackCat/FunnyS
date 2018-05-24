@@ -2,8 +2,8 @@
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    flex-direction: column;
-    height:1101px;
+    /* flex-direction: column; */
+    /* height:1101px; */
 }
 .story-list .story-card{
     padding: 24px 20px 32px;

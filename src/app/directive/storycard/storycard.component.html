@@ -2,7 +2,7 @@
     <div class="story-info">
         <div class="story-type"  [ngClass]="color">
             <i class="iconfont">&#xe6a2;</i>
-            <span>{{card.typeId}}</span>
+            <span>{{card.storyType}}</span>
         </div>
 
         <div class="author">
@@ -12,31 +12,31 @@
 
         <div class="time">
             <span>发布时间:</span>
-            <span>{{card.publicTime}}</span>
+            <span>{{card.timestamp}}</span>
         </div>
         
     </div>
 
     <div class="title"  [ngClass]="color" (click)="onClick()">
-        <p>{{card.storyName}}</p>
+        <p>{{card.storyTitle}}</p>
     </div>
 
     <div class="introduction">
-        简介: {{card.introduction}}
+        简介: {{card.storyIntro | interceptString: 6}}
     </div>
 
     <div class="content">
-        {{card.content | interceptString: 165}}
+        {{card.storyIntro | interceptString: 165}}
     </div>
 
     <div class="about">
         <div class="hot">
             <span>热度</span>
-            <span>{{card.hot}}</span>
+            <span>{{card.praiseNum}}</span>
         </div>
         <div class="comment">
             <span>评论</span>
-            <span>{{card.comment}}</span>
+            <span>{{card.commentsNum}}</span>
         </div>
         <div class="readall" (click)="onClick()" [ngClass]="color">
             <span>
