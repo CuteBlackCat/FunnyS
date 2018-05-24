@@ -19,14 +19,14 @@
                     <label for="">故事标题:</label>
                     <input type="text" name="title" formControlName="title" placeholder="故事标题">
                 </div>
-                <textarea name="text" maxlength="500" (ngModelChange)="cacularLen()"  formControlName="text"></textarea>
+                <textarea name="text" maxlength="200" (ngModelChange)="cacularLen()" placeholder="故事简介"  formControlName="text"></textarea>
 
                 <div class="label">
                     <span [class.active]="i === curType" *ngFor="let item of types; let i = index" (click)="selectType(i)">{{item}}</span>
                     <input type="text" (ngModelChange)="autoType()" formControlName="type" placeholder="请填写类型" formControlName="type">
                 </div>
                 <div class="button">
-                    <span>{{length}} / 500</span>
+                    <span>{{length}} / 200</span>
                     <button class="normal" type="submit">发布</button>
                 </div>
             </form>

@@ -31,7 +31,7 @@ export class StoryListComponent implements OnInit {
 	 * @param story 事件监听，返回story
 	 */
 	enterStory(story) {
-		this.router.navigate(['../detail', {storyid: story.storyId}], {relativeTo: this.route});
+		this.router.navigate(['../detail', {storyid: story.storyID}], {relativeTo: this.route});
 	}
 
 	getStory() {
@@ -45,7 +45,7 @@ export class StoryListComponent implements OnInit {
 						this.info = '客观，暂时搜不到该类型噢~';
 					}
 
-					// this.loading = false;
+					this.loading = false;
 				}
 			);
 	}

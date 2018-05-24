@@ -16,8 +16,8 @@
                 <div class="content">
                     <p>{{ancestor.storyName}}</p>
                     <p>作者：{{ancestor.author}}</p>
-                    <p class="font14">简介：{{ancestor.introduction}}</p>
-                    <p class="chapter">第1章</p>
+                    <!-- <p class="font14">简介：{{ancestor.introduction}}</p> -->
+                    <p class="chapter">故事简介</p>
                     <p class="font14 message">{{ancestor.content}}</p>
                     <p class="view">
                         <i class="iconfont" *ngIf="!ancestor.callPlay">&#xe873;</i>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="content-page page  preserve-3d" *ngFor="let storylist of allStorys; let i = index;" [style.z-index]='checkIndex(i) ? i + 1 : 998 - i' [class.close]="checkClose(i)" [class.active]="checkActive(i)">
-            <div class="front">
+            <div class="front"  *ngIf="!storylist">
                 <div class="list" *ngFor="let story of storylist">
                         <p class="story-item" (click)="checkPage(story, i, 'back')">{{story.content | interceptString: 60}}</p>
                         <div class="msg-box">
@@ -47,6 +47,10 @@
                             <span class="comment" (click)="checkPage(story, i, 'back')">{{story.comment}} 接龙</span>
                         </div>
                 </div>
+                
+            </div>
+            <div class="front" *ngIf="storylist">
+                <div class="list">暂无数据</div>
             </div>
             <div class="back">
                 <div class="content">
@@ -75,4 +79,53 @@
             <div class="back">-3</div>
         </div>
     </div>
+
+    <div class="comment-box" *ngIf="comment">
+        <div class="comment-header">
+            <div class="comment-title">评论</div>
+            <span>共 {{comment.total}} 条评论</span>
+        </div>
+    
+        <div class="user-comment">
+            <div class="header-pic">
+                <img src="assets/imgs/music/default_avatar.jpg" alt="">
+            </div>
+            <div class="comment-text">
+                <textarea name="" id="" placeholder="评论"></textarea>
+                <button class="normal">评论</button>
+            </div>
+        </div>
+    
+        <div class="wonderful-comment">
+            <div class="comment-type">
+                <span>最新评论</span>
+            </div>
+            <div class="comment-line" *ngFor="let item of comment.comments">
+                <div class="header-pic">
+                    <img [src]="item.user.avatarUrl" alt="">
+                </div>
+                <div class="comment-detail">
+                    <div class="comment-user">
+                        <span class="name">{{item.user.nickname}}:</span>
+                        <span class="comment-words">{{item.content}}</span>
+                    </div>
+                    <div class="small-info">
+                        <span class="time">{{item.time | date: 'yyyy-MM-dd hh:mm'}}</span>
+                        <span class="liked">
+                            <i class="iconfont" *ngIf="!item.liked" (click)="likedComment(1, item)">&#xe873;</i>
+                            <i class="iconfont" *ngIf="item.liked" (click)="likedComment(0, item)">&#xe872;</i>
+                            ({{item.likedCount}}) | 回复
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="switch-page">
+                <span class="prev" [class.active]="offset > 1" (click)="getComment(limit, current_music.id, offset - 1)">上一页</span>
+                <span class="next" [class.active]="offset < comment['total'] / this.limit" (click)="getComment(limit, current_music.id, offset + 1)">下一页</span>
+            </div>
+        </div>
+    </div>
+
+    <fs-alert-info [info]="info"></fs-alert-info>
+    <fs-loading [active]="loading"></fs-loading>
 </div>

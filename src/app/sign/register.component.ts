@@ -10,6 +10,8 @@ import { ConfigService } from './sign.service';
 export class RegisterComponent implements OnInit {
 
 	user: FormGroup;
+	info: string;
+	infoChange: boolean;
 
 	constructor(
 		private fb: FormBuilder,
@@ -27,11 +29,21 @@ export class RegisterComponent implements OnInit {
 			userDesription: ''
 		};
 
-		const url = '/register';
+		// const url = '/register';
+		const url = `/register?userName=${params.userName}&userPwd=${params.userPwd}&userEmail=${params.userEmail}&userPhoto=""&userDesription=""`;
 
-		this.http.postConfig(url, params).subscribe(
+		this.http.postConfig(url, {}).subscribe(
 			data => {
-				console.log(data);
+				if (data['code'] === '0') {
+					this.info = '注册成功';
+				} else {
+					this.info = data['message'];
+				}
+				this.infoChange = !this.infoChange;
+			},
+			err => {
+				this.info = '系统错误';
+				this.infoChange = !this.infoChange;
 			}
 		);
 	}

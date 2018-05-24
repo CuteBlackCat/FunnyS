@@ -95,14 +95,14 @@ export class HomeComponent implements OnInit {
 	 * @param card 返回的card
 	 */
 	enterCard(card: object) {
-		console.log(card);
+		// console.log(card);
 	}
 
 	getConfig(
 		url: string,
 		params: object
 	) {
-		console.log(url);
+		// console.log(url);
 		return this.http.get(url, params);
 	}
 

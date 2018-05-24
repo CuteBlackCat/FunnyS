@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ConfigService } from '../story.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
 	selector: 'fs-story-detail',
 	templateUrl: './story-detail.component.html',
@@ -26,6 +27,25 @@ export class StoryDetailComponent implements OnInit {
 	currentStory: object;
 
 	backStory: Array<object>;
+
+	// 加载以及错误信息
+	loading: boolean;
+	info: string;
+
+	// 加载参数相关
+	storyID: string;
+	articleID: string;
+	curStory: string;
+
+	// 故事相关
+
+	constructor(
+		private http: ConfigService,
+		private router: Router,
+		private route: ActivatedRoute
+	) {
+
+	}
 
 	checkPage(story, i, dir) {
 		this.activePage = i;
@@ -72,8 +92,38 @@ export class StoryDetailComponent implements OnInit {
 		}
 	}
 
+	getStoryDetail(firstArticle, articleID, storyID) {
+		this.loading = true;
+		this.http.postConfig(`/getNovelArticles?firstArticle=${firstArticle}&articleID=${articleID}&storyID=${storyID}`, {})
+			.subscribe(
+				res => {
+					if (res['data'].length === 0) {
+
+					}
+					this.loading = false;
+				}
+			);
+	}
+
+	// getStoryIntro() {
+		// this.loading = true;
+		// this.http.postConfig(`/get_novel_base_info?novelType=${this.name}&type=${this.condition}`, {})
+			// .subscribe(
+				// res => {
+					// console.log(res);
+					// this.introduction = res['data'];
+					// if (!this.storys || this.storys.length === 0) {
+					// 	this.info = '客观，暂时搜不到该类型噢~';
+					// }
+
+					// this.loading = false;
+				// }
+			// );
+	// }
+
 
 	ngOnInit() {
+
 		this.ancestor = {
 			storyName: '安河桥的故事',
 			hot: 4396,
@@ -114,5 +164,19 @@ export class StoryDetailComponent implements OnInit {
 		this.hot = false;
 		this.lover = false;
 		this.close = false;
+
+		this.route.paramMap.subscribe(
+			(params: ParamMap) => {
+				this.storyID = params.get('storyid');
+				console.log(this.storyID);
+				this.articleID = params.get('articleid');
+
+				if (this.articleID) {
+					this.getStoryDetail(1, this.articleID, this.storyID);
+				}else {
+					this.getStoryDetail(0, null, this.storyID);
+				}
+			}
+		);
 	}
 }

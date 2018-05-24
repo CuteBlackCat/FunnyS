@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
 	user: FormGroup;
 	info: string;
+	infoChange: boolean;
 
 	constructor(
 		private local: LocalStorage,
@@ -27,24 +28,29 @@ export class LoginComponent implements OnInit {
 	onSubmit() {
 		console.log(this.user.value);
 		const data = {
-			username: 'ljx',
-			password: 'ĸ1ĸ1ĸ1ĸ1ĸ1ĸ1ĸ1ĸ111',
-			// 'password': this.http.md5(this.user.value.password, Math.trunc(Date.now() / 1000)),
+			username: this.user.value.username,
+			// password: 'ĸ1ĸ1ĸ1ĸ1ĸ1ĸ1ĸ1ĸ111',
+			password: this.http.md5(this.user.value.password, String(Math.trunc(Date.now() / 1000))),
 			timestamp: Math.trunc(Date.now() / 1000)
 		};
 
-		const url = '/login';
-		// const url = `login?username=${data.username}&password=${data.password}&timestamp=${data.timestamp}`;
+		// const url = '/login';
+		const url = `login?username=${data.username}&password=${data.password}&timestamp=${data.timestamp}`;
 
-		this.http.postConfig(url, data).subscribe(
+		this.http.postConfig(url, {}).subscribe(
 			res => {
-				if (res['code'] === 200) {
+				if (res['code'] === '0') {
 					this.info = '登录成功';
+					this.infoChange = !this.infoChange;
 					this.local.setObject('user', res['data']);
-					this.router.navigate([`/`]);
+					// this.router.navigate([``]);
 				} else {
 					this.info = res['message'];
 				}
+			},
+			err => {
+				this.info = '系统错误';
+				this.infoChange = !this.infoChange;
 			}
 		);
 
@@ -66,6 +72,8 @@ export class LoginComponent implements OnInit {
 			username: [username, [Validators.required, Validators.minLength(3)]],
 			password: [password, [Validators.required, Validators.minLength(6)]]
 		});
+
+		this.infoChange = false;
 	}
 
 }

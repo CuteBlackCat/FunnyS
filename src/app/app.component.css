@@ -132,3 +132,18 @@ footer .container{
     height: 100%;
     text-align: center;
 }
+
+.welcome {
+    margin-right: 10px;
+}
+.welcome>span {
+    color: #4285f4;
+}
+
+.logout{
+    cursor: pointer;
+}
+.logout:hover{
+    text-decoration: underline;
+    color: #ea4335;
+}

@@ -10,10 +10,10 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 			top: 50%;
 			left:50%;
 			transform: translate(-50%);
-			padding: 0 30px;
+			padding: 15px 30px;
 			border-radius: 8px;
-			line-height:60px;
-			text-align:center;
+			line-height:30px;
+			text-align:left;
 			background: #000;
 			color:#fff;
 			opacity: 0;
@@ -33,25 +33,39 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 		.alert.active {
 			display:block;
 			animation-name: hide;
-			animation-duration: 1s;
+			animation-duration: 2s;
 		}
 	`]
 })
 export class AlertComponent implements OnChanges {
 	@Input() info: string;
+	@Input() change: boolean;
 
 	active: boolean;
 
 	ngOnChanges(changes: SimpleChanges) {
+		if (changes.info) {
+			if ((this.active !== changes.info.currentValue && changes.info.currentValue !== '') || changes.info.firstChange === true) {
+				this.info = changes.info.currentValue;
+			}
+		}
+
 		console.log(changes);
-		if ((changes.info && changes.info.previousValue !== changes.info.currentValue && changes.info.currentValue !== '') || changes.info.firstChange === true) {
-			this.info = changes.info.currentValue;
+
+		if (changes.change && changes.change.firstChange !== true) {
+			console.log(this.active);
+			if (this.active) {
+				return;
+			}
 			this.active = true;
 			console.log(this.active);
-			setTimeout(() => {
-				this.active = false;
-				this.info = '';
-			}, 800);
+			if (this.active) {
+				setTimeout(() => {
+					this.active = false;
+				}, 2000);
+			}
 		}
+
+
 	}
 }

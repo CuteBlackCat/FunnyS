@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class ConfigService {
@@ -23,7 +24,11 @@ export class ConfigService {
 		url: string,
 		params: object
 	) {
-		return this.http.post(this.baseUrl + url, params);
+		return this.http.post(this.baseUrl + url, params, {
+			// headers: new HttpHeaders({
+			// 	'Content-Type': 'x-www-form-urlencode',
+			// })
+		});
 	}
 
 	md5(pwd, time) {
