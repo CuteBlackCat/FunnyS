@@ -2,6 +2,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ConfigService } from '../story.service';
+import { LocalStorage } from '../../service/local.storage';
 @Component({
 	selector: 'fs-story-public',
 	templateUrl: './story-public.component.html',
@@ -25,26 +26,38 @@ export class StoryLPublicComponent implements OnInit {
 
 	oldType: number;
 
+	userInfo: object;
+
+	loading: boolean;
+
+	changeInfo: boolean;
+
 	constructor(
 		private router: Router,
 		private fb: FormBuilder,
 		private route: ActivatedRoute,
-		private http: ConfigService
+		private http: ConfigService,
+		private local: LocalStorage
 	) {
-		
+		this.userInfo = this.local.getObject('user');
 	}
 
 	onSubmit() {
 		const type = this.curType === null ? this.user.value.type : this.types[this.curType];
-		console.log(this.user);
-		this.http.postConfig(`/updateArticleTitle?title=${this.user.value.title}&storyType=${type}&storyIntro=${this.user.value.text}&create_userID=dbacd51340b029fa20da036cb444e056`, {
+
+		if (!this.userInfo['token']) {
+			this.info = '客观，请先登录噢！';
+			this.changeInfo = !this.changeInfo;
+			return;
+		}
+		this.loading = true;
+		this.http.postConfig(`/updateArticleTitle?title=${this.user.value.title}&storyType=${type}&storyIntro=${this.user.value.text}&create_userID=${this.userInfo['userId']}`, {
 			// title: this.user.value.title,
 			// storyType: type,
 			// storyIntro: this.user.value.text,
 			// create_userID: 'dbacd51340b029fa20da036cb444e056'
 		}).subscribe(
 			res => {
-				console.log(res);
 				if (res['code'] === '0') {
 					this.info = '发布成功';
 
@@ -57,6 +70,8 @@ export class StoryLPublicComponent implements OnInit {
 				}else {
 					this.info = res['message'];
 				}
+				this.changeInfo = !this.changeInfo;
+				this.loading = false;
 			}
 		);
 	}

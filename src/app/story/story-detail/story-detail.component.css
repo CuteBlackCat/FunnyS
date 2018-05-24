@@ -238,6 +238,7 @@ p.chapter{
 }
 .back .comment-box button{
     background: rgba(52,168,83,.6);
+    float: none;
 }
 .back .comment-box button:hover{
     background: rgba(52,168,83,1);
@@ -347,4 +348,11 @@ img{
 }
 .switch-page>span.active{
     color:#0c73c2;
+}
+
+.replay>button{
+    cursor: pointer;
+}
+span.replay{
+    cursor: pointer;
 }

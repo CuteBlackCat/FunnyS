@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="back">
-                    <div class="content" *ngIf="introduction">
+                    <div class="content" *ngIf="introduction && !notFirst">
                         <p>{{introduction.storyTitle}}</p>
                         <p>作者：{{introduction.author}}</p>
                         <!-- <p class="font14">简介：{{ancestor.introduction}}</p> -->
@@ -26,11 +26,34 @@
                             <i class="iconfont" *ngIf="ancestor.callPlay">&#xe872;</i>
                             <i class="iconfont" *ngIf="ancestor.lover">&#xe870;</i>
                             <span class="font14 comment">{{introduction.praiseNum}} 接龙</span>
-                            <span class="font14">发布时间：{{introduction.timestamp | date: 'yyyy-MM-dd mm:ss'}}</span>
+                            <span class="font14">发布时间：{{introduction.timestamp * 1000 | date: 'yyyy-MM-dd hh:mm'}}</span>
                         </p>
                         <i class="iconfont arrow-front" (click)="openBook(false)">&#xe991;</i>
                         <div class="comment-box">
-                            <p>接: </p>
+                            <p>接   标题: <input type="text" name="articleTitle" [(ngModel)]="articleTitle"></p>
+                            <textarea name="articleText" [(ngModel)]="articleText" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
+                            <button class="normal" (click)="public()">发布故事</button>
+                        </div>
+                    </div>
+                    <div class="content" *ngIf="currentArticle && notFirst">
+                        <p>第 {{currentArticle.capter}}章  {{currentArticle.articleTitle}}</p>
+                        <p>作者：{{currentArticle.userName}}</p>
+                        <!-- <p class="font14">简介：{{ancestor.introduction}}</p> -->
+                        <!-- <p class="chapter">故事简介</p> -->
+                        <p class="font14 message">{{currentArticle.articleContent}}</p>
+                        <p class="view">
+                            <i class="iconfont" *ngIf="!ancestor.callPlay">&#xe873;</i>
+                            <i class="iconfont" *ngIf="!ancestor.lover">&#xe871;</i>
+                            <i class="iconfont" *ngIf="ancestor.callPlay">&#xe872;</i>
+                            <i class="iconfont" *ngIf="ancestor.lover">&#xe870;</i>
+                            <span class="font14 comment">{{currentArticle.praisesNum}} 接龙</span>
+                            <span class="font14">发布时间：{{currentArticle.timestamp * 1000 | date: 'yyyy-MM-dd hh:mm'}}</span>
+                        </p>
+                        <i class="iconfont arrow-front" (click)="prevChapter(currentArticle)">&#xe991;</i>
+                        <div class="comment-box">
+                            <p>接 标题:
+                                <input type="text" name="articleTitle" [(ngModel)]="articleTitle">
+                            </p>
                             <textarea name="articleText" [(ngModel)]="articleText" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
                             <button class="normal" (click)="public()">发布故事</button>
                         </div>
@@ -38,7 +61,7 @@
                 </div>
             </div>
         
-            <div class="content-page page  preserve-3d" *ngFor="let storylist of allStorys; let i = index;" [style.z-index]='checkIndex(i) ? i + 1 : 998 - i'
+            <!-- <div class="content-page page  preserve-3d" *ngFor="let storylist of allStorys; let i = index;" [style.z-index]='checkIndex(i) ? i + 1 : 998 - i'
                 [class.close]="checkClose(i)" [class.active]="checkActive(i)">
                 <div class="front" *ngIf="!storylist">
                     <div class="list" *ngFor="let story of storylist">
@@ -74,10 +97,25 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         
             <div class="back-page page  preserve-3d">
-                <div class="front">3</div>
+                <div class="front">
+                    <div class="front" *ngIf="!storyList">
+                        <div class="list">暂无数据</div>
+                    </div>
+                    <ng-container *ngIf="storyList">
+                        <div class="list"  *ngFor="let story of storyList">
+                            <p class="story-item" (click)="nextChapter(story)">{{story.articleContent | interceptString: 60}}</p>
+                            <div class="msg-box">
+                                <span class="comment">{{story.author}}</span>
+                                <span class="time">{{story.timestamp * 1000 | date: 'yyyy-MM-dd hh:mm'}}</span>
+                                <span class="comment" (click)="checkPage(story, i, 'back')">{{story.praisesNum}} 接龙</span>
+                            </div>
+                        </div>
+                    </ng-container>
+                    
+                </div>
                 <div class="back">-3</div>
             </div>
         </div>
@@ -95,37 +133,43 @@
             </div>
             <div class="comment-text">
                 <textarea name="commentText" id="" placeholder="评论" [(ngModel)]="commentText"></textarea>
-                <button class="normal" (click)="commentCommit()">评论</button>
+                <button class="normal" (click)="commentCommit({}, false)">评论</button>
             </div>
         </div>
     
-        <div class="wonderful-comment"  *ngIf="comment">
+        <div class="wonderful-comment"  *ngIf="comments">
             <div class="comment-type">
                 <span>最新评论</span>
             </div>
-            <div class="comment-line" *ngFor="let item of comment.comments">
+            <div class="comment-line" *ngFor="let item of comments; let i = index">
                 <div class="header-pic">
-                    <img [src]="item.user.avatarUrl" alt="">
+                    <img src="assets/imgs/music/default_avatar.jpg" alt="">
                 </div>
                 <div class="comment-detail">
                     <div class="comment-user">
-                        <span class="name">{{item.user.nickname}}:</span>
-                        <span class="comment-words">{{item.content}}</span>
+                        <span  *ngIf="!item.replyUserName"><span class="name">{{item.userName}}</span>说: </span>
+                        <span  *ngIf="item.replyUserName"><span class="name">{{item.userName}}</span> 回复 <span class="name">{{item.replyUserName}}</span>: </span>
+                        <span class="comment-words">{{item.comment}}</span>
                     </div>
                     <div class="small-info">
-                        <span class="time">{{item.time | date: 'yyyy-MM-dd hh:mm'}}</span>
+                        <span class="time">{{item.timestamp * 1000 | date: 'yyyy-MM-dd hh:mm'}}</span>
                         <span class="liked">
                             <i class="iconfont" *ngIf="!item.liked" (click)="likedComment(1, item)">&#xe873;</i>
                             <i class="iconfont" *ngIf="item.liked" (click)="likedComment(0, item)">&#xe872;</i>
-                            ({{item.likedCount}}) | 回复
+                            (0) | <span class="replay" (click)="replaying(i)">回复</span>
                         </span>
+                    </div>
+
+                    <div class="replay" *ngIf="currentReplay === i">
+                        <textarea name="item.replayText" [(ngModel)]="item.replayText" max-length="100"></textarea>
+                        <button class="normal" (click) = "commentCommit(item, true)">回复</button>
                     </div>
                 </div>
             </div>
-            <div class="switch-page">
+            <!-- <div class="switch-page">
                 <span class="prev" [class.active]="offset > 1" (click)="getComment(limit, current_music.id, offset - 1)">上一页</span>
                 <span class="next" [class.active]="offset < comment['total'] / this.limit" (click)="getComment(limit, current_music.id, offset + 1)">下一页</span>
-            </div>
+            </div> -->
         </div>
     </div>
 

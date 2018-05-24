@@ -42,10 +42,17 @@ export class StoryDetailComponent implements OnInit {
 	// 故事相关
 	introduction: object;
 	articleText: string;
-	comment: Array<object>;
+	comments: Array<object>;
 	commentText: string;
 
+	currentReplay: boolean;
+	articleTitle: string;
+	storyList: Array<object>;
+	currentArticle: object;
+
 	user: object;
+
+	notFirst: boolean;
 
 	constructor(
 		private http: ConfigService,
@@ -102,17 +109,39 @@ export class StoryDetailComponent implements OnInit {
 		}
 	}
 
+	nextChapter(article) {
+		this.getStoryDetail(1, article['articleID'], this.storyID);
+		this.currentArticle = article;
+		this.notFirst = true;
+	}
+
+	prevChapter(article) {
+		if (article['articleParentID'] === 'null') {
+			this.notFirst = false;
+		}
+	}
+
 	getStoryDetail(firstArticle, articleID, storyID) {
 		this.loading = true;
 		this.http.postConfig(`/getNovelArticles?firstArticle=${firstArticle}&articleID=${articleID}&storyID=${storyID}`, {})
 			.subscribe(
 				res => {
-					// if (res['data'].length === 0) {
-
-					// }
+					if (res['data'].length !== 0) {
+						this.storyList = res['data'];
+						console.log(this.storyList, 1);
+						// if (this.storyList[0]['articleParentID'] === 'null') {
+						// 	this.notFirst = false;
+						// }else {
+						// 	this.notFirst = true;
+						// }
+					}
 					this.loading = false;
 				}
 			);
+	}
+
+	replaying(index) {
+		this.currentReplay = index === this.currentReplay ? -1 : index;
 	}
 
 	getComment(id) {
@@ -120,7 +149,11 @@ export class StoryDetailComponent implements OnInit {
 			.subscribe(
 				res => {
 					if (res['code'] === '0') {
-						this.comment = res['comment'];
+						this.comments = res['data'];
+
+						this.comments.forEach((item) => {
+							item['replayText'] = '';
+						});
 					}
 				}
 			);
@@ -151,25 +184,53 @@ export class StoryDetailComponent implements OnInit {
 			this.info = '客观，请先登录噢！';
 			this.infoChange = !this.infoChange;
 		} else {
-			this.http.postUrlConfig('/updateComments', {
+			this.http.postUrlConfig('/updateArticle', {
 				userID: this.user['userId'],
 				token: this.user['token'],
 				storyID: this.storyID,
 				articleParentID: articleID,
 				articleContent: this.articleText,
-				chapter: 1,
-				articleTitle: '',
-				timestamp: Math.trunc(Date.now() / 1000)
+				capter: 1,
+				articleTitle: this.articleTitle,
+				timestamp: Math.trunc(Date.now() / 1000),
+				articleID: Math.random()
 			}).subscribe(
 				res => {
 					console.log(res);
+					this.articleText = '';
+					this.articleText = '';
 				}
 			);
 		}
 	}
 
-	commentCommit() {
-		// this.http.
+	commentCommit(comment, replay) {
+		console.log(comment);
+		this.http.postUrlConfig('/updateComments', {
+			userID: this.user['userId'],
+			token: this.user['token'],
+			replyUserID: comment['userID'] ? comment['userID'] : null,
+			comment: replay ? comment['replayText'] : this.commentText,
+			event: '故事',
+			parentID: comment['eventID'] ? comment['eventID'] : null,
+			grandparentID: this.storyID,
+			timestamp: Math.trunc(Date.now() / 1000)
+		}).subscribe(
+			res => {
+				if (res['code'] === '0') {
+					this.info = '评论成功';
+				} else {
+					this.info = '评论失败';
+				}
+				this.infoChange = !this.infoChange;
+				comment['replayText'] = '';
+				this.getComment(this.storyID);
+			},
+			err => {
+				this.info = '系统错误';
+				this.infoChange = !this.infoChange;
+			}
+		);
 	}
 
 
@@ -231,6 +292,7 @@ export class StoryDetailComponent implements OnInit {
 
 				if (this.articleID) {
 					this.getStoryDetail(1, this.articleID, this.storyID);
+					this.notFirst = true;
 				}else {
 					this.getStoryDetail(0, null, this.storyID);
 				}

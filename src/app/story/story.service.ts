@@ -35,6 +35,7 @@ export class ConfigService {
 		for (const prop in params) {
 			url += `${prop}=${params[prop]}&`;
 		}
+		url = url.slice(0, url.length - 1);
 		return this.http.post(this.baseUrl + url, {});
 	}
 
