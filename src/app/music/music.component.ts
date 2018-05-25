@@ -3,6 +3,8 @@ import { DomSanitizer  } from '@angular/platform-browser';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MusicService } from './music.service';
 
+import { All } from '../interface';
+
 @Component({
 	selector: 'fs-music',
 	templateUrl: './music.component.html',
@@ -11,7 +13,7 @@ import { MusicService } from './music.service';
 export class MusicComponent implements OnInit {
 
 	// 当前播放的音乐链接
-	current_music: object;
+	current_music: All;
 
 	// 音乐类型
 	types: Array<object>;

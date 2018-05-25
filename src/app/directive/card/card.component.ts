@@ -5,11 +5,10 @@ import { Component, Input, Output, EventEmitter, HostListener } from '@angular/c
 	templateUrl: './card.component.html',
 	styleUrls: ['./card.component.css']
 })
-
 export class CardComponent {
 	front  = true;
 
-	@Input() card: object;
+	@Input() card: Card;
 
 	@Output() enterCard = new EventEmitter<object>();
 
@@ -18,4 +17,8 @@ export class CardComponent {
 		this.enterCard.emit(this.card);
 	}
 
+}
+
+interface Card {
+	[propName: string]: any;
 }

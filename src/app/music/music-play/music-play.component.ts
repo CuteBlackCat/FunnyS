@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MusicService } from '../music.service';
+import { All } from '../../interface';
 @Component({
 	selector: 'fs-music-play',
 	templateUrl: './music-play.component.html',
@@ -12,12 +13,12 @@ export class MusicPlayComponent implements OnInit, OnChanges {
 	@Input() albumId: string;
 
 	lyric: Array<string>;
-	album: object;
-	current_music: object;
+	album: All;
+	current_music: All;
 	lyricHeight: string;
 	limit: number;
 	offset: number;
-	comment: object;
+	comment: All;
 
 	constructor(
 		private route: ActivatedRoute,

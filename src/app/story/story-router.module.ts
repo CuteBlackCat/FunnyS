@@ -6,7 +6,7 @@ import { StoryDetailComponent } from './story-detail/story-detail.component';
 import { StoryLPublicComponent } from './story-public/story-public.component';
 import { StoryTypeComponent } from './story-type/story-type.component';
 
-const Routes: Routes = [
+const Routera: Routes = [
 	{
 		path: 'story',
 		component: StoryComponent,
@@ -38,7 +38,7 @@ const Routes: Routes = [
 
 @NgModule({
 	imports: [
-		RouterModule.forChild(Routes)
+		RouterModule.forChild(Routera)
 	],
 	exports: [RouterModule]
 })

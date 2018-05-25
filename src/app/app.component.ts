@@ -2,6 +2,7 @@ import { GlobalService } from './service/global.service';
 import { Component, OnInit } from '@angular/core';
 import { LocalStorage } from './service/local.storage';
 import { Router, NavigationEnd } from '@angular/router';
+import { All } from './interface';
 
 @Component({
 	selector: 'fs-root',
@@ -11,7 +12,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent implements OnInit {
 	title = 'Funnys';
 
-	user: object;
+	user: All;
 
 	constructor(
 		globalService: GlobalService,
@@ -24,6 +25,10 @@ export class AppComponent implements OnInit {
 	logout() {
 		this.local.remove('user');
 		this.user = this.local.getObject('user');
+	}
+
+	backHome() {
+		
 	}
 
 	ngOnInit() {

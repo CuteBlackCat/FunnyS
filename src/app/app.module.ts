@@ -5,6 +5,7 @@ import {ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 // 导入自定义模块
+import { CanvasModule } from './canvas/canvas.module';
 import { FsDirectiveModule } from './directive/directive.module';
 import { FunnysRoutingModule } from './funnys-routing.module';
 import { StoryModule } from './story/story.module';
@@ -13,8 +14,8 @@ import { MusicModule } from './music/music.module';
 
 // 导入组件
 import { AppComponent } from './app.component';
-import { BackcanvasComponent } from './canvas/backcanvas/backcanvas.component';
-import { SnakeComponent } from './canvas/snake/snake.component';
+// import { BackcanvasComponent } from './canvas/backcanvas/backcanvas.component';
+// import { SnakeComponent } from './canvas/snake/snake.component';
 import { TankComponent } from './canvas/tank/tank.component';
 import { HomeComponent } from './home/home.component';
 import { GamesComponent } from './games/games.component';
@@ -32,11 +33,11 @@ import { LocalStorage } from './service/local.storage';
 @NgModule({
 	declarations: [
 		AppComponent,
-		BackcanvasComponent,
+		// BackcanvasComponent,
 		HomeComponent,
 		GamesComponent,
 		AboutComponent,
-		SnakeComponent,
+		// SnakeComponent,
 		PagenotfoundComponent,
 	],
 	imports: [
@@ -44,6 +45,7 @@ import { LocalStorage } from './service/local.storage';
 		HttpClientModule,
 		ReactiveFormsModule,
 		FormsModule,
+		CanvasModule,
 		FsDirectiveModule,
 		StoryModule,
 		MusicModule,

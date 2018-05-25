@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, HostListener} from '@angular/core';
+import { All } from '../../interface';
 
 @Component({
 	selector: 'fs-story-card',
@@ -7,7 +8,7 @@ import { Component, Input, Output, EventEmitter, HostListener} from '@angular/co
 })
 
 export class StoryCardComponent {
-	@Input() card: object;
+	@Input() card: All;
 
 	@Input() color: string;
 
