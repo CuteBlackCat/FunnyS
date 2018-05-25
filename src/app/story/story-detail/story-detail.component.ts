@@ -118,6 +118,10 @@ export class StoryDetailComponent implements OnInit {
 	prevChapter(article) {
 		if (article['articleParentID'] === 'null') {
 			this.notFirst = false;
+
+			this.getStoryDetail(0, null, this.storyID);
+		} else {
+			// this.getStoryDetail(1, )
 		}
 	}
 
@@ -145,7 +149,7 @@ export class StoryDetailComponent implements OnInit {
 	}
 
 	getComment(id) {
-		this.http.postConfig(`/getComments?userName=${this.user['userName']}&token=${this.user['token']}&grandParentID=${id}`, {})
+		this.http.postConfig(`/getComments?userName=${this.user['userName']}&token=${this.user['token']}&grandParentID=${id}&type=1&parentID='null'`, {})
 			.subscribe(
 				res => {
 					if (res['code'] === '0') {
@@ -196,6 +200,15 @@ export class StoryDetailComponent implements OnInit {
 				articleID: Math.random()
 			}).subscribe(
 				res => {
+					if (res['code'] === '400') {
+						this.info = '发布失败，请重新登录噢';
+					} else if (res['code'] === '0') {
+						this.info = '发布成功';
+
+						this.getStoryDetail(first ? 0 : 1, first ? article['articleID'] : 'null', this.storyID);
+					}
+
+					this.infoChange = !this.infoChange;
 					console.log(res);
 					this.articleTitle = '';
 					this.articleText = '';
@@ -294,7 +307,7 @@ export class StoryDetailComponent implements OnInit {
 				if (this.articleID) {
 					this.getStoryDetail(1, this.articleID, this.storyID);
 					this.notFirst = true;
-				}else {
+				} else {
 					this.getStoryDetail(0, null, this.storyID);
 				}
 			}
