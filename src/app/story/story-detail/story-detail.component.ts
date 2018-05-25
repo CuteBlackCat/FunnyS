@@ -110,8 +110,8 @@ export class StoryDetailComponent implements OnInit {
 	}
 
 	nextChapter(article) {
-		this.getStoryDetail(1, article['articleID'], this.storyID);
 		this.currentArticle = article;
+		this.getStoryDetail(1, article['articleID'], this.storyID);
 		this.notFirst = true;
 	}
 
@@ -121,7 +121,7 @@ export class StoryDetailComponent implements OnInit {
 
 			this.getStoryDetail(0, null, this.storyID);
 		} else {
-			// this.getStoryDetail(1, )
+			this.getStoryDetail(1, article['articleID'], this.storyID );
 		}
 	}
 
@@ -131,13 +131,22 @@ export class StoryDetailComponent implements OnInit {
 			.subscribe(
 				res => {
 					if (res['data'].length !== 0) {
-						this.storyList = res['data'];
-						console.log(this.storyList, 1);
+						if (firstArticle === 0) {
+							this.storyList = res['data'].filter(item => {
+								return item['capter'] === 1;
+							});
+						} else if (firstArticle === 1) {
+							this.storyList = res['data'].filter(item => {
+								return item['capter'] === this.currentArticle['capter'] + 1;
+							});
+						}
+						console.log(this.storyList);
 						// if (this.storyList[0]['articleParentID'] === 'null') {
 						// 	this.notFirst = false;
 						// }else {
 						// 	this.notFirst = true;
 						// }
+					} else {
 					}
 					this.loading = false;
 				}
@@ -188,6 +197,7 @@ export class StoryDetailComponent implements OnInit {
 			this.info = '客观，请先登录噢！';
 			this.infoChange = !this.infoChange;
 		} else {
+			console.log(article);
 			this.http.postUrlConfig('/updateArticle', {
 				userID: this.user['userId'],
 				token: this.user['token'],
@@ -205,7 +215,7 @@ export class StoryDetailComponent implements OnInit {
 					} else if (res['code'] === '0') {
 						this.info = '发布成功';
 
-						this.getStoryDetail(first ? 0 : 1, first ? article['articleID'] : 'null', this.storyID);
+						this.getStoryDetail(first ? 0 : 1, first ? 'null' : article['articleID'], this.storyID);
 					}
 
 					this.infoChange = !this.infoChange;
@@ -285,6 +295,8 @@ export class StoryDetailComponent implements OnInit {
 				this.ancestor
 			]
 		];
+
+		this.storyList = [];
 
 		this.bookOpen = false;
 		this.hot = false;

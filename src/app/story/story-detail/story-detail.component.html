@@ -101,10 +101,10 @@
         
             <div class="back-page page  preserve-3d">
                 <div class="front">
-                    <div class="front" *ngIf="!storyList">
+                    <div class="front" *ngIf="!storyList.length">
                         <div class="list">暂无数据</div>
                     </div>
-                    <ng-container *ngIf="storyList">
+                    <ng-container *ngIf="storyList.length">
                         <div class="list"  *ngFor="let story of storyList">
                             <p class="story-item" (click)="nextChapter(story)">{{story.articleContent | interceptString: 60}}</p>
                             <div class="msg-box">
