@@ -179,7 +179,7 @@ export class StoryDetailComponent implements OnInit {
 			);
 	}
 
-	public(articleID) {
+	public(article, first) {
 		if (!this.user['userName']) {
 			this.info = '客观，请先登录噢！';
 			this.infoChange = !this.infoChange;
@@ -188,16 +188,16 @@ export class StoryDetailComponent implements OnInit {
 				userID: this.user['userId'],
 				token: this.user['token'],
 				storyID: this.storyID,
-				articleParentID: articleID,
+				articleParentID: first ? 'null' : article['articleID'],
 				articleContent: this.articleText,
-				capter: 1,
+				capter: first ? 1 : article['capter'] + 1,
 				articleTitle: this.articleTitle,
 				timestamp: Math.trunc(Date.now() / 1000),
 				articleID: Math.random()
 			}).subscribe(
 				res => {
 					console.log(res);
-					this.articleText = '';
+					this.articleTitle = '';
 					this.articleText = '';
 				}
 			);
@@ -224,6 +224,7 @@ export class StoryDetailComponent implements OnInit {
 				}
 				this.infoChange = !this.infoChange;
 				comment['replayText'] = '';
+				this.commentText = '';
 				this.getComment(this.storyID);
 			},
 			err => {

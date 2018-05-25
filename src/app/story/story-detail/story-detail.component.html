@@ -32,7 +32,7 @@
                         <div class="comment-box">
                             <p>接   标题: <input type="text" name="articleTitle" [(ngModel)]="articleTitle"></p>
                             <textarea name="articleText" [(ngModel)]="articleText" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
-                            <button class="normal" (click)="public()">发布故事</button>
+                            <button class="normal" (click)="public(introduction, true)">发布故事</button>
                         </div>
                     </div>
                     <div class="content" *ngIf="currentArticle && notFirst">
@@ -55,7 +55,7 @@
                                 <input type="text" name="articleTitle" [(ngModel)]="articleTitle">
                             </p>
                             <textarea name="articleText" [(ngModel)]="articleText" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
-                            <button class="normal" (click)="public()">发布故事</button>
+                            <button class="normal" (click)="public(currentArticle, false)">发布故事</button>
                         </div>
                     </div>
                 </div>
