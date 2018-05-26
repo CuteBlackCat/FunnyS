@@ -77,7 +77,7 @@ export class StoryDetailComponent implements OnInit {
 			setTimeout(() => {
 				this.pageIndex = i;
 			}, 1500);
-		}else {
+		} else {
 			this.backStory.pop();
 			this.currentStory = this.backStory[this.backStory.length - 1];
 			this.pageIndex = i - 1;
@@ -104,7 +104,7 @@ export class StoryDetailComponent implements OnInit {
 			setTimeout(() => {
 				this.firstIndex = 0;
 			}, 1500);
-		}else {
+		} else {
 			this.firstIndex = 999;
 		}
 	}
@@ -121,8 +121,18 @@ export class StoryDetailComponent implements OnInit {
 
 			this.getStoryDetail(0, null, this.storyID);
 		} else {
-			this.getStoryDetail(1, article['articleID'], this.storyID );
+			this.getArticle(article['articleParentID']);
+			this.getStoryDetail(1, article['articleParentID'], this.storyID );
 		}
+	}
+
+	getArticle(articleID) {
+		this.http.postConfig(`/getArticleBaseInfo?articleID=${articleID}`, {})
+			.subscribe(
+				res => {
+					// this.currentArticle = res
+				}
+			);
 	}
 
 	getStoryDetail(firstArticle, articleID, storyID) {
