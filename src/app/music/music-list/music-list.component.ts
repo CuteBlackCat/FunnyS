@@ -31,6 +31,10 @@ export class MusicListComponent implements OnInit, OnChanges {
 	search: boolean;
 	album: boolean;
 
+	info: string;
+	changeInfo: boolean;
+	loading: boolean;
+
 	@Input() next: number;
 	@Input() playOrder: number;
 	@Input() curType: string;
@@ -62,15 +66,21 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 	selectMusic(next) {
 		if (this.playOrder === 3) {
-			const num = Math.random() * this.musicList.length;
+			const num = Math.floor(Math.random() * this.musicList.length);
 			if (num === this.curnext) {
 				this.selectMusic(next);
-			}else {
+			} else {
 				this.curnext = num;
 				return this.curnext;
 			}
-		}else {
-			return next ? this.curnext + 1 : this.curnext - 1;
+		} else {
+			let result = next ? this.curnext + 1 : this.curnext - 1;
+			if (result < 0) {
+				result = this.musicList.length - 1;
+			} else if (result >= this.musicList.length) {
+				result = 0;
+			}
+			return result;
 		}
 	}
 
@@ -90,6 +100,10 @@ export class MusicListComponent implements OnInit, OnChanges {
 		if (changes.keyWords && changes.keyWords.previousValue !== changes.keyWords.currentValue) {
 			this.keyWords = changes.keyWords.currentValue;
 		}
+
+		if (changes.playOrder && changes.playOrder.previousValue !== changes.playOrder.currentValue) {
+			this.playOrder = changes.playOrder.currentValue;
+		}
 	}
 
 	songerMusic(id) {
@@ -101,6 +115,7 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 	getMusicList(url) {
 		console.log(url);
+		this.loading = true;
 		this.http.getConfig(url, {}).subscribe(
 			data => {
 
@@ -111,13 +126,12 @@ export class MusicListComponent implements OnInit, OnChanges {
 				if ( this.curType === '0') {
 					this.musicList = data['result'];
 					canPlay = true;
-				}else if (this.curType === '1' || this.curType === '2' || this.curType === '3') {
+				} else if (this.curType === '1' || this.curType === '2' || this.curType === '3') {
 					this.allMusic = data['playlist']['tracks'];
 					this.maxLoad = this.allMusic.length / 20;
 					this.musicList = data['playlist']['tracks'].slice(0, this.page_id * 20);
 					canPlay = true;
-				}else if (this.curType === '4') {
-					console.log(data);
+				} else if (this.curType === '4') {
 					const playlistId = data['playlist'][0]['id'];
 					this.http.getConfig(`/playlist/detail?id=${playlistId}`, {}).subscribe(
 						res => {
@@ -131,22 +145,22 @@ export class MusicListComponent implements OnInit, OnChanges {
 							}
 						}
 					);
-				}else if (this.curType === '6') {
+				} else if (this.curType === '6') {
 					this.allMusic = data['recommend'];
 					this.maxLoad = this.allMusic.length / 20;
 					this.musicList = data['recommend'].slice(0, this.page_id * 20);
 					canPlay = true;
-				}else if (this.curType === '5') {
+				} else if (this.curType === '5') {
 					this.topTen = data['artists'].slice(0, 10);
 					this.hotSonger = data['artists'].slice(10);
-				}else if (this.curType === '7') {
+				} else if (this.curType === '7') {
 					console.log(data);
 					if (this.album) {
 						this.album = false;
 						this.allMusic = data['result']['tracks'];
 						this.maxLoad = this.allMusic.length / 20;
 						this.musicList = data['result']['tracks'].slice(0, this.page_id * 20);
-					}else {
+					} else {
 						this.allMusic = this.search ? data['result']['songs'] : data['hotSongs'];
 						this.maxLoad = this.allMusic.length / 20;
 						this.musicList = this.allMusic.slice(0, this.page_id * 20);
@@ -158,6 +172,13 @@ export class MusicListComponent implements OnInit, OnChanges {
 					this.playMusic(this.musicList[0], 0);
 					this.first = false;
 				}
+
+				this.loading = false;
+			},
+			err => {
+				this.info = '客观，网络不好哦，请稍后再试';
+				this.changeInfo = !this.changeInfo;
+				this.loading = false;
 			}
 		);
 	}
@@ -253,9 +274,9 @@ export class MusicListComponent implements OnInit, OnChanges {
 					this.album = true;
 					this.search = true;
 					this.getMusicList(`/playlist/detail?id=${album}`);
-				}else if (!music && !album) {
+				} else if (!music && !album && this.curType === '7') {
 					return;
-				}else {
+				} else {
 					this.getMusicList(this.findUrl(this.id));
 				}
 			}

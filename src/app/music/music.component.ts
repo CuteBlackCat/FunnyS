@@ -59,6 +59,9 @@ export class MusicComponent implements OnInit {
 	// 是否关闭声音
 	closeVolume: boolean;
 
+	// 是否单曲循环
+	loop: boolean;
+
 	// 关闭声音前的音量
 	oldVolume: number;
 
@@ -165,12 +168,13 @@ export class MusicComponent implements OnInit {
 	clickNextPlayMusic(next) {
 		if (next) {
 			this.curNext++;
-		}else {
+		} else {
 			this.curNext--;
 		}
 	}
 
 	autoNextPlayMusic() {
+		this.loop = false;
 		switch (this.playorder) {
 			case 0:
 				// 播放列表的下一首,当到最后一首结束
@@ -181,6 +185,8 @@ export class MusicComponent implements OnInit {
 				this.curNext++;
 				break;
 			case 2:
+				this.loop = true;
+				this.initData();
 				// if (click) {
 					// 播放下一首
 					// this.curNext++;

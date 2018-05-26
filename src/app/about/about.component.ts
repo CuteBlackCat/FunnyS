@@ -22,7 +22,7 @@ export class AboutComponent implements OnInit {
 			src: 'assets/imgs/engineer/front_end1.png',
 			name: '李嘉欣',
 			title: '前端开发工程师',
-			content: '一年开发经验，现就职于某游戏公司，任前端开发一职，热爱技术、热爱生活,有着丰富的前端知识结构。熟练javascript、HTML5、CSS3、canvas、Angular2.0、git、ECMAscript6'
+			content: '一年开发经验，现就职于美团点评，任前端开发一职，热爱技术、热爱生活,有着丰富的前端知识结构。熟练javascript、HTML5、CSS3、canvas、Angular2.0、git、ECMAscript6'
 		};
 		this.back_end = {
 			src: 'assets/imgs/engineer/back_end1.jpg',

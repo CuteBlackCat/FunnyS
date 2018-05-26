@@ -89,4 +89,7 @@
             <span class="songer" *ngFor="let item of hotSonger">{{item.name}}</span>
         </div>
     </div>
+
+    <fs-alert-info [info]="info" [change]="changeInfo"></fs-alert-info>
+    <fs-loading [active]="loading"></fs-loading>
 </div>
