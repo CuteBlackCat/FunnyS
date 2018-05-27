@@ -11,14 +11,14 @@ import { FunnysRoutingModule } from './funnys-routing.module';
 import { StoryModule } from './story/story.module';
 import { SignModule } from './sign/sign.module';
 import { MusicModule } from './music/music.module';
+import { GamesModule } from './games/games.module';
 
 // 导入组件
 import { AppComponent } from './app.component';
 // import { BackcanvasComponent } from './canvas/backcanvas/backcanvas.component';
 // import { SnakeComponent } from './canvas/snake/snake.component';
-import { TankComponent } from './canvas/tank/tank.component';
+// import { TankComponent } from './canvas/tank/tank.component';
 import { HomeComponent } from './home/home.component';
-import { GamesComponent } from './games/games.component';
 import { AboutComponent } from './about/about.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
@@ -35,7 +35,7 @@ import { LocalStorage } from './service/local.storage';
 		AppComponent,
 		// BackcanvasComponent,
 		HomeComponent,
-		GamesComponent,
+		// GamesComponent,
 		AboutComponent,
 		// SnakeComponent,
 		PagenotfoundComponent,
@@ -50,6 +50,7 @@ import { LocalStorage } from './service/local.storage';
 		StoryModule,
 		MusicModule,
 		SignModule,
+		GamesModule,
 		FunnysRoutingModule,
 	],
 	providers: [
