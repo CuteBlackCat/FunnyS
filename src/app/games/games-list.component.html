@@ -1,7 +1,4 @@
-<div class="game" page-box>
-    <div class="title">
-        <span>游戏列表</span>
-    </div>
+<div class="game">
     <ng-container *ngFor="let card of games">
         <fs-card [card]="card" (enterCard)="selectGames($event)"></fs-card>
     </ng-container>

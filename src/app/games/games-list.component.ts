@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'fs-games-list',
@@ -9,12 +10,21 @@ export class GamesListComponent implements OnInit {
 
 	games: Array<object>;
 
-	constructor() { }
+	constructor(
+		private router: Router
+	) { }
+
+	selectGames(card) {
+		const route = card['route'];
+
+		this.router.navigate([`/game/${route}`]);
+
+	}
 
 	ngOnInit() {
 		this.games = [
 			{
-				img: 'http://p1.music.126.net/cCyPSxi-BE2h-SmpLBztbA==/18635622580993683.jpg',
+				img: 'assets/imgs/game/tank.png',
 				title: '坦克大战',
 				hot: 0,
 				collection: 0,
@@ -25,7 +35,7 @@ export class GamesListComponent implements OnInit {
 				route: 'tank'
 			},
 			{
-				img: 'http://p1.music.126.net/cCyPSxi-BE2h-SmpLBztbA==/18635622580993683.jpg',
+				img: 'assets/imgs/game/snake.jpg',
 				title: '贪吃蛇大作战',
 				hot: 0,
 				collection: 0,

@@ -11,6 +11,11 @@ const Routera: Routes = [
 		component: GamesComponent,
 		children: [
 			{
+				path: '',
+				redirectTo: 'list',
+				pathMatch: 'full'
+			},
+			{
 				path: 'list',
 				component: GamesListComponent
 			},

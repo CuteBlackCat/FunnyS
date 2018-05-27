@@ -7,6 +7,9 @@ import { GamesComponent } from './games.component';
 import { GamesListComponent } from './games-list.component';
 import { GTankComponent } from './g-tank.component';
 import { GSnakeComponent } from './g-snake.component';
+import { CanvasModule } from '../canvas/canvas.module';
+import { FsDirectiveModule } from '../directive/directive.module';
+import { StoryRoutingModule } from './games-routing.component';
 // import { SnakeComponent } from '../canvas/snake/snake.component';
 // import { TankComponent } from '../canvas/tank/tank.component';
 
@@ -21,6 +24,9 @@ import { GSnakeComponent } from './g-snake.component';
 	],
 	imports: [
 		BrowserModule,
+		StoryRoutingModule,
+		CanvasModule,
+		FsDirectiveModule
 	],
 	exports: [
 		GamesComponent,

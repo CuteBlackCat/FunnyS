@@ -1,0 +1,11 @@
+.game fs-card {
+    position: relative;
+    width: 216px;
+    height: 252px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+.game{
+    display: flex;
+    padding: 20px;
+}
