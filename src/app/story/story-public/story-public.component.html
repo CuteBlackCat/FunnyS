@@ -17,7 +17,7 @@
             <form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
                 <div class="title">
                     <label for="">故事标题:</label>
-                    <input type="text" name="title" formControlName="title" placeholder="故事标题">
+                    <input type="text" name="title" maxlength="10" formControlName="title" placeholder="故事标题">
                 </div>
                 <textarea name="text" maxlength="200" (ngModelChange)="cacularLen()" placeholder="故事简介"  formControlName="text"></textarea>
 

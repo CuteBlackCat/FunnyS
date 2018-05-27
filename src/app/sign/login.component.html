@@ -10,6 +10,9 @@
 	<div class="introductor">
 		Sign in to FunnyS
 	</div>
+	<!-- <div class="introductor" *ngIf="forget">
+		Forget Password
+	</div> -->
 	<form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
 		<div class="username">
 			<label for="username">Username: </label>
@@ -21,7 +24,7 @@
 		</div>
 
 		<div class="password">
-			<label for="password">Password: </label>
+			<label for="password">Password: <span class="forget-pass" (click)="forgetPwd()">忘记密码</span></label>
 			<input type="password" placeholder="password" name="password" formControlName="password">
 			<div class="error" *ngIf="user.get('password').hasError('minlength') && user.get('password').touched">
 				密码长度必须大于6

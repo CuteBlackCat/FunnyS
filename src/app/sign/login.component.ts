@@ -56,6 +56,29 @@ export class LoginComponent implements OnInit {
 
 	}
 
+	forgetPwd() {
+		if (this.user.value.username === '') {
+			this.info = '请输入用户名';
+			this.infoChange = !this.infoChange;
+		} else {
+			this.http.postConfig(`sendEmail?username=${this.user.value.username}`, {})
+				.subscribe(
+					res => {
+						if (res['code'] === '0') {
+							this.info = '邮件发送成功，请注意查收';
+						} else {
+							this.info = res['message'];
+						}
+						this.infoChange = !this.infoChange;
+					},
+					err => {
+						this.info = '系统错误';
+						this.infoChange = !this.infoChange;
+					}
+				);
+		}
+	}
+
 	ngOnInit() {
 		let username = this.local.get('username');
 		let password = this.local.get('password');

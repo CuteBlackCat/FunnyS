@@ -11,9 +11,9 @@
 					</svg>
 				</div>
 				<div class="title">经典游戏</div>
-				<div class="description">带你回忆游戏童年</div>
+				<div class="description" [routerLink]="['/game/list']">带你回忆游戏童年</div>
 			</div>
-			<div class="hot-project">
+			<div class="hot-project" [routerLink]="['/story/list']">
 				<div class="img-box">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-bijiben"></use>
@@ -40,7 +40,7 @@
 				<div class="title">陈一发</div>
 				<div class="description">倾听网红的声音</div>
 			</div>
-			<div class="hot-project">
+			<div class="hot-project"  [routerLink]="['/story/list']">
 				<div class="img-box">
 					<svg class="icon" aria-hidden="true">
 						<use xlink:href="#icon-ico_lady"></use>

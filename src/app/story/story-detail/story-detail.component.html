@@ -25,13 +25,13 @@
                             <i class="iconfont" *ngIf="!ancestor.lover">&#xe871;</i>
                             <i class="iconfont" *ngIf="ancestor.callPlay">&#xe872;</i>
                             <i class="iconfont" *ngIf="ancestor.lover">&#xe870;</i>
-                            <span class="font14 comment">{{introduction.praiseNum}} 接龙</span>
+                            <!-- <span class="font14 comment">{{introduction.praiseNum}} 接龙</span> -->
                             <span class="font14">发布时间：{{introduction.timestamp * 1000 | date: 'yyyy-MM-dd hh:mm'}}</span>
                         </p>
                         <i class="iconfont arrow-front" (click)="openBook(false)">&#xe991;</i>
                         <div class="comment-box">
                             <p>接   标题: <input type="text" name="articleTitle" [(ngModel)]="articleTitle"></p>
-                            <textarea name="articleText" [(ngModel)]="articleText" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
+                            <textarea name="articleText" [(ngModel)]="articleText" id="" maxlength="500" placeholder="文明社会，理性评论"></textarea>
                             <button class="normal" (click)="public(introduction, true)">发布故事</button>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             <i class="iconfont" *ngIf="!ancestor.lover">&#xe871;</i>
                             <i class="iconfont" *ngIf="ancestor.callPlay">&#xe872;</i>
                             <i class="iconfont" *ngIf="ancestor.lover">&#xe870;</i>
-                            <span class="font14 comment">{{currentArticle.praisesNum}} 接龙</span>
+                            <!-- <span class="font14 comment">{{currentArticle.praisesNum}} 接龙</span> -->
                             <span class="font14">发布时间：{{currentArticle.timestamp * 1000 | date: 'yyyy-MM-dd hh:mm'}}</span>
                         </p>
                         <i class="iconfont arrow-front" (click)="prevChapter(currentArticle)">&#xe991;</i>
@@ -54,7 +54,7 @@
                             <p>接 标题:
                                 <input type="text" name="articleTitle" [(ngModel)]="articleTitle">
                             </p>
-                            <textarea name="articleText" [(ngModel)]="articleText" id="" maxlength="200" placeholder="文明社会，理性评论"></textarea>
+                            <textarea name="articleText" [(ngModel)]="articleText" id="" maxlength="500" placeholder="文明社会，理性评论"></textarea>
                             <button class="normal" (click)="public(currentArticle, false)">发布故事</button>
                         </div>
                     </div>
@@ -156,12 +156,12 @@
                         <span class="liked">
                             <i class="iconfont" *ngIf="!item.liked" (click)="likedComment(1, item)">&#xe873;</i>
                             <i class="iconfont" *ngIf="item.liked" (click)="likedComment(0, item)">&#xe872;</i>
-                            (0) | <span class="replay" (click)="replaying(i)">回复</span>
+                            ({{item.hasChildComment - 1}}) | <span class="replay" (click)="replaying(i)">回复</span>
                         </span>
                     </div>
 
                     <div class="replay" *ngIf="currentReplay === i">
-                        <textarea name="item.replayText" [(ngModel)]="item.replayText" max-length="100"></textarea>
+                        <textarea name="item.replayText" [(ngModel)]="item.replayText" maxlength="100"></textarea>
                         <button class="normal" (click) = "commentCommit(item, true)">回复</button>
                     </div>
                 </div>

@@ -87,7 +87,7 @@ export class Snake {
 		}
 		if (this.weight + this.x + speed >= w || this.x - this.weight - speed <= 0 || this.y + this.weight + speed >= h || this.y - this.weight - speed <= 0) {
 			return this.switchDirective();
-		}else {
+		} else {
 			this.snake.pop();
 			this.snake.unshift([this.x, this.y]);
 		}

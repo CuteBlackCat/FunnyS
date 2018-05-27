@@ -120,7 +120,6 @@ export class SnakeComponent implements OnInit {
 			}
 			if (!alive || !crashSuper) {
 				dead.push(i);
-				continue;
 			}
 			for (let j = i + 1; j < this.snake.length; j++) {
 				const crash = this.snake[i].brokenOther(this.snake[j]);
@@ -156,10 +155,10 @@ export class SnakeComponent implements OnInit {
 		if (!alive) {
 			this.becomeFood(this.superSnake);
 			this.superSnake = null;
-		}else {
+		} else {
 			if (this.superSnake.protect) {
 				this.superSnake.protectedSnake(this.ctx);
-			}else {
+			} else {
 				for (let i = 0; i < this.snake.length; i++) {
 					const crash = this.superSnake.brokenOther(this.snake[i]);
 					if (!crash) {

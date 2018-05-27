@@ -42,6 +42,8 @@ input:focus,textarea:focus {
 .label{
     margin-top: 10px;
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
 }
 .label>span{
     /* background: rgba(52,168,83,.6); */

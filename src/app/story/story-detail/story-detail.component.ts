@@ -115,6 +115,16 @@ export class StoryDetailComponent implements OnInit {
 		this.notFirst = true;
 	}
 
+	likedComment(status, comment) {
+		if (status === 1) {
+			comment.hasChildComment++;
+			comment.liked = true;
+		} else {
+			comment.hasChildComment--;
+			comment.liked = false;
+		}
+	}
+
 	prevChapter(article) {
 		if (article['articleParentID'] === 'null') {
 			this.notFirst = false;
@@ -130,7 +140,7 @@ export class StoryDetailComponent implements OnInit {
 		this.http.postConfig(`/getArticleBaseInfo?articleID=${articleID}`, {})
 			.subscribe(
 				res => {
-					// this.currentArticle = res
+					this.currentArticle = res['data'];
 				}
 			);
 	}

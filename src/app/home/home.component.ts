@@ -54,12 +54,33 @@ export class HomeComponent implements OnInit {
 			collection: 4000,
 			label: 'game',
 			author: ' funnys',
-			type: 0, //
+			type: -1, //
 			description: '更多好玩的游戏正在开发中...'
 		};
 
-		this.cards = [card, card, card, card, card];
-		this.gamecards = [card, card, card, card, card, card, card, card, card, card];
+		// this.cards = [card, card, card, card, card];
+		this.gamecards = [{
+				img: 'assets/imgs/game/tank.png',
+				title: '坦克大战',
+				hot: 0,
+				collection: 0,
+				label: '游戏',
+				author: 'funnys',
+				type: 3, // 音乐 1 ablum 2 故事 3 游戏 4
+				description: '一款经典的游戏',
+				route: 'tank'
+			},
+			{
+				img: 'assets/imgs/game/snake.jpg',
+				title: '贪吃蛇大作战',
+				hot: 0,
+				collection: 0,
+				label: '游戏',
+				author: 'funnys',
+				type: 3, // 0 音乐 1 ablum 2 故事 3 游戏
+				description: '贪吃蛇噢',
+				route: 'snake'
+			}, card, card, card];
 
 	}
 
@@ -86,6 +107,8 @@ export class HomeComponent implements OnInit {
 			this.router.navigate(['/music/7', { music: card['title'] }]);
 		} else if (card['type'] === 1) {
 			this.router.navigate(['/music/7', { album: card['id'] }]);
+		} else if (card['type'] === 4) {
+
 		}
 	}
 
@@ -94,11 +117,13 @@ export class HomeComponent implements OnInit {
 	}
 
 	enterGameCard(card: object) {
-		console.log(card);
+		this.router.navigate([`/game/${card['route']}`]);
 	}
 
 	enterWonderCard(card: object) {
-		console.log(card);
+		if (card['type'] === -1) {
+			return;
+		}
 		if (card['type'] === 0 || card['type'] === 1) {
 			this.enterMusicCard(card);
 		} else if (card['type'] === 2) {
@@ -180,7 +205,7 @@ export class HomeComponent implements OnInit {
 			}
 		];
 
-		this.getConfig('http://localhost:1927/top/playlist/highquality?limit=10', {}).subscribe(
+		this.getConfig('http://47.52.238.90:1927/top/playlist/highquality?limit=10', {}).subscribe(
 			res => {
 				res['playlists'].forEach((item, i) => {
 					const obj = {
