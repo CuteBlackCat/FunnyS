@@ -205,7 +205,7 @@ export class HomeComponent implements OnInit {
 			}
 		];
 
-		this.getConfig('http://47.52.238.90:1927/top/playlist/highquality?limit=10', {}).subscribe(
+		this.getConfig('http://localhost:1927/top/playlist/highquality?limit=10', {}).subscribe(
 			res => {
 				res['playlists'].forEach((item, i) => {
 					const obj = {

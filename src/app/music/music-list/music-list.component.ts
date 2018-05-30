@@ -114,7 +114,7 @@ export class MusicListComponent implements OnInit, OnChanges {
 
 	getMusicList(url) {
 		this.loading = true;
-		url = this.findUrl(this.curType);
+		// url = this.findUrl(this.curType);
 		this.http.getConfig(url, {}).subscribe(
 			data => {
 

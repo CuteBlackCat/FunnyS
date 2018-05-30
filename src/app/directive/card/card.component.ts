@@ -12,7 +12,7 @@ export class CardComponent {
 
 	@Output() enterCard = new EventEmitter<object>();
 
-	@HostListener('click', ['$event.target'])
+	// @HostListener('click', ['$event.target'])
 	onClick() {
 		this.enterCard.emit(this.card);
 	}

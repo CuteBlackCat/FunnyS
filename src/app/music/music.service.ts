@@ -9,7 +9,7 @@ export class MusicService {
 	constructor(
 		private http: HttpClient
 	) {
-		this.baseUrl = 'http://47.52.238.90:1927';
+		this.baseUrl = 'http://localhost:1927';
 	}
 
 	getConfig(
